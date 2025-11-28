@@ -39,5 +39,5 @@ ENV PYTHONPATH=/workspace
 # ------------------------------------------------------------
 # 6. Default command
 # ------------------------------------------------------------
-CMD ["bash"]
+ENTRYPOINT ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--ServerApp.token="]
 

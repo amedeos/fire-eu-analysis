@@ -183,3 +183,4 @@ products_vectorstore/
 .bash_history
 .local
 *.swp
+.jupyter/
