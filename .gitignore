@@ -184,3 +184,4 @@ products_vectorstore/
 .local
 *.swp
 .jupyter/
+Untitled*.ipynb
