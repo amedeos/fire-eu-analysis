@@ -1,0 +1,19 @@
+{
+  // Jupyter configuration for VS Code
+  // Connect notebooks to Jupyter kernel in Docker container
+  
+  "jupyter.jupyterServerType": "remote",
+  "jupyter.remoteJupyterServer": {
+    "baseUrl": "http://localhost:8888",
+    "token": "",
+    "displayName": "Fire EU Analysis Container"
+  },
+  
+  // Use container's Python kernel when available
+  "python.defaultInterpreterPath": "/usr/local/bin/python",
+  
+  // Notebook configuration
+  "notebook.output.textLineLimit": 1000,
+  "jupyter.widgetScriptSources": []
+}
+

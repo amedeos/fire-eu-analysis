@@ -185,3 +185,4 @@ products_vectorstore/
 *.swp
 .jupyter/
 Untitled*.ipynb
+.jupyter_token

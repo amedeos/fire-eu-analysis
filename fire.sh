@@ -190,7 +190,19 @@ start_gpu_container() {
     -p 8888:8888 \
     "${GPU_IMAGE}"
 
-  echo "[INFO] GPU container started. Jupyter should be available on http://localhost:8888"
+  echo "[INFO] GPU container started. Waiting for Jupyter to initialize..."
+  sleep 3
+  
+  # Try to get token
+  if [ -f .jupyter_token ]; then
+    TOKEN=$(cat .jupyter_token | tr -d '\n\r ')
+    echo "[INFO] Jupyter Lab available at: http://localhost:8888"
+    echo "[INFO] Token: ${TOKEN}"
+    echo "[INFO] Get token anytime with: ./get-jupyter-token.sh"
+  else
+    echo "[INFO] Jupyter Lab available at: http://localhost:8888"
+    echo "[INFO] Get token with: ./get-jupyter-token.sh"
+  fi
 }
 
 start_cpu_container() {
@@ -204,7 +216,19 @@ start_cpu_container() {
     -p 8888:8888 \
     "${CPU_IMAGE}"
 
-  echo "[INFO] CPU container started. Jupyter should be available on http://localhost:8888"
+  echo "[INFO] CPU container started. Waiting for Jupyter to initialize..."
+  sleep 3
+  
+  # Try to get token
+  if [ -f .jupyter_token ]; then
+    TOKEN=$(cat .jupyter_token | tr -d '\n\r ')
+    echo "[INFO] Jupyter Lab available at: http://localhost:8888"
+    echo "[INFO] Token: ${TOKEN}"
+    echo "[INFO] Get token anytime with: ./get-jupyter-token.sh"
+  else
+    echo "[INFO] Jupyter Lab available at: http://localhost:8888"
+    echo "[INFO] Get token with: ./get-jupyter-token.sh"
+  fi
 }
 
 # -------------------------------------------------------------------
@@ -290,7 +314,15 @@ case "${COMMAND}" in
       echo "[WARN] Container '${CONTAINER_NAME}' exists but is not running."
       echo "[INFO] Starting existing container..."
       ${PODMAN_BIN} start "${CONTAINER_NAME}" >/dev/null
-      echo "[INFO] Container started. Jupyter should be available on http://localhost:8888"
+      sleep 2
+      if [ -f .jupyter_token ]; then
+        TOKEN=$(cat .jupyter_token | tr -d '\n\r ')
+        echo "[INFO] Container started. Jupyter Lab available at: http://localhost:8888"
+        echo "[INFO] Token: ${TOKEN}"
+      else
+        echo "[INFO] Container started. Jupyter Lab available at: http://localhost:8888"
+        echo "[INFO] Get token with: ./get-jupyter-token.sh"
+      fi
       exit 0
     fi
 

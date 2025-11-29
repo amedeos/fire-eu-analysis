@@ -46,7 +46,15 @@ COPY . .
 ENV PYTHONPATH=/workspace
 
 # ------------------------------------------------------------
-# 7. Default command
+# 7. Copy startup script and set permissions
 # ------------------------------------------------------------
-ENTRYPOINT ["jupyter", "lab", "--ip=0.0.0.0", "--no-browser", "--ServerApp.token="]
+COPY start-jupyter.sh /usr/local/bin/start-jupyter.sh
+RUN chmod +x /usr/local/bin/start-jupyter.sh
+
+# ------------------------------------------------------------
+# 8. Default command
+# Start Jupyter Lab with token generation for remote access
+# Token will be saved to /workspace/.jupyter_token
+# ------------------------------------------------------------
+ENTRYPOINT ["/usr/local/bin/start-jupyter.sh"]
 
