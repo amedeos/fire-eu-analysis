@@ -19,24 +19,48 @@ MODE="${START_MODE:-auto}"
 # Build flag: if true, build images before starting
 BUILD_IMAGES=false
 
+# Remove images flag: if true, remove images when removing container
+REMOVE_IMAGES=false
+
+# Command: start (default) | stop | remove
+COMMAND="start"
+
 # -------------------------------------------------------------------
 # Functions
 # -------------------------------------------------------------------
 
 usage() {
   cat <<EOF
-Usage: $0 [--auto|--gpu|--cpu] [--name NAME] [--build]
+Usage: $0 [COMMAND] [OPTIONS]
 
-Options:
+Commands:
+  start       Start the container (default)
+  stop        Stop the running container
+  remove      Remove the container (use --remove-image to also remove images)
+
+Options for 'start':
   --auto       Automatically choose GPU if available, otherwise CPU (default)
   --gpu        Force GPU container
   --cpu        Force CPU container
   --name NAME  Set container name (default: ${CONTAINER_NAME})
   --build      Build images before starting (auto-detects GPU/CUDA for Dockerfile selection)
+
+Options for 'remove':
+  --remove-image  Also remove the container images (CPU and/or GPU)
+
+Global options:
+  --name NAME  Set container name (default: ${CONTAINER_NAME})
   -h, --help   Show this help
 
 Environment:
   START_MODE   Can be set to auto, gpu, or cpu (overridden by CLI flags)
+
+Examples:
+  $0 start                    # Start container (auto-detect GPU)
+  $0 start --gpu --build      # Start GPU container, build images first
+  $0 stop                     # Stop the container
+  $0 remove                   # Remove the container
+  $0 remove --remove-image    # Remove container and images
 EOF
 }
 
@@ -111,6 +135,49 @@ container_running() {
   ${PODMAN_BIN} ps --format '{{.Names}}' | grep -qx "$CONTAINER_NAME" || return 1
 }
 
+stop_container() {
+  if ! container_exists; then
+    echo "[WARN] Container '${CONTAINER_NAME}' does not exist."
+    return 0
+  fi
+
+  if ! container_running; then
+    echo "[INFO] Container '${CONTAINER_NAME}' is not running."
+    return 0
+  fi
+
+  echo "[INFO] Stopping container '${CONTAINER_NAME}'..."
+  ${PODMAN_BIN} stop "${CONTAINER_NAME}" >/dev/null
+  echo "[INFO] Container '${CONTAINER_NAME}' stopped."
+}
+
+remove_container() {
+  if ! container_exists; then
+    echo "[WARN] Container '${CONTAINER_NAME}' does not exist."
+  else
+    if container_running; then
+      echo "[INFO] Container '${CONTAINER_NAME}' is running. Stopping it first..."
+      ${PODMAN_BIN} stop "${CONTAINER_NAME}" >/dev/null
+    fi
+    echo "[INFO] Removing container '${CONTAINER_NAME}'..."
+    ${PODMAN_BIN} rm "${CONTAINER_NAME}" >/dev/null
+    echo "[INFO] Container '${CONTAINER_NAME}' removed."
+  fi
+
+  if [[ "${REMOVE_IMAGES}" == "true" ]]; then
+    echo "[INFO] Removing images..."
+    if image_exists "${CPU_IMAGE}"; then
+      echo "[INFO] Removing CPU image '${CPU_IMAGE}'..."
+      ${PODMAN_BIN} rmi "${CPU_IMAGE}" || echo "[WARN] Failed to remove CPU image (may be in use)" >&2
+    fi
+    if image_exists "${GPU_IMAGE}"; then
+      echo "[INFO] Removing GPU image '${GPU_IMAGE}'..."
+      ${PODMAN_BIN} rmi "${GPU_IMAGE}" || echo "[WARN] Failed to remove GPU image (may be in use)" >&2
+    fi
+    echo "[INFO] Image removal completed."
+  fi
+}
+
 start_gpu_container() {
   echo "[INFO] Starting GPU container '${CONTAINER_NAME}' using image '${GPU_IMAGE}'"
   ${PODMAN_BIN} run -d \
@@ -143,6 +210,13 @@ start_cpu_container() {
 # -------------------------------------------------------------------
 # CLI parsing
 # -------------------------------------------------------------------
+
+# Parse command (first argument if it's not a flag)
+if [[ $# -gt 0 ]] && [[ ! "$1" =~ ^-- ]]; then
+  COMMAND="$1"
+  shift
+fi
+
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --gpu)
@@ -169,6 +243,10 @@ while [[ $# -gt 0 ]]; do
       BUILD_IMAGES=true
       shift
       ;;
+    --remove-image)
+      REMOVE_IMAGES=true
+      shift
+      ;;
     -h|--help)
       usage
       exit 0
@@ -191,73 +269,85 @@ if ! command -v "${PODMAN_BIN}" >/dev/null 2>&1; then
 fi
 
 # -------------------------------------------------------------------
-# Build images if requested
+# Execute command
 # -------------------------------------------------------------------
-if [[ "${BUILD_IMAGES}" == "true" ]]; then
-  build_images || exit 1
-fi
 
-if container_running; then
-  echo "[INFO] Container '${CONTAINER_NAME}' is already running."
-  echo "[INFO] You can attach a shell with:"
-  echo "       ${PODMAN_BIN} exec -it ${CONTAINER_NAME} bash"
-  exit 0
-fi
-
-if container_exists; then
-  echo "[WARN] Container '${CONTAINER_NAME}' exists but is not running."
-  echo "[INFO] Starting existing container..."
-  ${PODMAN_BIN} start "${CONTAINER_NAME}" >/dev/null
-  echo "[INFO] Container started. Jupyter should be available on http://localhost:8888"
-  exit 0
-fi
-
-# -------------------------------------------------------------------
-# Mode resolution
-# -------------------------------------------------------------------
-FINAL_MODE="${MODE}"
-
-if [[ "${MODE}" == "auto" ]]; then
-  echo "[INFO] Auto mode: detecting GPU availability..."
-  if has_gpu; then
-    echo "[INFO] GPU detected via nvidia-smi. Using GPU container."
-    FINAL_MODE="gpu"
-  else
-    echo "[INFO] No GPU detected. Falling back to CPU container."
-    FINAL_MODE="cpu"
-  fi
-fi
-
-# -------------------------------------------------------------------
-# Check if images exist, build if missing
-# -------------------------------------------------------------------
-case "${FINAL_MODE}" in
-  gpu)
-    if ! image_exists "${GPU_IMAGE}"; then
-      echo "[INFO] GPU image '${GPU_IMAGE}' not found. Building it..."
-      build_gpu_image || exit 1
+case "${COMMAND}" in
+  start)
+    # Build images if requested
+    if [[ "${BUILD_IMAGES}" == "true" ]]; then
+      build_images || exit 1
     fi
-    ;;
-  cpu)
-    if ! image_exists "${CPU_IMAGE}"; then
-      echo "[INFO] CPU image '${CPU_IMAGE}' not found. Building it..."
-      build_cpu_image || exit 1
-    fi
-    ;;
-esac
 
-# -------------------------------------------------------------------
-# Start appropriate container
-# -------------------------------------------------------------------
-case "${FINAL_MODE}" in
-  gpu)
-    start_gpu_container
+    if container_running; then
+      echo "[INFO] Container '${CONTAINER_NAME}' is already running."
+      echo "[INFO] You can attach a shell with:"
+      echo "       ${PODMAN_BIN} exec -it ${CONTAINER_NAME} bash"
+      exit 0
+    fi
+
+    if container_exists; then
+      echo "[WARN] Container '${CONTAINER_NAME}' exists but is not running."
+      echo "[INFO] Starting existing container..."
+      ${PODMAN_BIN} start "${CONTAINER_NAME}" >/dev/null
+      echo "[INFO] Container started. Jupyter should be available on http://localhost:8888"
+      exit 0
+    fi
+
+    # Mode resolution
+    FINAL_MODE="${MODE}"
+
+    if [[ "${MODE}" == "auto" ]]; then
+      echo "[INFO] Auto mode: detecting GPU availability..."
+      if has_gpu; then
+        echo "[INFO] GPU detected via nvidia-smi. Using GPU container."
+        FINAL_MODE="gpu"
+      else
+        echo "[INFO] No GPU detected. Falling back to CPU container."
+        FINAL_MODE="cpu"
+      fi
+    fi
+
+    # Check if images exist, build if missing
+    case "${FINAL_MODE}" in
+      gpu)
+        if ! image_exists "${GPU_IMAGE}"; then
+          echo "[INFO] GPU image '${GPU_IMAGE}' not found. Building it..."
+          build_gpu_image || exit 1
+        fi
+        ;;
+      cpu)
+        if ! image_exists "${CPU_IMAGE}"; then
+          echo "[INFO] CPU image '${CPU_IMAGE}' not found. Building it..."
+          build_cpu_image || exit 1
+        fi
+        ;;
+    esac
+
+    # Start appropriate container
+    case "${FINAL_MODE}" in
+      gpu)
+        start_gpu_container
+        ;;
+      cpu)
+        start_cpu_container
+        ;;
+      *)
+        echo "[ERROR] Invalid mode '${FINAL_MODE}'. Must be auto, gpu, or cpu." >&2
+        exit 1
+        ;;
+    esac
     ;;
-  cpu)
-    start_cpu_container
+  stop)
+    stop_container
+    ;;
+  remove)
+    remove_container
     ;;
   *)
-    echo "[ERROR] Invalid mode '${FINAL_MODE}'. Must be auto, gpu, or cpu." >&2
+    echo "[ERROR] Unknown command '${COMMAND}'. Must be start, stop, or remove." >&2
+    echo ""
+    usage
     exit 1
     ;;
 esac
