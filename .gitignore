@@ -187,3 +187,4 @@ products_vectorstore/
 Untitled*.ipynb
 .jupyter_token
 data/eurostat/hicp_it_eu.csv
+data/msci/
