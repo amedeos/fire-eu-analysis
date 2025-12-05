@@ -20,11 +20,20 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # ------------------------------------------------------------
 WORKDIR /workspace
 
-# ------------------------------------------------------------
 # 3. Install Python dependencies
 # ------------------------------------------------------------
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements-ci.txt .
+
+ARG CI_BUILD=false
+RUN if [ "$CI_BUILD" = "true" ]; then \
+      echo "Using lightweight CI requirements (requirements-ci.txt)"; \
+      pip install --no-cache-dir -r requirements-ci.txt; \
+    else \
+      echo "Using full requirements (requirements.txt)"; \
+      pip install --no-cache-dir -r requirements.txt; \
+    fi
+
 
 # ------------------------------------------------------------
 # 4. Copy project files (only used when not bind-mounted)

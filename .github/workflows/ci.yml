@@ -21,14 +21,12 @@ jobs:
           podman --version
           podman info
 
-      # -------------------------------------------------
-      # Build + smoke test CPU image (Dockerfile)
-      # -------------------------------------------------
       - name: Build CPU image (Dockerfile)
         run: |
           podman build \
             --file Dockerfile \
-            --tag localhost/fire-eu-analysis:cpu .
+            --tag localhost/fire-eu-analysis:cpu \
+            --build-arg CI_BUILD=true .
 
       - name: Smoke test CPU image
         run: |
