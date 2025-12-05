@@ -1,3 +1,20 @@
+<h1 align="center">🔥 FIRE EU Analysis</h1>
+
+<p align="center">
+  <em>Quantitative FIRE analysis for European markets</em>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License">
+  <img src="https://img.shields.io/badge/python-3.12%2B-blue" alt="Python Version">
+  <img src="https://img.shields.io/badge/container-ready-orange" alt="Container Ready">
+  <a href="https://github.com/amedeos/fire-eu-analysis/actions">
+    <img src="https://github.com/amedeos/fire-eu-analysis/actions/workflows/ci.yml/badge.svg" alt="Build Status">
+  </a>
+</p>
+
+---
+
 # 📊 FIRE EU Analysis
 
 Quantitative analysis for evaluating the sustainability of the 4% rule and FIRE strategies in Europe and Italy.
