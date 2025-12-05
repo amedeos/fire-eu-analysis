@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-with-podman:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman
+          podman --version
+          podman info
+
+      # ---------------------------
+      # Build + smoke test CPU image
+      # ---------------------------
+      - name: Build CPU image (Dockerfile)
+        run: |
+          podman build \
+            --file Dockerfile \
+            --tag localhost/fire-eu-analysis:cpu .
+
+      - name: Smoke test CPU image
+        run: |
+          podman run --rm \
+            --entrypoint python \
+            localhost/fire-eu-analysis:cpu \
+            -c "print('CPU image OK')"
+
+      # ---------------------------
+      # Build + smoke test GPU image
+      # ---------------------------
+      - name: Build GPU image (Dockerfile.gpu)
+        run: |
+          podman build \
+            --file Dockerfile.gpu \
+            --tag localhost/fire-eu-analysis:gpu .
+
+      - name: Smoke test GPU image
+        run: |
+          podman run --rm \
+            --entrypoint python \
+            localhost/fire-eu-analysis:gpu \
+            -c "print('GPU image OK')"
+
