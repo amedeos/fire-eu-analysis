@@ -191,3 +191,5 @@ data/msci/
 Output/
 src/tools/
 *.~lock.*
+data/bdi/*.csv
+data/bdi/*/*.csv
