@@ -1,0 +1,21 @@
+Links:
+
+- eurostat
+https://ec.europa.eu/eurostat/api/dissemination/sdmx/3.0/data/dataflow/ESTAT/prc_hicp_midx/1.0?compress=false&format=csvdata&formatVersion=1.0&lang=en&labels=label_only
+https://ec.europa.eu/eurostat/api/dissemination/sdmx/3.0/data/dataflow/ESTAT/prc_hicp_midx/1.0?compress=true&format=csvdata&formatVersion=1.0&lang=en&labels=label_only
+
+- BDI
+https://infostat.bancaditalia.it/inquiry/home?spyglass/taxo:CUBESET=&ITEMSELEZ=&OPEN=false/&ep:LC=IT&COMM=BANKITALIA&ENV=LIVE&CTX=DIFF&IDX=1&/view:CUBEIDS=BMK0100
+
+- fred
+https://fred.stlouisfed.org/series/INTGSBEZM193N
+https://fred.stlouisfed.org/series/BAMLHE00EHYIEY#:~:text=ICE%20BofA%20Euro%20High%20Yield,BAMLHE00EHYIEY
+
+
+- bond
+https://www.bundesbank.de/en/statistics/money-and-capital-markets/interest-rates-and-yields/daily-yields-of-current-federal-securities-772220#:~:text=BBSSY,ML%202.1
+
+- OAT
+https://www.banque-france.fr/fr/statistiques/taux-et-cours/indices-obligataires-2025-12-05
+https://webstat.banque-france.fr/export/csv-columns/fr/selection/5385693
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.FR.L.L40.CI.0000.EUR.N.Z
