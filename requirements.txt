@@ -8,3 +8,4 @@ ipykernel
 pyarrow
 torch
 python-slugify
+openpyxl
