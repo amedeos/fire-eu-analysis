@@ -33,10 +33,8 @@ The goal is to assess the sustainability of withdrawal rate strategies—especia
 fire-eu-analysis/
 │
 ├── data/                # Raw and processed datasets (large files excluded)
-├── notebooks/           # Jupyter notebooks for exploration and analysis
-├── src/                 # Python modules (models, utilities, loaders)
+├── src/                 # Jupyter notebooks for exploration and analysis
 ├── docs/                # Documentation, plots, thesis-related material
-├── tests/               # Unit tests (optional)
 ├── fire.sh              # Podman-based startup script
 └── README.md
 ```
