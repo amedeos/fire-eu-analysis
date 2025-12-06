@@ -190,3 +190,4 @@ data/eurostat/hicp_it_eu.csv
 data/msci/
 Output/
 src/tools/
+*.~lock.*
