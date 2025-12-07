@@ -198,3 +198,6 @@ data/bdi/*/*.png
 data/bund/*.png
 data/bund/*/*.png
 data/bund/*/*YIELDS.csv
+data/oat/*.png
+data/oat/*/*.png
+data/oat/*YIELDS.csv
