@@ -23,3 +23,10 @@ https://www.bundesbank.de/en/statistics/overview-of-the-statistical-series/-/a-t
 https://www.banque-france.fr/fr/statistiques/taux-et-cours/indices-obligataires-2025-12-05
 https://webstat.banque-france.fr/export/csv-columns/fr/selection/5385693
 https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.FR.L.L40.CI.0000.EUR.N.Z
+https://webstat.banque-france.fr/en/sources/banque-de-france-mts-france/
+https://webstat.banque-france.fr/fr/catalogue/fm/FM.M.FR.EUR.FR6.MM.TAM.HSTA
+
+- ECB
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.FR.L.L40.CI.0000.EUR.N.Z
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.IT.L.L40.CI.0000.EUR.N.Z
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.DE.L.L40.CI.0000.EUR.N.Z
