@@ -6,16 +6,27 @@ https://ec.europa.eu/eurostat/api/dissemination/sdmx/3.0/data/dataflow/ESTAT/prc
 
 - BDI
 https://infostat.bancaditalia.it/inquiry/home?spyglass/taxo:CUBESET=&ITEMSELEZ=&OPEN=false/&ep:LC=IT&COMM=BANKITALIA&ENV=LIVE&CTX=DIFF&IDX=1&/view:CUBEIDS=BMK0100
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.DE.L.L40.CI.0000.EUR.N.Z
 
 - fred
 https://fred.stlouisfed.org/series/INTGSBEZM193N
 https://fred.stlouisfed.org/series/BAMLHE00EHYIEY#:~:text=ICE%20BofA%20Euro%20High%20Yield,BAMLHE00EHYIEY
 
 
-- bond
+- bund
 https://www.bundesbank.de/en/statistics/money-and-capital-markets/interest-rates-and-yields/daily-yields-of-current-federal-securities-772220#:~:text=BBSSY,ML%202.1
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.DE.L.L40.CI.0000.EUR.N.Z
+method by Svensson:
+https://www.bundesbank.de/en/statistics/overview-of-the-statistical-series/-/a-term-structure-of-interest-rates-in-the-debt-securities-market-estimated-values-listed-federal-securities--809524
 
 - OAT
 https://www.banque-france.fr/fr/statistiques/taux-et-cours/indices-obligataires-2025-12-05
 https://webstat.banque-france.fr/export/csv-columns/fr/selection/5385693
 https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.FR.L.L40.CI.0000.EUR.N.Z
+https://webstat.banque-france.fr/en/sources/banque-de-france-mts-france/
+https://webstat.banque-france.fr/fr/catalogue/fm/FM.M.FR.EUR.FR6.MM.TAM.HSTA
+
+- ECB
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.FR.L.L40.CI.0000.EUR.N.Z
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.IT.L.L40.CI.0000.EUR.N.Z
+https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.DE.L.L40.CI.0000.EUR.N.Z
