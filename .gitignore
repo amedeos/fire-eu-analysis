@@ -192,4 +192,6 @@ Output/
 src/tools/
 *.~lock.*
 data/bdi/*.csv
+data/bdi/*.png
 data/bdi/*/*.csv
+data/bdi/*/*.png
