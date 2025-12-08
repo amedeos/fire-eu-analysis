@@ -16,6 +16,8 @@ https://fred.stlouisfed.org/series/BAMLHE00EHYIEY#:~:text=ICE%20BofA%20Euro%20Hi
 https://www.bundesbank.de/en/statistics/money-and-capital-markets/interest-rates-and-yields/daily-yields-of-current-federal-securities-772220#:~:text=BBSSY,ML%202.1
 method by Svensson:
 https://www.bundesbank.de/en/statistics/overview-of-the-statistical-series/-/a-term-structure-of-interest-rates-in-the-debt-securities-market-estimated-values-listed-federal-securities--809524
+used:
+https://api.statistiken.bundesbank.de/rest/download/BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A?format=csv&lang=en
 
 - OAT
 https://www.banque-france.fr/fr/statistiques/taux-et-cours/indices-obligataires-2025-12-05
