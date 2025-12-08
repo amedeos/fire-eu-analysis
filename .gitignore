@@ -201,3 +201,5 @@ data/bund/*/*YIELDS.csv
 data/oat/*.png
 data/oat/*/*.png
 data/oat/*YIELDS.csv
+data/ecb/*.png
+data/ecb/*MONTHLY.csv
