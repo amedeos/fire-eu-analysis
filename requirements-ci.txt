@@ -8,3 +8,4 @@ ipykernel
 pyarrow
 python-slugify
 openpyxl
+statsmodels
