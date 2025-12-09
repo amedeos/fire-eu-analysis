@@ -9,3 +9,4 @@ pyarrow
 torch
 python-slugify
 openpyxl
+statsmodels
