@@ -205,3 +205,4 @@ data/oat/*YIELDS*.csv
 data/ecb/*.png
 data/ecb/*MONTHLY.csv
 data/stoxx/STOXX_SXXGR_DAILY.csv
+data/stoxx/STOXX_SXXGR_DAILY_plot.png
