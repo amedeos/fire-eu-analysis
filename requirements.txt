@@ -11,3 +11,4 @@ python-slugify
 openpyxl
 statsmodels
 yfinance
+xlrd

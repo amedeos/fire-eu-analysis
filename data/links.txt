@@ -35,3 +35,18 @@ https://data.ecb.europa.eu/data/datasets/IRS/IRS.M.DE.L.L40.CI.0000.EUR.N.Z
 - STOXX - Net Return SXXGR
 https://finance.yahoo.com/quote/SXXR.Z/history/?period1=536400000&period2=1765711325
 https://www.investing.com/indices/stoxx-europe-600-eur-nr-historical-data
+
+- ISTAT
+FOI:
+curl -kL -H "Accept: application/vnd.sdmx.data+csv;version=1.0.0" \
+  "https://esploradati.istat.it/SDMXWS/rest/data/169_745_DF_DCSP_FOI1B2015_1/M.IT.55.4.00?startPeriod=2016-01&endPeriod=2025-12" \
+  -o foi_2016_2025.csv
+curl -kL -H "Accept: application/vnd.sdmx.data+csv;version=1.0.0" \
+  "https://esploradati.istat.it/SDMXWS/rest/data/144_110_DF_DCSP_FOI1_1/M.IT.4.4.00?startPeriod=1996-01&endPeriod=2010-12" \
+  -o foi_1996_2010_base1995.csv
+curl -kL -H "Accept: application/vnd.sdmx.data+csv;version=1.0.0" \
+  "https://esploradati.istat.it/SDMXWS/rest/data/169_15_DF_DCSP_FOI1B2010_1/M.IT.11.4.00?startPeriod=2011-01&endPeriod=2015-12" \
+  -o foi_2011_2015_base2010.csv
+curl -L -o DCSP_Splicing_coefficient_TB4_FOI.xls \
+  "https://esploradati.istat.it/databrowser/DWL/Prezzi/DCSP_FOI1B2015/DCSP_Splicing_coefficient_TB4.xls"
+
