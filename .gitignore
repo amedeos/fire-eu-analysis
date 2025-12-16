@@ -207,7 +207,7 @@ data/ecb/*MONTHLY.csv
 data/stoxx/STOXX_SXXGR_DAILY.csv
 data/stoxx/STOXX_SXXGR_DAILY_plot.png
 data/istat/*.png
-data/istat/*.xls
+data/istat/*_FOI.xls
 data/istat/FOI_*.csv
 data/istat/foi_2016_2025.csv
 
