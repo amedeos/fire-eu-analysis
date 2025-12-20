@@ -37,6 +37,8 @@ https://finance.yahoo.com/quote/SXXR.Z/history/?period1=536400000&period2=176571
 https://www.investing.com/indices/stoxx-europe-600-eur-nr-historical-data
 
 - ISTAT
+curl -s -H "Accept: application/vnd.sdmx.structure+json;version=1.0" \
+  "https://esploradati.istat.it/SDMXWS/rest/dataflow/IT1" > dataflow_istat.json
 FOI:
 curl -kL -H "Accept: application/vnd.sdmx.data+csv;version=1.0.0" \
   "https://esploradati.istat.it/SDMXWS/rest/data/169_745_DF_DCSP_FOI1B2015_1/M.IT.55.4.00?startPeriod=2016-01&endPeriod=2025-12" \
@@ -49,4 +51,8 @@ curl -kL -H "Accept: application/vnd.sdmx.data+csv;version=1.0.0" \
   -o foi_2011_2015_base2010.csv
 curl -L -o DCSP_Splicing_coefficient_TB4_FOI.xls \
   "https://esploradati.istat.it/databrowser/DWL/Prezzi/DCSP_FOI1B2015/DCSP_Splicing_coefficient_TB4.xls"
+NIC:
+wget -O nic_1996_2015.xls \
+"https://esploradati.istat.it/databrowser/DWL/Prezzi/DCSP_NIC1B2015/Reconstruction NIC base 2015=100.xls"
+https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,Z0400PRI,1.0/PRI_CONWHONAT/DCSP_NIC1B2015/IT1,167_744_DF_DCSP_NIC1B2015_1,1.0
 
