@@ -211,3 +211,5 @@ data/istat/*_FOI.xls
 data/istat/FOI_*.csv
 data/istat/foi_2016_2025.csv
 data/istat/NIC_MONTHLY.csv
+data/eurostat/hicp_plots
+data/eurostat/*.png
