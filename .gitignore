@@ -210,4 +210,4 @@ data/istat/*.png
 data/istat/*_FOI.xls
 data/istat/FOI_*.csv
 data/istat/foi_2016_2025.csv
-
+data/istat/NIC_MONTHLY.csv
