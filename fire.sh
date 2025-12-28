@@ -95,6 +95,8 @@ build_cpu_image() {
   ${PODMAN_BIN} build -f Dockerfile -t "${CPU_IMAGE}" .
   if [ $? -eq 0 ]; then
     echo "[INFO] CPU image '${CPU_IMAGE}' built successfully"
+    echo "[INFO] Cleaning up intermediate build images..."
+    ${PODMAN_BIN} image prune -f >/dev/null 2>&1 || true
   else
     echo "[ERROR] Failed to build CPU image" >&2
     return 1
@@ -106,6 +108,8 @@ build_gpu_image() {
   ${PODMAN_BIN} build -f Dockerfile.gpu -t "${GPU_IMAGE}" .
   if [ $? -eq 0 ]; then
     echo "[INFO] GPU image '${GPU_IMAGE}' built successfully"
+    echo "[INFO] Cleaning up intermediate build images..."
+    ${PODMAN_BIN} image prune -f >/dev/null 2>&1 || true
   else
     echo "[ERROR] Failed to build GPU image" >&2
     return 1
@@ -125,6 +129,8 @@ build_images() {
   fi
   
   echo "[INFO] Image build completed"
+  echo "[INFO] Final cleanup of intermediate build images..."
+  ${PODMAN_BIN} image prune -f >/dev/null 2>&1 || true
 }
 
 container_exists() {
