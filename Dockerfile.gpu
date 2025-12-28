@@ -1,60 +1,64 @@
 # fire-eu-analysis GPU Dockerfile
+# Multi-stage build to reduce final image size
 
-# Recent CUDA + Ubuntu 24.04 base image with cuDNN included
-FROM nvidia/cuda:13.0.2-cudnn-runtime-ubuntu24.04
+# Stage 1: Build stage (with build tools)
+FROM nvidia/cuda:13.0.2-cudnn-runtime-ubuntu24.04 AS builder
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-# ------------------------------------------------------------
-# 1. System packages
-#    - python3-venv needed to create a virtual environment
-# ------------------------------------------------------------
+# Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 python3-pip python3-venv \
     build-essential \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# ------------------------------------------------------------
-# 2. Create and activate a virtual environment
-# ------------------------------------------------------------
+# Create and activate a virtual environment
 RUN python3 -m venv /opt/venv
-# Make sure the venv is used for all subsequent commands
 ENV PATH="/opt/venv/bin:${PATH}"
 
-# ------------------------------------------------------------
-# 3. Workdir
-# ------------------------------------------------------------
+# Set working directory
 WORKDIR /workspace
 
-# ------------------------------------------------------------
-# 4. Install Python dependencies into the venv
-# ------------------------------------------------------------
+# Install Python dependencies into the venv
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# ------------------------------------------------------------
-# 5. Project files (overridden by bind mount in dev)
-# ------------------------------------------------------------
+# Stage 2: Runtime stage (without build tools)
+FROM nvidia/cuda:13.0.2-cudnn-runtime-ubuntu24.04
+
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install only runtime dependencies (no build-essential)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-pip python3-venv \
+    git \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Copy virtual environment from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:${PATH}"
+
+# Set working directory
+WORKDIR /workspace
+
+# Copy project files (overridden by bind mount in dev)
 COPY . .
 
-# ------------------------------------------------------------
-# 6. Local modules importable
-# ------------------------------------------------------------
+# Local modules importable
 ENV PYTHONPATH=/workspace
 
-# ------------------------------------------------------------
-# 7. Copy startup script and set permissions
-# ------------------------------------------------------------
+# Copy startup script and set permissions
 COPY start-jupyter.sh /usr/local/bin/start-jupyter.sh
 RUN chmod +x /usr/local/bin/start-jupyter.sh
 
-# ------------------------------------------------------------
-# 8. Default command
+# Default command
 # Start Jupyter Lab with token generation for remote access
 # Token will be saved to /workspace/.jupyter_token
-# ------------------------------------------------------------
 ENTRYPOINT ["/usr/local/bin/start-jupyter.sh"]
 
