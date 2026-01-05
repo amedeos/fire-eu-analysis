@@ -15,4 +15,6 @@ exec jupyter lab \
     --ServerApp.token="$TOKEN" \
     --ServerApp.password='' \
     --ServerApp.allow_origin='*' \
-    --ServerApp.disable_check_xsrf=True
+    --ServerApp.disable_check_xsrf=True \
+    --ServerApp.iopub_data_rate_limit=${JUPYTER_DATA_LIMIT:-100000000} \
+    --ServerApp.iopub_msg_rate_limit=${JUPYTER_MSG_LIMIT:-100000}
