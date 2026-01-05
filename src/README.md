@@ -60,6 +60,15 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [37_block_notax_i_hicp_m_acwi_b_de_9010.ipynb](37_block_notax_i_hicp_m_acwi_b_de_9010.ipynb) | 90% MSCI ACWI + 10% Bund | SWR simulation with Euro area HICP inflation |
 | [38_block_notax_i_hicp_m_acwi_b_de_1000.ipynb](38_block_notax_i_hicp_m_acwi_b_de_1000.ipynb) | 100% MSCI ACWI | SWR simulation with Euro area HICP inflation |
 
+### MSCI ACWI + BTP Portfolios (No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [39_block_notax_i_hicp_m_acwi_b_it_6040.ipynb](39_block_notax_i_hicp_m_acwi_b_it_6040.ipynb) | 60% MSCI ACWI + 40% BTP | SWR simulation with Euro area HICP inflation |
+| [40_block_notax_i_hicp_m_acwi_b_it_7030.ipynb](40_block_notax_i_hicp_m_acwi_b_it_7030.ipynb) | 70% MSCI ACWI + 30% BTP | SWR simulation with Euro area HICP inflation |
+| [41_block_notax_i_hicp_m_acwi_b_it_8020.ipynb](41_block_notax_i_hicp_m_acwi_b_it_8020.ipynb) | 80% MSCI ACWI + 20% BTP | SWR simulation with Euro area HICP inflation |
+| [42_block_notax_i_hicp_m_acwi_b_it_9010.ipynb](42_block_notax_i_hicp_m_acwi_b_it_9010.ipynb) | 90% MSCI ACWI + 10% BTP | SWR simulation with Euro area HICP inflation |
+
 ## Simulation Methodology
 
 ### Block Bootstrap
