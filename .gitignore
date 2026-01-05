@@ -184,6 +184,7 @@ products_vectorstore/
 .local
 *.swp
 .jupyter/
+CLAUDE.md
 Untitled*.ipynb
 .jupyter_token
 data/eurostat/hicp_it_eu.csv
