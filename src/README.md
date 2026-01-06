@@ -117,6 +117,15 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [0407_block_notax_i_hicp_m_europe_b_it_8020.ipynb](0407_block_notax_i_hicp_m_europe_b_it_8020.ipynb) | 80% MSCI Europe + 20% BTP | SWR simulation with Euro area HICP inflation |
 | [0408_block_notax_i_hicp_m_europe_b_it_9010.ipynb](0408_block_notax_i_hicp_m_europe_b_it_9010.ipynb) | 90% MSCI Europe + 10% BTP | SWR simulation with Euro area HICP inflation |
 
+### MSCI Europe + Bund + BTP Portfolios (04xx, No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0409_block_notax_i_hicp_m_europe_b_deit_602020.ipynb](0409_block_notax_i_hicp_m_europe_b_deit_602020.ipynb) | 60% MSCI Europe + 20% Bund + 20% BTP | SWR simulation with Euro area HICP inflation |
+| [0410_block_notax_i_hicp_m_europe_b_deit_701515.ipynb](0410_block_notax_i_hicp_m_europe_b_deit_701515.ipynb) | 70% MSCI Europe + 15% Bund + 15% BTP | SWR simulation with Euro area HICP inflation |
+| [0411_block_notax_i_hicp_m_europe_b_deit_801010.ipynb](0411_block_notax_i_hicp_m_europe_b_deit_801010.ipynb) | 80% MSCI Europe + 10% Bund + 10% BTP | SWR simulation with Euro area HICP inflation |
+| [0412_block_notax_i_hicp_m_europe_b_deit_900505.ipynb](0412_block_notax_i_hicp_m_europe_b_deit_900505.ipynb) | 90% MSCI Europe + 5% Bund + 5% BTP | SWR simulation with Euro area HICP inflation |
+
 ## Simulation Methodology
 
 ### Block Bootstrap
