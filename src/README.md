@@ -10,6 +10,7 @@ This directory contains Jupyter notebooks for financial data analysis and Monte 
 | `01xx` | MSCI World | Simulations with MSCI World NET index |
 | `02xx` | MSCI ACWI | Simulations with MSCI ACWI NET index |
 | `03xx` | STOXX SXXGR | Simulations with STOXX Europe 600 GR index |
+| `04xx` | MSCI Europe | Simulations with MSCI Europe NET index |
 
 ## Data Extraction and Preparation Notebooks (00xx)
 
@@ -96,6 +97,16 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [0302_block_notax_i_hicp_s_e600_b_de_8020.ipynb](0302_block_notax_i_hicp_s_e600_b_de_8020.ipynb) | 80% STOXX 600 + 20% Bund | SWR simulation with Euro area HICP inflation |
 | [0303_block_notax_i_hicp_s_e600_b_de_9010.ipynb](0303_block_notax_i_hicp_s_e600_b_de_9010.ipynb) | 90% STOXX 600 + 10% Bund | SWR simulation with Euro area HICP inflation |
 | [0304_block_notax_i_hicp_s_e600_b_de_1000.ipynb](0304_block_notax_i_hicp_s_e600_b_de_1000.ipynb) | 100% STOXX 600 | SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + Bund Portfolios (04xx, No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0400_block_notax_i_hicp_m_europe_b_de_6040.ipynb](0400_block_notax_i_hicp_m_europe_b_de_6040.ipynb) | 60% MSCI Europe + 40% Bund | SWR simulation with Euro area HICP inflation |
+| [0401_block_notax_i_hicp_m_europe_b_de_7030.ipynb](0401_block_notax_i_hicp_m_europe_b_de_7030.ipynb) | 70% MSCI Europe + 30% Bund | SWR simulation with Euro area HICP inflation |
+| [0402_block_notax_i_hicp_m_europe_b_de_8020.ipynb](0402_block_notax_i_hicp_m_europe_b_de_8020.ipynb) | 80% MSCI Europe + 20% Bund | SWR simulation with Euro area HICP inflation |
+| [0403_block_notax_i_hicp_m_europe_b_de_9010.ipynb](0403_block_notax_i_hicp_m_europe_b_de_9010.ipynb) | 90% MSCI Europe + 10% Bund | SWR simulation with Euro area HICP inflation |
+| [0404_block_notax_i_hicp_m_europe_b_de_1000.ipynb](0404_block_notax_i_hicp_m_europe_b_de_1000.ipynb) | 100% MSCI Europe | SWR simulation with Euro area HICP inflation |
 
 ## Simulation Methodology
 
