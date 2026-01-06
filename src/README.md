@@ -78,6 +78,16 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [45_block_notax_i_hicp_m_acwi_b_deit_801010.ipynb](45_block_notax_i_hicp_m_acwi_b_deit_801010.ipynb) | 80% MSCI ACWI + 10% Bund + 10% BTP | SWR simulation with Euro area HICP inflation |
 | [46_block_notax_i_hicp_m_acwi_b_deit_900505.ipynb](46_block_notax_i_hicp_m_acwi_b_deit_900505.ipynb) | 90% MSCI ACWI + 5% Bund + 5% BTP | SWR simulation with Euro area HICP inflation |
 
+### STOXX Europe 600 + Bund Portfolios (No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [47_block_notax_i_hicp_s_e600_b_de_6040.ipynb](47_block_notax_i_hicp_s_e600_b_de_6040.ipynb) | 60% STOXX 600 + 40% Bund | SWR simulation with Euro area HICP inflation |
+| [48_block_notax_i_hicp_s_e600_b_de_7030.ipynb](48_block_notax_i_hicp_s_e600_b_de_7030.ipynb) | 70% STOXX 600 + 30% Bund | SWR simulation with Euro area HICP inflation |
+| [49_block_notax_i_hicp_s_e600_b_de_8020.ipynb](49_block_notax_i_hicp_s_e600_b_de_8020.ipynb) | 80% STOXX 600 + 20% Bund | SWR simulation with Euro area HICP inflation |
+| [50_block_notax_i_hicp_s_e600_b_de_9010.ipynb](50_block_notax_i_hicp_s_e600_b_de_9010.ipynb) | 90% STOXX 600 + 10% Bund | SWR simulation with Euro area HICP inflation |
+| [51_block_notax_i_hicp_s_e600_b_de_1000.ipynb](51_block_notax_i_hicp_s_e600_b_de_1000.ipynb) | 100% STOXX 600 | SWR simulation with Euro area HICP inflation |
+
 ## Simulation Methodology
 
 ### Block Bootstrap
