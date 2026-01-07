@@ -190,7 +190,7 @@ Untitled*.ipynb
 data/eurostat/hicp_it_eu.csv
 data/msci/
 Output/
-src/tools/
+src/tools/*.ipynb*
 *.~lock.*
 data/bdi/*.csv
 data/bdi/*.png
