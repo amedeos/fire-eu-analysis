@@ -43,6 +43,7 @@ class NotebookData:
     failed_simulations: int = 0
     failed_simulations_pct: float = 0.0
     median_depletion_year: int | None = None
+    min_depletion_year: int | None = None
 
 
 # Mapping of asset codes to display names
@@ -117,18 +118,18 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
             if title_match:
                 data.description = title_match.group(1).strip()
 
-    # Find last code cell with output
+    # Find code cells with relevant output
     output_text = ""
+    depletion_text = ""
     for i in range(len(nb.cells) - 1, -1, -1):
         cell = nb.cells[i]
         if cell.cell_type == "code" and cell.outputs:
             for out in cell.outputs:
                 if out.output_type == "stream" and hasattr(out, "text"):
-                    if "MONTE CARLO SIMULATION SUMMARY" in out.text:
+                    if "MONTE CARLO SIMULATION SUMMARY" in out.text and not output_text:
                         output_text = out.text
-                        break
-            if output_text:
-                break
+                    if "DEPLETION YEAR PERCENTILES" in out.text and not depletion_text:
+                        depletion_text = out.text
 
     if not output_text:
         logger.warning(f"No simulation output found in {notebook_path.name}")
@@ -136,6 +137,10 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
 
     # Parse simulation output
     _parse_simulation_output(data, output_text)
+
+    # Parse depletion year details if found
+    if depletion_text:
+        _parse_depletion_output(data, depletion_text)
 
     return data
 
@@ -220,6 +225,12 @@ def _parse_simulation_output(data: NotebookData, text: str) -> None:
     if match:
         data.median_depletion_year = int(match.group(1))
 
+def _parse_depletion_output(data: NotebookData, text: str) -> None:
+    """Parse the DEPLETION YEAR PERCENTILES output for min depletion year."""
+    match = re.search(r"Min depletion year:\s*(\d+)", text)
+    if match:
+        data.min_depletion_year = int(match.group(1))
+
 
 def get_display_name(code: str, mapping: dict[str, str]) -> str:
     """Get display name from code, using mapping or returning code as-is."""
@@ -299,8 +310,8 @@ def generate_registry(
         "",
         "## Summary Table: Success Rate @ 4% WR",
         "",
-        "| ID | Equity | Bond | Allocation | Tax | SR@4% | Median Final | Med. Depletion |",
-        "|----|--------|------|------------|-----|-------|--------------|----------------|",
+        "| ID | Equity | Bond | Allocation | Tax | SR@4% | Median Final | Med. Depletion | Min Depletion |",
+        "|----|--------|------|------------|-----|-------|--------------|----------------|---------------|",
     ]
 
     # Sort notebooks by ID
@@ -313,11 +324,12 @@ def generate_registry(
         median_depletion = (
             str(nb.median_depletion_year) if nb.median_depletion_year else "-"
         )
+        min_depletion = str(nb.min_depletion_year) if nb.min_depletion_year else "-"
 
         lines.append(
             f"| {nb.notebook_id} | {equity_display} | {bond_short} | {allocation} | "
             f"{nb.tax_status} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
-            f"{median_depletion} |"
+            f"{median_depletion} | {min_depletion} |"
         )
 
     lines.extend(["", "---", "", "## Detailed Analysis", ""])
@@ -384,6 +396,11 @@ def generate_registry(
                 lines.append(f"| Median Depletion Year | {nb.median_depletion_year} |")
             else:
                 lines.append("| Median Depletion Year | - |")
+
+            if nb.min_depletion_year:
+                lines.append(f"| Min Depletion Year | {nb.min_depletion_year} |")
+            else:
+                lines.append("| Min Depletion Year | - |")
 
             lines.extend(["", "---", ""])
 
