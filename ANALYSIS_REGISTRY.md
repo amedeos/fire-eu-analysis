@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-07 14:51:08
+> Auto-generated from notebooks on 2026-01-07 14:54:46
 
 ## Methodology Summary
 
@@ -17,52 +17,52 @@
 
 ## Summary Table: Success Rate @ 4% WR
 
-| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Median Depletion | Mean Depletion | Min Depletion |
-|----|--------|------|------------|-----------|-----|-------|--------------|------------------|----------------|---------------|
-| 0100 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 78.35% | €899,494 | 26 | 25.3 | 12 |
-| 0101 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 78.17% | €1,097,975 | 25 | 24.6 | 11 |
-| 0102 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 77.33% | €1,282,788 | 24 | 23.9 | 10 |
-| 0103 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 76.23% | €1,444,403 | 24 | 23.2 | 9 |
-| 0104 | MSCI World | - | 100 | HICP_EU | No Tax | 74.86% | €1,580,517 | 23 | 22.5 | 8 |
-| 0105 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 80.46% | €1,188,838 | 25 | 25.0 | 12 |
-| 0106 | MSCI World | BTP | 70/30 | HICP_EU | No Tax | 79.68% | €1,333,558 | 25 | 24.4 | 11 |
-| 0107 | MSCI World | BTP | 80/20 | HICP_EU | No Tax | 78.32% | €1,447,769 | 24 | 23.8 | 9 |
-| 0108 | MSCI World | BTP | 90/10 | HICP_EU | No Tax | 76.73% | €1,530,097 | 24 | 23.2 | 8 |
-| 0109 | MSCI World | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 79.87% | €1,054,239 | 26 | 25.2 | 12 |
-| 0110 | MSCI World | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 79.15% | €1,221,866 | 25 | 24.5 | 11 |
-| 0111 | MSCI World | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 77.94% | €1,367,482 | 24 | 23.9 | 10 |
-| 0112 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 76.50% | €1,489,272 | 24 | 23.2 | 8 |
-| 0200 | MSCI ACWI | Bund | 60/40 | HICP_EU | No Tax | 76.97% | €837,272 | 26 | 25.2 | 12 |
-| 0201 | MSCI ACWI | Bund | 70/30 | HICP_EU | No Tax | 76.77% | €1,017,984 | 25 | 24.6 | 11 |
-| 0202 | MSCI ACWI | Bund | 80/20 | HICP_EU | No Tax | 75.99% | €1,187,717 | 24 | 23.9 | 10 |
-| 0203 | MSCI ACWI | Bund | 90/10 | HICP_EU | No Tax | 74.93% | €1,334,669 | 24 | 23.1 | 9 |
-| 0204 | MSCI ACWI | - | 100 | HICP_EU | No Tax | 73.63% | €1,458,183 | 23 | 22.5 | 8 |
-| 0205 | MSCI ACWI | BTP | 60/40 | HICP_EU | No Tax | 79.18% | €1,113,314 | 25 | 24.9 | 12 |
-| 0206 | MSCI ACWI | BTP | 70/30 | HICP_EU | No Tax | 78.35% | €1,243,429 | 25 | 24.3 | 11 |
-| 0207 | MSCI ACWI | BTP | 80/20 | HICP_EU | No Tax | 77.02% | €1,344,157 | 24 | 23.7 | 9 |
-| 0208 | MSCI ACWI | BTP | 90/10 | HICP_EU | No Tax | 75.40% | €1,416,403 | 23 | 23.1 | 8 |
-| 0209 | MSCI ACWI | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 78.53% | €983,413 | 26 | 25.1 | 12 |
-| 0210 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 77.77% | €1,133,975 | 25 | 24.4 | 11 |
-| 0211 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 76.60% | €1,268,338 | 24 | 23.8 | 10 |
-| 0212 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 75.18% | €1,376,308 | 24 | 23.1 | 8 |
-| 0300 | STOXX 600 | Bund | 60/40 | HICP_EU | No Tax | 81.95% | €3,924,453 | 22 | 21.7 | 8 |
-| 0301 | STOXX 600 | Bund | 70/30 | HICP_EU | No Tax | 80.23% | €4,723,474 | 21 | 20.6 | 7 |
-| 0302 | STOXX 600 | Bund | 80/20 | HICP_EU | No Tax | 78.25% | €5,456,359 | 19 | 19.6 | 6 |
-| 0303 | STOXX 600 | Bund | 90/10 | HICP_EU | No Tax | 76.23% | €6,078,578 | 18 | 18.8 | 6 |
-| 0304 | STOXX 600 | - | 100 | HICP_EU | No Tax | 88.09% | €11,025,784 | 21 | 21.1 | 7 |
-| 0400 | MSCI Europe | Bund | 60/40 | HICP_EU | No Tax | 65.00% | €384,577 | 25 | 24.7 | 11 |
-| 0401 | MSCI Europe | Bund | 70/30 | HICP_EU | No Tax | 63.92% | €428,468 | 24 | 23.9 | 10 |
-| 0402 | MSCI Europe | Bund | 80/20 | HICP_EU | No Tax | 62.52% | €447,219 | 23 | 23.1 | 9 |
-| 0403 | MSCI Europe | Bund | 90/10 | HICP_EU | No Tax | 60.85% | €434,461 | 23 | 22.3 | 8 |
-| 0404 | MSCI Europe | - | 100 | HICP_EU | No Tax | 58.97% | €393,783 | 22 | 21.6 | 7 |
-| 0405 | MSCI Europe | BTP | 60/40 | HICP_EU | No Tax | 67.85% | €566,126 | 25 | 24.2 | 11 |
-| 0406 | MSCI Europe | BTP | 70/30 | HICP_EU | No Tax | 66.00% | €562,083 | 24 | 23.6 | 10 |
-| 0407 | MSCI Europe | BTP | 80/20 | HICP_EU | No Tax | 63.73% | €532,579 | 23 | 22.9 | 9 |
-| 0408 | MSCI Europe | BTP | 90/10 | HICP_EU | No Tax | 61.41% | €472,065 | 22 | 22.2 | 8 |
-| 0409 | MSCI Europe | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 66.80% | €482,433 | 25 | 24.5 | 11 |
-| 0410 | MSCI Europe | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 65.16% | €498,546 | 24 | 23.8 | 10 |
-| 0411 | MSCI Europe | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 63.22% | €490,738 | 23 | 23.0 | 9 |
-| 0412 | MSCI Europe | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 61.19% | €453,207 | 22 | 22.3 | 8 |
+| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Mean Final | Median Depletion | Mean Depletion | Min Depletion |
+|----|--------|------|------------|-----------|-----|-------|--------------|------------|------------------|----------------|---------------|
+| 0100 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 78.35% | €899,494 | €1,381,636 | 26 | 25.3 | 12 |
+| 0101 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 78.17% | €1,097,975 | €1,807,516 | 25 | 24.6 | 11 |
+| 0102 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 77.33% | €1,282,788 | €2,308,728 | 24 | 23.9 | 10 |
+| 0103 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 76.23% | €1,444,403 | €2,895,666 | 24 | 23.2 | 9 |
+| 0104 | MSCI World | - | 100 | HICP_EU | No Tax | 74.86% | €1,580,517 | €3,580,714 | 23 | 22.5 | 8 |
+| 0105 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 80.46% | €1,188,838 | €1,848,342 | 25 | 25.0 | 12 |
+| 0106 | MSCI World | BTP | 70/30 | HICP_EU | No Tax | 79.68% | €1,333,558 | €2,212,797 | 25 | 24.4 | 11 |
+| 0107 | MSCI World | BTP | 80/20 | HICP_EU | No Tax | 78.32% | €1,447,769 | €2,620,960 | 24 | 23.8 | 9 |
+| 0108 | MSCI World | BTP | 90/10 | HICP_EU | No Tax | 76.73% | €1,530,097 | €3,075,857 | 24 | 23.2 | 8 |
+| 0109 | MSCI World | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 79.87% | €1,054,239 | €1,606,661 | 26 | 25.2 | 12 |
+| 0110 | MSCI World | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 79.15% | €1,221,866 | €2,005,033 | 25 | 24.5 | 11 |
+| 0111 | MSCI World | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 77.94% | €1,367,482 | €2,462,334 | 24 | 23.9 | 10 |
+| 0112 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 76.50% | €1,489,272 | €2,985,057 | 24 | 23.2 | 8 |
+| 0200 | MSCI ACWI | Bund | 60/40 | HICP_EU | No Tax | 76.97% | €837,272 | €1,318,952 | 26 | 25.2 | 12 |
+| 0201 | MSCI ACWI | Bund | 70/30 | HICP_EU | No Tax | 76.77% | €1,017,984 | €1,724,778 | 25 | 24.6 | 11 |
+| 0202 | MSCI ACWI | Bund | 80/20 | HICP_EU | No Tax | 75.99% | €1,187,717 | €2,202,664 | 24 | 23.9 | 10 |
+| 0203 | MSCI ACWI | Bund | 90/10 | HICP_EU | No Tax | 74.93% | €1,334,669 | €2,762,741 | 24 | 23.1 | 9 |
+| 0204 | MSCI ACWI | - | 100 | HICP_EU | No Tax | 73.63% | €1,458,183 | €3,417,091 | 23 | 22.5 | 8 |
+| 0205 | MSCI ACWI | BTP | 60/40 | HICP_EU | No Tax | 79.18% | €1,113,314 | €1,772,350 | 25 | 24.9 | 12 |
+| 0206 | MSCI ACWI | BTP | 70/30 | HICP_EU | No Tax | 78.35% | €1,243,429 | €2,117,440 | 25 | 24.3 | 11 |
+| 0207 | MSCI ACWI | BTP | 80/20 | HICP_EU | No Tax | 77.02% | €1,344,157 | €2,504,514 | 24 | 23.7 | 9 |
+| 0208 | MSCI ACWI | BTP | 90/10 | HICP_EU | No Tax | 75.40% | €1,416,403 | €2,936,635 | 23 | 23.1 | 8 |
+| 0209 | MSCI ACWI | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 78.53% | €983,413 | €1,537,335 | 26 | 25.1 | 12 |
+| 0210 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 77.77% | €1,133,975 | €1,916,017 | 25 | 24.4 | 11 |
+| 0211 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 76.60% | €1,268,338 | €2,351,093 | 24 | 23.8 | 10 |
+| 0212 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 75.18% | €1,376,308 | €2,848,998 | 24 | 23.1 | 8 |
+| 0300 | STOXX 600 | Bund | 60/40 | HICP_EU | No Tax | 81.95% | €3,924,453 | €9,919,297 | 22 | 21.7 | 8 |
+| 0301 | STOXX 600 | Bund | 70/30 | HICP_EU | No Tax | 80.23% | €4,723,474 | €15,380,633 | 21 | 20.6 | 7 |
+| 0302 | STOXX 600 | Bund | 80/20 | HICP_EU | No Tax | 78.25% | €5,456,359 | €23,798,822 | 19 | 19.6 | 6 |
+| 0303 | STOXX 600 | Bund | 90/10 | HICP_EU | No Tax | 76.23% | €6,078,578 | €36,903,053 | 18 | 18.8 | 6 |
+| 0304 | STOXX 600 | - | 100 | HICP_EU | No Tax | 88.09% | €11,025,784 | €26,753,425 | 21 | 21.1 | 7 |
+| 0400 | MSCI Europe | Bund | 60/40 | HICP_EU | No Tax | 65.00% | €384,577 | €878,249 | 25 | 24.7 | 11 |
+| 0401 | MSCI Europe | Bund | 70/30 | HICP_EU | No Tax | 63.92% | €428,468 | €1,115,627 | 24 | 23.9 | 10 |
+| 0402 | MSCI Europe | Bund | 80/20 | HICP_EU | No Tax | 62.52% | €447,219 | €1,381,899 | 23 | 23.1 | 9 |
+| 0403 | MSCI Europe | Bund | 90/10 | HICP_EU | No Tax | 60.85% | €434,461 | €1,678,483 | 23 | 22.3 | 8 |
+| 0404 | MSCI Europe | - | 100 | HICP_EU | No Tax | 58.97% | €393,783 | €2,007,341 | 22 | 21.6 | 7 |
+| 0405 | MSCI Europe | BTP | 60/40 | HICP_EU | No Tax | 67.85% | €566,126 | €1,227,077 | 25 | 24.2 | 11 |
+| 0406 | MSCI Europe | BTP | 70/30 | HICP_EU | No Tax | 66.00% | €562,083 | €1,404,050 | 24 | 23.6 | 10 |
+| 0407 | MSCI Europe | BTP | 80/20 | HICP_EU | No Tax | 63.73% | €532,579 | €1,593,587 | 23 | 22.9 | 9 |
+| 0408 | MSCI Europe | BTP | 90/10 | HICP_EU | No Tax | 61.41% | €472,065 | €1,794,887 | 22 | 22.2 | 8 |
+| 0409 | MSCI Europe | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 66.80% | €482,433 | €1,045,166 | 25 | 24.5 | 11 |
+| 0410 | MSCI Europe | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 65.16% | €498,546 | €1,255,451 | 24 | 23.8 | 10 |
+| 0411 | MSCI Europe | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 63.22% | €490,738 | €1,485,709 | 23 | 23.0 | 9 |
+| 0412 | MSCI Europe | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 61.19% | €453,207 | €1,736,154 | 22 | 22.3 | 8 |
 
 ---
 
@@ -89,6 +89,7 @@
 |--------|-------|
 | Success Rate | 78.35% |
 | Median Final Value | €899,494 |
+| Mean Final Value | €1,381,636 |
 | P5 Final Value | €0 |
 | P95 Final Value | €4,541,365 |
 | Failed Simulations | 21,647 (21.6%) |
@@ -117,6 +118,7 @@
 |--------|-------|
 | Success Rate | 78.17% |
 | Median Final Value | €1,097,975 |
+| Mean Final Value | €1,807,516 |
 | P5 Final Value | €0 |
 | P95 Final Value | €6,181,313 |
 | Failed Simulations | 21,832 (21.8%) |
@@ -145,6 +147,7 @@
 |--------|-------|
 | Success Rate | 77.33% |
 | Median Final Value | €1,282,788 |
+| Mean Final Value | €2,308,728 |
 | P5 Final Value | €0 |
 | P95 Final Value | €8,270,551 |
 | Failed Simulations | 22,669 (22.7%) |
@@ -173,6 +176,7 @@
 |--------|-------|
 | Success Rate | 76.23% |
 | Median Final Value | €1,444,403 |
+| Mean Final Value | €2,895,666 |
 | P5 Final Value | €0 |
 | P95 Final Value | €10,825,881 |
 | Failed Simulations | 23,768 (23.8%) |
@@ -201,6 +205,7 @@
 |--------|-------|
 | Success Rate | 74.86% |
 | Median Final Value | €1,580,517 |
+| Mean Final Value | €3,580,714 |
 | P5 Final Value | €0 |
 | P95 Final Value | €14,008,419 |
 | Failed Simulations | 25,138 (25.1%) |
@@ -229,6 +234,7 @@
 |--------|-------|
 | Success Rate | 80.46% |
 | Median Final Value | €1,188,838 |
+| Mean Final Value | €1,848,342 |
 | P5 Final Value | €0 |
 | P95 Final Value | €6,095,223 |
 | Failed Simulations | 19,540 (19.5%) |
@@ -257,6 +263,7 @@
 |--------|-------|
 | Success Rate | 79.68% |
 | Median Final Value | €1,333,558 |
+| Mean Final Value | €2,212,797 |
 | P5 Final Value | €0 |
 | P95 Final Value | €7,581,764 |
 | Failed Simulations | 20,318 (20.3%) |
@@ -285,6 +292,7 @@
 |--------|-------|
 | Success Rate | 78.32% |
 | Median Final Value | €1,447,769 |
+| Mean Final Value | €2,620,960 |
 | P5 Final Value | €0 |
 | P95 Final Value | €9,399,755 |
 | Failed Simulations | 21,677 (21.7%) |
@@ -313,6 +321,7 @@
 |--------|-------|
 | Success Rate | 76.73% |
 | Median Final Value | €1,530,097 |
+| Mean Final Value | €3,075,857 |
 | P5 Final Value | €0 |
 | P95 Final Value | €11,535,199 |
 | Failed Simulations | 23,271 (23.3%) |
@@ -341,6 +350,7 @@
 |--------|-------|
 | Success Rate | 79.87% |
 | Median Final Value | €1,054,239 |
+| Mean Final Value | €1,606,661 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,244,569 |
 | Failed Simulations | 20,130 (20.1%) |
@@ -369,6 +379,7 @@
 |--------|-------|
 | Success Rate | 79.15% |
 | Median Final Value | €1,221,866 |
+| Mean Final Value | €2,005,033 |
 | P5 Final Value | €0 |
 | P95 Final Value | €6,843,578 |
 | Failed Simulations | 20,847 (20.8%) |
@@ -397,6 +408,7 @@
 |--------|-------|
 | Success Rate | 77.94% |
 | Median Final Value | €1,367,482 |
+| Mean Final Value | €2,462,334 |
 | P5 Final Value | €0 |
 | P95 Final Value | €8,832,595 |
 | Failed Simulations | 22,057 (22.1%) |
@@ -425,6 +437,7 @@
 |--------|-------|
 | Success Rate | 76.50% |
 | Median Final Value | €1,489,272 |
+| Mean Final Value | €2,985,057 |
 | P5 Final Value | €0 |
 | P95 Final Value | €11,198,818 |
 | Failed Simulations | 23,503 (23.5%) |
@@ -455,6 +468,7 @@
 |--------|-------|
 | Success Rate | 76.97% |
 | Median Final Value | €837,272 |
+| Mean Final Value | €1,318,952 |
 | P5 Final Value | €0 |
 | P95 Final Value | €4,399,692 |
 | Failed Simulations | 23,034 (23.0%) |
@@ -483,6 +497,7 @@
 |--------|-------|
 | Success Rate | 76.77% |
 | Median Final Value | €1,017,984 |
+| Mean Final Value | €1,724,778 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,981,103 |
 | Failed Simulations | 23,233 (23.2%) |
@@ -511,6 +526,7 @@
 |--------|-------|
 | Success Rate | 75.99% |
 | Median Final Value | €1,187,717 |
+| Mean Final Value | €2,202,664 |
 | P5 Final Value | €0 |
 | P95 Final Value | €7,986,124 |
 | Failed Simulations | 24,010 (24.0%) |
@@ -539,6 +555,7 @@
 |--------|-------|
 | Success Rate | 74.93% |
 | Median Final Value | €1,334,669 |
+| Mean Final Value | €2,762,741 |
 | P5 Final Value | €0 |
 | P95 Final Value | €10,440,302 |
 | Failed Simulations | 25,072 (25.1%) |
@@ -567,6 +584,7 @@
 |--------|-------|
 | Success Rate | 73.63% |
 | Median Final Value | €1,458,183 |
+| Mean Final Value | €3,417,091 |
 | P5 Final Value | €0 |
 | P95 Final Value | €13,470,758 |
 | Failed Simulations | 26,370 (26.4%) |
@@ -595,6 +613,7 @@
 |--------|-------|
 | Success Rate | 79.18% |
 | Median Final Value | €1,113,314 |
+| Mean Final Value | €1,772,350 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,913,329 |
 | Failed Simulations | 20,823 (20.8%) |
@@ -623,6 +642,7 @@
 |--------|-------|
 | Success Rate | 78.35% |
 | Median Final Value | €1,243,429 |
+| Mean Final Value | €2,117,440 |
 | P5 Final Value | €0 |
 | P95 Final Value | €7,348,057 |
 | Failed Simulations | 21,651 (21.7%) |
@@ -651,6 +671,7 @@
 |--------|-------|
 | Success Rate | 77.02% |
 | Median Final Value | €1,344,157 |
+| Mean Final Value | €2,504,514 |
 | P5 Final Value | €0 |
 | P95 Final Value | €9,079,500 |
 | Failed Simulations | 22,977 (23.0%) |
@@ -679,6 +700,7 @@
 |--------|-------|
 | Success Rate | 75.40% |
 | Median Final Value | €1,416,403 |
+| Mean Final Value | €2,936,635 |
 | P5 Final Value | €0 |
 | P95 Final Value | €11,116,477 |
 | Failed Simulations | 24,602 (24.6%) |
@@ -707,6 +729,7 @@
 |--------|-------|
 | Success Rate | 78.53% |
 | Median Final Value | €983,413 |
+| Mean Final Value | €1,537,335 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,087,303 |
 | Failed Simulations | 21,467 (21.5%) |
@@ -735,6 +758,7 @@
 |--------|-------|
 | Success Rate | 77.77% |
 | Median Final Value | €1,133,975 |
+| Mean Final Value | €1,916,017 |
 | P5 Final Value | €0 |
 | P95 Final Value | €6,626,916 |
 | Failed Simulations | 22,227 (22.2%) |
@@ -763,6 +787,7 @@
 |--------|-------|
 | Success Rate | 76.60% |
 | Median Final Value | €1,268,338 |
+| Mean Final Value | €2,351,093 |
 | P5 Final Value | €0 |
 | P95 Final Value | €8,527,823 |
 | Failed Simulations | 23,404 (23.4%) |
@@ -791,6 +816,7 @@
 |--------|-------|
 | Success Rate | 75.18% |
 | Median Final Value | €1,376,308 |
+| Mean Final Value | €2,848,998 |
 | P5 Final Value | €0 |
 | P95 Final Value | €10,781,621 |
 | Failed Simulations | 24,816 (24.8%) |
@@ -821,6 +847,7 @@
 |--------|-------|
 | Success Rate | 81.95% |
 | Median Final Value | €3,924,453 |
+| Mean Final Value | €9,919,297 |
 | P5 Final Value | €0 |
 | P95 Final Value | €39,192,568 |
 | Failed Simulations | 18,052 (18.1%) |
@@ -849,6 +876,7 @@
 |--------|-------|
 | Success Rate | 80.23% |
 | Median Final Value | €4,723,474 |
+| Mean Final Value | €15,380,633 |
 | P5 Final Value | €0 |
 | P95 Final Value | €63,823,568 |
 | Failed Simulations | 19,773 (19.8%) |
@@ -877,6 +905,7 @@
 |--------|-------|
 | Success Rate | 78.25% |
 | Median Final Value | €5,456,359 |
+| Mean Final Value | €23,798,822 |
 | P5 Final Value | €0 |
 | P95 Final Value | €101,369,495 |
 | Failed Simulations | 21,748 (21.7%) |
@@ -905,6 +934,7 @@
 |--------|-------|
 | Success Rate | 76.23% |
 | Median Final Value | €6,078,578 |
+| Mean Final Value | €36,903,053 |
 | P5 Final Value | €0 |
 | P95 Final Value | €157,034,506 |
 | Failed Simulations | 23,765 (23.8%) |
@@ -933,6 +963,7 @@
 |--------|-------|
 | Success Rate | 88.09% |
 | Median Final Value | €11,025,784 |
+| Mean Final Value | €26,753,425 |
 | P5 Final Value | €0 |
 | P95 Final Value | €103,596,483 |
 | Failed Simulations | 11,914 (11.9%) |
@@ -963,6 +994,7 @@
 |--------|-------|
 | Success Rate | 65.00% |
 | Median Final Value | €384,577 |
+| Mean Final Value | €878,249 |
 | P5 Final Value | €0 |
 | P95 Final Value | €3,381,309 |
 | Failed Simulations | 34,999 (35.0%) |
@@ -991,6 +1023,7 @@
 |--------|-------|
 | Success Rate | 63.92% |
 | Median Final Value | €428,468 |
+| Mean Final Value | €1,115,627 |
 | P5 Final Value | €0 |
 | P95 Final Value | €4,462,032 |
 | Failed Simulations | 36,077 (36.1%) |
@@ -1019,6 +1052,7 @@
 |--------|-------|
 | Success Rate | 62.52% |
 | Median Final Value | €447,219 |
+| Mean Final Value | €1,381,899 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,758,632 |
 | Failed Simulations | 37,477 (37.5%) |
@@ -1047,6 +1081,7 @@
 |--------|-------|
 | Success Rate | 60.85% |
 | Median Final Value | €434,461 |
+| Mean Final Value | €1,678,483 |
 | P5 Final Value | €0 |
 | P95 Final Value | €7,274,934 |
 | Failed Simulations | 39,146 (39.1%) |
@@ -1075,6 +1110,7 @@
 |--------|-------|
 | Success Rate | 58.97% |
 | Median Final Value | €393,783 |
+| Mean Final Value | €2,007,341 |
 | P5 Final Value | €0 |
 | P95 Final Value | €9,013,865 |
 | Failed Simulations | 41,027 (41.0%) |
@@ -1103,6 +1139,7 @@
 |--------|-------|
 | Success Rate | 67.85% |
 | Median Final Value | €566,126 |
+| Mean Final Value | €1,227,077 |
 | P5 Final Value | €0 |
 | P95 Final Value | €4,677,971 |
 | Failed Simulations | 32,147 (32.1%) |
@@ -1131,6 +1168,7 @@
 |--------|-------|
 | Success Rate | 66.00% |
 | Median Final Value | €562,083 |
+| Mean Final Value | €1,404,050 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,584,709 |
 | Failed Simulations | 34,003 (34.0%) |
@@ -1159,6 +1197,7 @@
 |--------|-------|
 | Success Rate | 63.73% |
 | Median Final Value | €532,579 |
+| Mean Final Value | €1,593,587 |
 | P5 Final Value | €0 |
 | P95 Final Value | €6,613,002 |
 | Failed Simulations | 36,268 (36.3%) |
@@ -1187,6 +1226,7 @@
 |--------|-------|
 | Success Rate | 61.41% |
 | Median Final Value | €472,065 |
+| Mean Final Value | €1,794,887 |
 | P5 Final Value | €0 |
 | P95 Final Value | €7,769,048 |
 | Failed Simulations | 38,585 (38.6%) |
@@ -1215,6 +1255,7 @@
 |--------|-------|
 | Success Rate | 66.80% |
 | Median Final Value | €482,433 |
+| Mean Final Value | €1,045,166 |
 | P5 Final Value | €0 |
 | P95 Final Value | €3,978,196 |
 | Failed Simulations | 33,200 (33.2%) |
@@ -1243,6 +1284,7 @@
 |--------|-------|
 | Success Rate | 65.16% |
 | Median Final Value | €498,546 |
+| Mean Final Value | €1,255,451 |
 | P5 Final Value | €0 |
 | P95 Final Value | €5,003,890 |
 | Failed Simulations | 34,842 (34.8%) |
@@ -1271,6 +1313,7 @@
 |--------|-------|
 | Success Rate | 63.22% |
 | Median Final Value | €490,738 |
+| Mean Final Value | €1,485,709 |
 | P5 Final Value | €0 |
 | P95 Final Value | €6,179,467 |
 | Failed Simulations | 36,782 (36.8%) |
@@ -1299,6 +1342,7 @@
 |--------|-------|
 | Success Rate | 61.19% |
 | Median Final Value | €453,207 |
+| Mean Final Value | €1,736,154 |
 | P5 Final Value | €0 |
 | P95 Final Value | €7,520,112 |
 | Failed Simulations | 38,808 (38.8%) |

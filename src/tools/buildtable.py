@@ -38,6 +38,7 @@ class NotebookData:
     withdrawal_rate: float = 0.0
     success_rate: float = 0.0
     median_final_value: int = 0
+    mean_final_value: int = 0
     p5_final_value: int = 0
     p95_final_value: int = 0
     failed_simulations: int = 0
@@ -123,6 +124,7 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
     output_text = ""
     depletion_percentiles_text = ""
     depletion_stats_text = ""
+    results_text = ""
     for i in range(len(nb.cells) - 1, -1, -1):
         cell = nb.cells[i]
         if cell.cell_type == "code" and cell.outputs:
@@ -134,6 +136,8 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
                         depletion_percentiles_text = out.text
                     if "Basic Depletion Statistics" in out.text and not depletion_stats_text:
                         depletion_stats_text = out.text
+                    if "Mean final value" in out.text and not results_text:
+                        results_text = out.text
 
     if not output_text:
         logger.warning(f"No simulation output found in {notebook_path.name}")
@@ -147,6 +151,8 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
         _parse_depletion_percentiles(data, depletion_percentiles_text)
     if depletion_stats_text:
         _parse_depletion_stats(data, depletion_stats_text)
+    if results_text:
+        _parse_results_output(data, results_text)
 
     return data
 
@@ -214,6 +220,10 @@ def _parse_simulation_output(data: NotebookData, text: str) -> None:
     if match:
         data.median_final_value = parse_currency(match.group(1))
 
+    match = re.search(r"Mean final value:\s*€([\d,]+)", text)
+    if match:
+        data.mean_final_value = parse_currency(match.group(1))
+
     match = re.search(r"P5 final value:\s*€([\d,]+)", text)
     if match:
         data.p5_final_value = parse_currency(match.group(1))
@@ -243,6 +253,13 @@ def _parse_depletion_stats(data: NotebookData, text: str) -> None:
     match = re.search(r"Mean depletion year:\s*([\d.]+)", text)
     if match:
         data.mean_depletion_year = float(match.group(1))
+
+
+def _parse_results_output(data: NotebookData, text: str) -> None:
+    """Parse the Results output for mean final value."""
+    match = re.search(r"Mean final value:\s*€([\d,]+)", text)
+    if match:
+        data.mean_final_value = parse_currency(match.group(1))
 
 
 def get_display_name(code: str, mapping: dict[str, str]) -> str:
@@ -323,8 +340,8 @@ def generate_registry(
         "",
         "## Summary Table: Success Rate @ 4% WR",
         "",
-        "| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Median Depletion | Mean Depletion | Min Depletion |",
-        "|----|--------|------|------------|-----------|-----|-------|--------------|------------------|----------------|---------------|",
+        "| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Mean Final | Median Depletion | Mean Depletion | Min Depletion |",
+        "|----|--------|------|------------|-----------|-----|-------|--------------|------------|------------------|----------------|---------------|",
     ]
 
     # Sort notebooks by ID
@@ -345,7 +362,7 @@ def generate_registry(
         lines.append(
             f"| {nb.notebook_id} | {equity_display} | {bond_short} | {allocation} | "
             f"{nb.inflation_series} | {nb.tax_status} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
-            f"{median_depletion} | {mean_depletion} | {min_depletion} |"
+            f"{format_currency(nb.mean_final_value)} | {median_depletion} | {mean_depletion} | {min_depletion} |"
         )
 
     lines.extend(["", "---", "", "## Detailed Analysis", ""])
@@ -402,6 +419,7 @@ def generate_registry(
                     "|--------|-------|",
                     f"| Success Rate | {nb.success_rate:.2f}% |",
                     f"| Median Final Value | {format_currency(nb.median_final_value)} |",
+                    f"| Mean Final Value | {format_currency(nb.mean_final_value)} |",
                     f"| P5 Final Value | {format_currency(nb.p5_final_value)} |",
                     f"| P95 Final Value | {format_currency(nb.p95_final_value)} |",
                     f"| Failed Simulations | {nb.failed_simulations:,} ({nb.failed_simulations_pct:.1f}%) |",
