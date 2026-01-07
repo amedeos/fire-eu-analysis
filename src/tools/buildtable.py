@@ -43,6 +43,7 @@ class NotebookData:
     failed_simulations: int = 0
     failed_simulations_pct: float = 0.0
     median_depletion_year: int | None = None
+    mean_depletion_year: float | None = None
     min_depletion_year: int | None = None
 
 
@@ -120,7 +121,8 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
 
     # Find code cells with relevant output
     output_text = ""
-    depletion_text = ""
+    depletion_percentiles_text = ""
+    depletion_stats_text = ""
     for i in range(len(nb.cells) - 1, -1, -1):
         cell = nb.cells[i]
         if cell.cell_type == "code" and cell.outputs:
@@ -128,8 +130,10 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
                 if out.output_type == "stream" and hasattr(out, "text"):
                     if "MONTE CARLO SIMULATION SUMMARY" in out.text and not output_text:
                         output_text = out.text
-                    if "DEPLETION YEAR PERCENTILES" in out.text and not depletion_text:
-                        depletion_text = out.text
+                    if "DEPLETION YEAR PERCENTILES" in out.text and not depletion_percentiles_text:
+                        depletion_percentiles_text = out.text
+                    if "Basic Depletion Statistics" in out.text and not depletion_stats_text:
+                        depletion_stats_text = out.text
 
     if not output_text:
         logger.warning(f"No simulation output found in {notebook_path.name}")
@@ -139,8 +143,10 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
     _parse_simulation_output(data, output_text)
 
     # Parse depletion year details if found
-    if depletion_text:
-        _parse_depletion_output(data, depletion_text)
+    if depletion_percentiles_text:
+        _parse_depletion_percentiles(data, depletion_percentiles_text)
+    if depletion_stats_text:
+        _parse_depletion_stats(data, depletion_stats_text)
 
     return data
 
@@ -225,11 +231,18 @@ def _parse_simulation_output(data: NotebookData, text: str) -> None:
     if match:
         data.median_depletion_year = int(match.group(1))
 
-def _parse_depletion_output(data: NotebookData, text: str) -> None:
+def _parse_depletion_percentiles(data: NotebookData, text: str) -> None:
     """Parse the DEPLETION YEAR PERCENTILES output for min depletion year."""
     match = re.search(r"Min depletion year:\s*(\d+)", text)
     if match:
         data.min_depletion_year = int(match.group(1))
+
+
+def _parse_depletion_stats(data: NotebookData, text: str) -> None:
+    """Parse the Basic Depletion Statistics output for mean depletion year."""
+    match = re.search(r"Mean depletion year:\s*([\d.]+)", text)
+    if match:
+        data.mean_depletion_year = float(match.group(1))
 
 
 def get_display_name(code: str, mapping: dict[str, str]) -> str:
@@ -310,8 +323,8 @@ def generate_registry(
         "",
         "## Summary Table: Success Rate @ 4% WR",
         "",
-        "| ID | Equity | Bond | Allocation | Tax | SR@4% | Median Final | Med. Depletion | Min Depletion |",
-        "|----|--------|------|------------|-----|-------|--------------|----------------|---------------|",
+        "| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Median Depletion | Mean Depletion | Min Depletion |",
+        "|----|--------|------|------------|-----------|-----|-------|--------------|------------------|----------------|---------------|",
     ]
 
     # Sort notebooks by ID
@@ -324,12 +337,15 @@ def generate_registry(
         median_depletion = (
             str(nb.median_depletion_year) if nb.median_depletion_year else "-"
         )
+        mean_depletion = (
+            f"{nb.mean_depletion_year:.1f}" if nb.mean_depletion_year else "-"
+        )
         min_depletion = str(nb.min_depletion_year) if nb.min_depletion_year else "-"
 
         lines.append(
             f"| {nb.notebook_id} | {equity_display} | {bond_short} | {allocation} | "
-            f"{nb.tax_status} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
-            f"{median_depletion} | {min_depletion} |"
+            f"{nb.inflation_series} | {nb.tax_status} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
+            f"{median_depletion} | {mean_depletion} | {min_depletion} |"
         )
 
     lines.extend(["", "---", "", "## Detailed Analysis", ""])
@@ -396,6 +412,11 @@ def generate_registry(
                 lines.append(f"| Median Depletion Year | {nb.median_depletion_year} |")
             else:
                 lines.append("| Median Depletion Year | - |")
+
+            if nb.mean_depletion_year:
+                lines.append(f"| Mean Depletion Year | {nb.mean_depletion_year:.1f} |")
+            else:
+                lines.append("| Mean Depletion Year | - |")
 
             if nb.min_depletion_year:
                 lines.append(f"| Min Depletion Year | {nb.min_depletion_year} |")
