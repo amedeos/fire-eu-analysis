@@ -11,6 +11,7 @@ This directory contains Jupyter notebooks for financial data analysis and Monte 
 | `02xx` | MSCI ACWI | Simulations with MSCI ACWI NET index |
 | `03xx` | STOXX SXXGR | Simulations with STOXX Europe 600 GR index |
 | `04xx` | MSCI Europe | Simulations with MSCI Europe NET index |
+| `05xx` | MSCI EMU | Simulations with MSCI EMU NET index |
 
 ## Data Extraction and Preparation Notebooks (00xx)
 
@@ -125,6 +126,34 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [0410_block_notax_i_hicp_m_europe_b_deit_701515.ipynb](0410_block_notax_i_hicp_m_europe_b_deit_701515.ipynb) | 70% MSCI Europe + 15% Bund + 15% BTP | SWR simulation with Euro area HICP inflation |
 | [0411_block_notax_i_hicp_m_europe_b_deit_801010.ipynb](0411_block_notax_i_hicp_m_europe_b_deit_801010.ipynb) | 80% MSCI Europe + 10% Bund + 10% BTP | SWR simulation with Euro area HICP inflation |
 | [0412_block_notax_i_hicp_m_europe_b_deit_900505.ipynb](0412_block_notax_i_hicp_m_europe_b_deit_900505.ipynb) | 90% MSCI Europe + 5% Bund + 5% BTP | SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + Bund Portfolios (05xx, No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0500_block_notax_i_hicp_m_emu_b_de_6040.ipynb](0500_block_notax_i_hicp_m_emu_b_de_6040.ipynb) | 60% MSCI EMU + 40% Bund | SWR simulation with Euro area HICP inflation |
+| [0501_block_notax_i_hicp_m_emu_b_de_7030.ipynb](0501_block_notax_i_hicp_m_emu_b_de_7030.ipynb) | 70% MSCI EMU + 30% Bund | SWR simulation with Euro area HICP inflation |
+| [0502_block_notax_i_hicp_m_emu_b_de_8020.ipynb](0502_block_notax_i_hicp_m_emu_b_de_8020.ipynb) | 80% MSCI EMU + 20% Bund | SWR simulation with Euro area HICP inflation |
+| [0503_block_notax_i_hicp_m_emu_b_de_9010.ipynb](0503_block_notax_i_hicp_m_emu_b_de_9010.ipynb) | 90% MSCI EMU + 10% Bund | SWR simulation with Euro area HICP inflation |
+| [0504_block_notax_i_hicp_m_emu_b_de_1000.ipynb](0504_block_notax_i_hicp_m_emu_b_de_1000.ipynb) | 100% MSCI EMU | SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + BTP Portfolios (05xx, No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0505_block_notax_i_hicp_m_emu_b_it_6040.ipynb](0505_block_notax_i_hicp_m_emu_b_it_6040.ipynb) | 60% MSCI EMU + 40% BTP | SWR simulation with Euro area HICP inflation |
+| [0506_block_notax_i_hicp_m_emu_b_it_7030.ipynb](0506_block_notax_i_hicp_m_emu_b_it_7030.ipynb) | 70% MSCI EMU + 30% BTP | SWR simulation with Euro area HICP inflation |
+| [0507_block_notax_i_hicp_m_emu_b_it_8020.ipynb](0507_block_notax_i_hicp_m_emu_b_it_8020.ipynb) | 80% MSCI EMU + 20% BTP | SWR simulation with Euro area HICP inflation |
+| [0508_block_notax_i_hicp_m_emu_b_it_9010.ipynb](0508_block_notax_i_hicp_m_emu_b_it_9010.ipynb) | 90% MSCI EMU + 10% BTP | SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + Bund + BTP Portfolios (05xx, No Tax)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0509_block_notax_i_hicp_m_emu_b_deit_602020.ipynb](0509_block_notax_i_hicp_m_emu_b_deit_602020.ipynb) | 60% MSCI EMU + 20% Bund + 20% BTP | SWR simulation with Euro area HICP inflation |
+| [0510_block_notax_i_hicp_m_emu_b_deit_701515.ipynb](0510_block_notax_i_hicp_m_emu_b_deit_701515.ipynb) | 70% MSCI EMU + 15% Bund + 15% BTP | SWR simulation with Euro area HICP inflation |
+| [0511_block_notax_i_hicp_m_emu_b_deit_801010.ipynb](0511_block_notax_i_hicp_m_emu_b_deit_801010.ipynb) | 80% MSCI EMU + 10% Bund + 10% BTP | SWR simulation with Euro area HICP inflation |
+| [0512_block_notax_i_hicp_m_emu_b_deit_900505.ipynb](0512_block_notax_i_hicp_m_emu_b_deit_900505.ipynb) | 90% MSCI EMU + 5% Bund + 5% BTP | SWR simulation with Euro area HICP inflation |
 
 ## Simulation Methodology
 
