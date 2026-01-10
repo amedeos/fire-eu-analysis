@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-08 12:35:23
+> Auto-generated from notebooks on 2026-01-10 19:15:16
 
 ## Methodology Summary
 
@@ -15,67 +15,72 @@
 
 ---
 
-## Summary Table: Success Rate @ 4% WR
+## Summary Table
 
-| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Mean Final | Median Depletion | Mean Depletion | Min Depletion |
-|----|--------|------|------------|-----------|-----|-------|--------------|------------|------------------|----------------|---------------|
-| 0100 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 78.35% | €899,494 | €1,381,636 | 26 | 25.3 | 12 |
-| 0101 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 78.17% | €1,097,975 | €1,807,516 | 25 | 24.6 | 11 |
-| 0102 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 77.33% | €1,282,788 | €2,308,728 | 24 | 23.9 | 10 |
-| 0103 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 76.23% | €1,444,403 | €2,895,666 | 24 | 23.2 | 9 |
-| 0104 | MSCI World | - | 100 | HICP_EU | No Tax | 74.86% | €1,580,517 | €3,580,714 | 23 | 22.5 | 8 |
-| 0105 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 80.46% | €1,188,838 | €1,848,342 | 25 | 25.0 | 12 |
-| 0106 | MSCI World | BTP | 70/30 | HICP_EU | No Tax | 79.68% | €1,333,558 | €2,212,797 | 25 | 24.4 | 11 |
-| 0107 | MSCI World | BTP | 80/20 | HICP_EU | No Tax | 78.32% | €1,447,769 | €2,620,960 | 24 | 23.8 | 9 |
-| 0108 | MSCI World | BTP | 90/10 | HICP_EU | No Tax | 76.73% | €1,530,097 | €3,075,857 | 24 | 23.2 | 8 |
-| 0109 | MSCI World | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 79.87% | €1,054,239 | €1,606,661 | 26 | 25.2 | 12 |
-| 0110 | MSCI World | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 79.15% | €1,221,866 | €2,005,033 | 25 | 24.5 | 11 |
-| 0111 | MSCI World | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 77.94% | €1,367,482 | €2,462,334 | 24 | 23.9 | 10 |
-| 0112 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 76.50% | €1,489,272 | €2,985,057 | 24 | 23.2 | 8 |
-| 0200 | MSCI ACWI | Bund | 60/40 | HICP_EU | No Tax | 76.97% | €837,272 | €1,318,952 | 26 | 25.2 | 12 |
-| 0201 | MSCI ACWI | Bund | 70/30 | HICP_EU | No Tax | 76.77% | €1,017,984 | €1,724,778 | 25 | 24.6 | 11 |
-| 0202 | MSCI ACWI | Bund | 80/20 | HICP_EU | No Tax | 75.99% | €1,187,717 | €2,202,664 | 24 | 23.9 | 10 |
-| 0203 | MSCI ACWI | Bund | 90/10 | HICP_EU | No Tax | 74.93% | €1,334,669 | €2,762,741 | 24 | 23.1 | 9 |
-| 0204 | MSCI ACWI | - | 100 | HICP_EU | No Tax | 73.63% | €1,458,183 | €3,417,091 | 23 | 22.5 | 8 |
-| 0205 | MSCI ACWI | BTP | 60/40 | HICP_EU | No Tax | 79.18% | €1,113,314 | €1,772,350 | 25 | 24.9 | 12 |
-| 0206 | MSCI ACWI | BTP | 70/30 | HICP_EU | No Tax | 78.35% | €1,243,429 | €2,117,440 | 25 | 24.3 | 11 |
-| 0207 | MSCI ACWI | BTP | 80/20 | HICP_EU | No Tax | 77.02% | €1,344,157 | €2,504,514 | 24 | 23.7 | 9 |
-| 0208 | MSCI ACWI | BTP | 90/10 | HICP_EU | No Tax | 75.40% | €1,416,403 | €2,936,635 | 23 | 23.1 | 8 |
-| 0209 | MSCI ACWI | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 78.53% | €983,413 | €1,537,335 | 26 | 25.1 | 12 |
-| 0210 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 77.77% | €1,133,975 | €1,916,017 | 25 | 24.4 | 11 |
-| 0211 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 76.60% | €1,268,338 | €2,351,093 | 24 | 23.8 | 10 |
-| 0212 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 75.18% | €1,376,308 | €2,848,998 | 24 | 23.1 | 8 |
-| 0300 | STOXX 600 | Bund | 60/40 | HICP_EU | No Tax | 81.95% | €3,924,453 | €9,919,297 | 22 | 21.7 | 8 |
-| 0301 | STOXX 600 | Bund | 70/30 | HICP_EU | No Tax | 80.23% | €4,723,474 | €15,380,633 | 21 | 20.6 | 7 |
-| 0302 | STOXX 600 | Bund | 80/20 | HICP_EU | No Tax | 78.25% | €5,456,359 | €23,798,822 | 19 | 19.6 | 6 |
-| 0303 | STOXX 600 | Bund | 90/10 | HICP_EU | No Tax | 76.23% | €6,078,578 | €36,903,053 | 18 | 18.8 | 6 |
-| 0304 | STOXX 600 | - | 100 | HICP_EU | No Tax | 88.09% | €11,025,784 | €26,753,425 | 21 | 21.1 | 7 |
-| 0400 | MSCI Europe | Bund | 60/40 | HICP_EU | No Tax | 65.00% | €384,577 | €878,249 | 25 | 24.7 | 11 |
-| 0401 | MSCI Europe | Bund | 70/30 | HICP_EU | No Tax | 63.92% | €428,468 | €1,115,627 | 24 | 23.9 | 10 |
-| 0402 | MSCI Europe | Bund | 80/20 | HICP_EU | No Tax | 62.52% | €447,219 | €1,381,899 | 23 | 23.1 | 9 |
-| 0403 | MSCI Europe | Bund | 90/10 | HICP_EU | No Tax | 60.85% | €434,461 | €1,678,483 | 23 | 22.3 | 8 |
-| 0404 | MSCI Europe | - | 100 | HICP_EU | No Tax | 58.97% | €393,783 | €2,007,341 | 22 | 21.6 | 7 |
-| 0405 | MSCI Europe | BTP | 60/40 | HICP_EU | No Tax | 67.85% | €566,126 | €1,227,077 | 25 | 24.2 | 11 |
-| 0406 | MSCI Europe | BTP | 70/30 | HICP_EU | No Tax | 66.00% | €562,083 | €1,404,050 | 24 | 23.6 | 10 |
-| 0407 | MSCI Europe | BTP | 80/20 | HICP_EU | No Tax | 63.73% | €532,579 | €1,593,587 | 23 | 22.9 | 9 |
-| 0408 | MSCI Europe | BTP | 90/10 | HICP_EU | No Tax | 61.41% | €472,065 | €1,794,887 | 22 | 22.2 | 8 |
-| 0409 | MSCI Europe | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 66.80% | €482,433 | €1,045,166 | 25 | 24.5 | 11 |
-| 0410 | MSCI Europe | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 65.16% | €498,546 | €1,255,451 | 24 | 23.8 | 10 |
-| 0411 | MSCI Europe | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 63.22% | €490,738 | €1,485,709 | 23 | 23.0 | 9 |
-| 0412 | MSCI Europe | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 61.19% | €453,207 | €1,736,154 | 22 | 22.3 | 8 |
-| 0500 | MSCI EMU | Bund | 60/40 | HICP_EU | No Tax | 60.88% | €294,456 | €891,975 | 24 | 24.1 | 11 |
-| 0501 | MSCI EMU | Bund | 70/30 | HICP_EU | No Tax | 59.51% | €301,911 | €1,132,049 | 23 | 23.2 | 10 |
-| 0502 | MSCI EMU | Bund | 80/20 | HICP_EU | No Tax | 57.72% | €278,820 | €1,400,590 | 23 | 22.4 | 8 |
-| 0503 | MSCI EMU | Bund | 90/10 | HICP_EU | No Tax | 55.78% | €231,278 | €1,698,954 | 22 | 21.6 | 7 |
-| 0504 | MSCI EMU | - | 100 | HICP_EU | No Tax | 53.57% | €156,499 | €2,028,953 | 21 | 20.8 | 6 |
-| 0505 | MSCI EMU | BTP | 60/40 | HICP_EU | No Tax | 63.57% | €442,670 | €1,250,384 | 24 | 23.5 | 10 |
-| 0506 | MSCI EMU | BTP | 70/30 | HICP_EU | No Tax | 61.27% | €408,498 | €1,429,125 | 23 | 22.9 | 9 |
-| 0507 | MSCI EMU | BTP | 80/20 | HICP_EU | No Tax | 58.78% | €347,077 | €1,619,083 | 22 | 22.2 | 8 |
-| 0508 | MSCI EMU | BTP | 90/10 | HICP_EU | No Tax | 56.22% | €260,847 | €1,819,311 | 22 | 21.5 | 7 |
-| 0509 | MSCI EMU | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 62.52% | €375,056 | €1,063,453 | 24 | 23.8 | 10 |
-| 0510 | MSCI EMU | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 60.54% | €358,693 | €1,276,027 | 23 | 23.1 | 9 |
-| 0511 | MSCI EMU | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 58.31% | €315,216 | €1,507,696 | 22 | 22.3 | 8 |
-| 0512 | MSCI EMU | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 56.00% | €245,658 | €1,758,570 | 22 | 21.5 | 7 |
+| ID | Equity | Bond | Allocation | Inflation | Tax | WR | Success Rate | Median Final | Mean Final | Median Depletion | Mean Depletion | Min Depletion |
+|----|--------|------|------------|-----------|-----|----|--------------|--------------|------------|------------------|----------------|---------------|
+| 0100 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 4% | 78.35% | €899,494 | €1,381,636 | 26 | 25.3 | 12 |
+| 0101 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 4% | 78.17% | €1,097,975 | €1,807,516 | 25 | 24.6 | 11 |
+| 0102 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 4% | 77.33% | €1,282,788 | €2,308,728 | 24 | 23.9 | 10 |
+| 0103 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 4% | 76.23% | €1,444,403 | €2,895,666 | 24 | 23.2 | 9 |
+| 0104 | MSCI World | - | 100 | HICP_EU | No Tax | 4% | 74.86% | €1,580,517 | €3,580,714 | 23 | 22.5 | 8 |
+| 0105 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 4% | 80.46% | €1,188,838 | €1,848,342 | 25 | 25.0 | 12 |
+| 0106 | MSCI World | BTP | 70/30 | HICP_EU | No Tax | 4% | 79.68% | €1,333,558 | €2,212,797 | 25 | 24.4 | 11 |
+| 0107 | MSCI World | BTP | 80/20 | HICP_EU | No Tax | 4% | 78.32% | €1,447,769 | €2,620,960 | 24 | 23.8 | 9 |
+| 0108 | MSCI World | BTP | 90/10 | HICP_EU | No Tax | 4% | 76.73% | €1,530,097 | €3,075,857 | 24 | 23.2 | 8 |
+| 0109 | MSCI World | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 4% | 79.87% | €1,054,239 | €1,606,661 | 26 | 25.2 | 12 |
+| 0110 | MSCI World | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 4% | 79.15% | €1,221,866 | €2,005,033 | 25 | 24.5 | 11 |
+| 0111 | MSCI World | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 4% | 77.94% | €1,367,482 | €2,462,334 | 24 | 23.9 | 10 |
+| 0112 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 4% | 76.50% | €1,489,272 | €2,985,057 | 24 | 23.2 | 8 |
+| 0200 | MSCI ACWI | Bund | 60/40 | HICP_EU | No Tax | 4% | 76.97% | €837,272 | €1,318,952 | 26 | 25.2 | 12 |
+| 0201 | MSCI ACWI | Bund | 70/30 | HICP_EU | No Tax | 4% | 76.77% | €1,017,984 | €1,724,778 | 25 | 24.6 | 11 |
+| 0202 | MSCI ACWI | Bund | 80/20 | HICP_EU | No Tax | 4% | 75.99% | €1,187,717 | €2,202,664 | 24 | 23.9 | 10 |
+| 0203 | MSCI ACWI | Bund | 90/10 | HICP_EU | No Tax | 4% | 74.93% | €1,334,669 | €2,762,741 | 24 | 23.1 | 9 |
+| 0204 | MSCI ACWI | - | 100 | HICP_EU | No Tax | 4% | 73.63% | €1,458,183 | €3,417,091 | 23 | 22.5 | 8 |
+| 0205 | MSCI ACWI | BTP | 60/40 | HICP_EU | No Tax | 4% | 79.18% | €1,113,314 | €1,772,350 | 25 | 24.9 | 12 |
+| 0206 | MSCI ACWI | BTP | 70/30 | HICP_EU | No Tax | 4% | 78.35% | €1,243,429 | €2,117,440 | 25 | 24.3 | 11 |
+| 0207 | MSCI ACWI | BTP | 80/20 | HICP_EU | No Tax | 4% | 77.02% | €1,344,157 | €2,504,514 | 24 | 23.7 | 9 |
+| 0208 | MSCI ACWI | BTP | 90/10 | HICP_EU | No Tax | 4% | 75.40% | €1,416,403 | €2,936,635 | 23 | 23.1 | 8 |
+| 0209 | MSCI ACWI | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 4% | 78.53% | €983,413 | €1,537,335 | 26 | 25.1 | 12 |
+| 0210 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 4% | 77.77% | €1,133,975 | €1,916,017 | 25 | 24.4 | 11 |
+| 0211 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 4% | 76.60% | €1,268,338 | €2,351,093 | 24 | 23.8 | 10 |
+| 0212 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 4% | 75.18% | €1,376,308 | €2,848,998 | 24 | 23.1 | 8 |
+| 0300 | STOXX 600 | Bund | 60/40 | HICP_EU | No Tax | 4% | 81.95% | €3,924,453 | €9,919,297 | 22 | 21.7 | 8 |
+| 0301 | STOXX 600 | Bund | 70/30 | HICP_EU | No Tax | 4% | 80.23% | €4,723,474 | €15,380,633 | 21 | 20.6 | 7 |
+| 0302 | STOXX 600 | Bund | 80/20 | HICP_EU | No Tax | 4% | 78.25% | €5,456,359 | €23,798,822 | 19 | 19.6 | 6 |
+| 0303 | STOXX 600 | Bund | 90/10 | HICP_EU | No Tax | 4% | 76.23% | €6,078,578 | €36,903,053 | 18 | 18.8 | 6 |
+| 0304 | STOXX 600 | - | 100 | HICP_EU | No Tax | 4% | 88.09% | €11,025,784 | €26,753,425 | 21 | 21.1 | 7 |
+| 0400 | MSCI Europe | Bund | 60/40 | HICP_EU | No Tax | 4% | 65.00% | €384,577 | €878,249 | 25 | 24.7 | 11 |
+| 0401 | MSCI Europe | Bund | 70/30 | HICP_EU | No Tax | 4% | 63.92% | €428,468 | €1,115,627 | 24 | 23.9 | 10 |
+| 0402 | MSCI Europe | Bund | 80/20 | HICP_EU | No Tax | 4% | 62.52% | €447,219 | €1,381,899 | 23 | 23.1 | 9 |
+| 0403 | MSCI Europe | Bund | 90/10 | HICP_EU | No Tax | 4% | 60.85% | €434,461 | €1,678,483 | 23 | 22.3 | 8 |
+| 0404 | MSCI Europe | - | 100 | HICP_EU | No Tax | 4% | 58.97% | €393,783 | €2,007,341 | 22 | 21.6 | 7 |
+| 0405 | MSCI Europe | BTP | 60/40 | HICP_EU | No Tax | 4% | 67.85% | €566,126 | €1,227,077 | 25 | 24.2 | 11 |
+| 0406 | MSCI Europe | BTP | 70/30 | HICP_EU | No Tax | 4% | 66.00% | €562,083 | €1,404,050 | 24 | 23.6 | 10 |
+| 0407 | MSCI Europe | BTP | 80/20 | HICP_EU | No Tax | 4% | 63.73% | €532,579 | €1,593,587 | 23 | 22.9 | 9 |
+| 0408 | MSCI Europe | BTP | 90/10 | HICP_EU | No Tax | 4% | 61.41% | €472,065 | €1,794,887 | 22 | 22.2 | 8 |
+| 0409 | MSCI Europe | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 4% | 66.80% | €482,433 | €1,045,166 | 25 | 24.5 | 11 |
+| 0410 | MSCI Europe | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 4% | 65.16% | €498,546 | €1,255,451 | 24 | 23.8 | 10 |
+| 0411 | MSCI Europe | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 4% | 63.22% | €490,738 | €1,485,709 | 23 | 23.0 | 9 |
+| 0412 | MSCI Europe | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 4% | 61.19% | €453,207 | €1,736,154 | 22 | 22.3 | 8 |
+| 0500 | MSCI EMU | Bund | 60/40 | HICP_EU | No Tax | 4% | 60.88% | €294,456 | €891,975 | 24 | 24.1 | 11 |
+| 0501 | MSCI EMU | Bund | 70/30 | HICP_EU | No Tax | 4% | 59.51% | €301,911 | €1,132,049 | 23 | 23.2 | 10 |
+| 0502 | MSCI EMU | Bund | 80/20 | HICP_EU | No Tax | 4% | 57.72% | €278,820 | €1,400,590 | 23 | 22.4 | 8 |
+| 0503 | MSCI EMU | Bund | 90/10 | HICP_EU | No Tax | 4% | 55.78% | €231,278 | €1,698,954 | 22 | 21.6 | 7 |
+| 0504 | MSCI EMU | - | 100 | HICP_EU | No Tax | 4% | 53.57% | €156,499 | €2,028,953 | 21 | 20.8 | 6 |
+| 0505 | MSCI EMU | BTP | 60/40 | HICP_EU | No Tax | 4% | 63.57% | €442,670 | €1,250,384 | 24 | 23.5 | 10 |
+| 0506 | MSCI EMU | BTP | 70/30 | HICP_EU | No Tax | 4% | 61.27% | €408,498 | €1,429,125 | 23 | 22.9 | 9 |
+| 0507 | MSCI EMU | BTP | 80/20 | HICP_EU | No Tax | 4% | 58.78% | €347,077 | €1,619,083 | 22 | 22.2 | 8 |
+| 0508 | MSCI EMU | BTP | 90/10 | HICP_EU | No Tax | 4% | 56.22% | €260,847 | €1,819,311 | 22 | 21.5 | 7 |
+| 0509 | MSCI EMU | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 4% | 62.52% | €375,056 | €1,063,453 | 24 | 23.8 | 10 |
+| 0510 | MSCI EMU | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 4% | 60.54% | €358,693 | €1,276,027 | 23 | 23.1 | 9 |
+| 0511 | MSCI EMU | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 4% | 58.31% | €315,216 | €1,507,696 | 22 | 22.3 | 8 |
+| 0512 | MSCI EMU | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 4% | 56.00% | €245,658 | €1,758,570 | 22 | 21.5 | 7 |
+| 0600 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 3% | 95.82% | €1,850,878 | €2,301,669 | 27 | 26.7 | 14 |
+| 0601 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 3% | 94.43% | €2,096,234 | €2,798,778 | 27 | 26.0 | 13 |
+| 0602 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 3% | 92.75% | €2,331,297 | €3,376,173 | 26 | 25.3 | 12 |
+| 0603 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 3% | 90.99% | €2,540,817 | €4,045,800 | 25 | 24.6 | 11 |
+| 0604 | MSCI World | - | 100 | HICP_EU | No Tax | 3% | 89.11% | €2,724,769 | €4,821,149 | 24 | 23.9 | 9 |
 
 ---
 
@@ -95,6 +100,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -124,6 +130,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -153,6 +160,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -182,6 +190,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -211,6 +220,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -240,6 +250,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -269,6 +280,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -298,6 +310,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -327,6 +340,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -356,6 +370,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -385,6 +400,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -414,6 +430,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -443,6 +460,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -474,6 +492,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -503,6 +522,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -532,6 +552,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -561,6 +582,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -590,6 +612,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -619,6 +642,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -648,6 +672,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -677,6 +702,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -706,6 +732,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -735,6 +762,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -764,6 +792,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -793,6 +822,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -822,6 +852,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -853,6 +884,7 @@
 | Tax Status | No Tax |
 | Data Period | 1997-08-02 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -882,6 +914,7 @@
 | Tax Status | No Tax |
 | Data Period | 1997-08-02 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -911,6 +944,7 @@
 | Tax Status | No Tax |
 | Data Period | 1997-08-02 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -940,6 +974,7 @@
 | Tax Status | No Tax |
 | Data Period | 1997-08-02 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -969,6 +1004,7 @@
 | Tax Status | No Tax |
 | Data Period | 1987-01-01 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1000,6 +1036,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1029,6 +1066,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1058,6 +1096,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1087,6 +1126,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1116,6 +1156,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1145,6 +1186,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1174,6 +1216,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1203,6 +1246,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1232,6 +1276,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1261,6 +1306,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1290,6 +1336,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1319,6 +1366,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1348,6 +1396,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1365,7 +1414,7 @@
 
 ---
 
-### 05xx – Family 05xx
+### 05xx – MSCI EMU NET
 
 #### 0500 – MSCI EMU 60% + Bund 10Y 40%
 
@@ -1379,6 +1428,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1408,6 +1458,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1437,6 +1488,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1466,6 +1518,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1495,6 +1548,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1524,6 +1578,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1553,6 +1608,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1582,6 +1638,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1611,6 +1668,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1640,6 +1698,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1669,6 +1728,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1698,6 +1758,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1727,6 +1788,7 @@
 | Tax Status | No Tax |
 | Data Period | 2000-12-30 → 2025-10-31 |
 | Simulations | 100,000 |
+| Withdrawal Rate | 4.0% |
 
 **Results @ 4% WR:**
 
@@ -1741,5 +1803,157 @@
 | Median Depletion Year | 22 |
 | Mean Depletion Year | 21.5 |
 | Min Depletion Year | 7 |
+
+---
+
+### 06xx – MSCI World NET (3% WR)
+
+#### 0600 – MSCI World 60% + Bund 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0600_block_notax_i_hicp_3_m_world_b_de_6040.ipynb](src/0600_block_notax_i_hicp_3_m_world_b_de_6040.ipynb) |
+| Description | MSCI World 60% + Bund 10Y 40% |
+| Equity Index | MSCI World (60%) |
+| Bond | Bund 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 95.82% |
+| Median Final Value | €1,850,878 |
+| Mean Final Value | €2,301,669 |
+| P5 Final Value | €58,916 |
+| P95 Final Value | €6,024,803 |
+| Failed Simulations | 4,178 (4.2%) |
+| Median Depletion Year | 27 |
+| Mean Depletion Year | 26.7 |
+| Min Depletion Year | 14 |
+
+---
+
+#### 0601 – MSCI World 70% + Bund 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0601_block_notax_i_hicp_3_m_world_b_de_7030.ipynb](src/0601_block_notax_i_hicp_3_m_world_b_de_7030.ipynb) |
+| Description | MSCI World 70% + Bund 10Y 30% |
+| Equity Index | MSCI World (70%) |
+| Bond | Bund 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 94.43% |
+| Median Final Value | €2,096,234 |
+| Mean Final Value | €2,798,778 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,920,764 |
+| Failed Simulations | 5,572 (5.6%) |
+| Median Depletion Year | 27 |
+| Mean Depletion Year | 26.0 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 0602 – MSCI World 80% + Bund 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0602_block_notax_i_hicp_3_m_world_b_de_8020.ipynb](src/0602_block_notax_i_hicp_3_m_world_b_de_8020.ipynb) |
+| Description | MSCI World 80% + Bund 10Y 20% |
+| Equity Index | MSCI World (80%) |
+| Bond | Bund 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 92.75% |
+| Median Final Value | €2,331,297 |
+| Mean Final Value | €3,376,173 |
+| P5 Final Value | €0 |
+| P95 Final Value | €10,306,788 |
+| Failed Simulations | 7,249 (7.2%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.3 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 0603 – MSCI World 90% + Bund 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0603_block_notax_i_hicp_3_m_world_b_de_9010.ipynb](src/0603_block_notax_i_hicp_3_m_world_b_de_9010.ipynb) |
+| Description | MSCI World 90% + Bund 10Y 10% |
+| Equity Index | MSCI World (90%) |
+| Bond | Bund 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 90.99% |
+| Median Final Value | €2,540,817 |
+| Mean Final Value | €4,045,800 |
+| P5 Final Value | €0 |
+| P95 Final Value | €13,245,858 |
+| Failed Simulations | 9,007 (9.0%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.6 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 0604 – MSCI World 100%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0604_block_notax_i_hicp_3_m_world_b_de_1000.ipynb](src/0604_block_notax_i_hicp_3_m_world_b_de_1000.ipynb) |
+| Description | MSCI World 100% |
+| Equity Index | MSCI World (100%) |
+| Bond | - |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 89.11% |
+| Median Final Value | €2,724,769 |
+| Mean Final Value | €4,821,149 |
+| P5 Final Value | €0 |
+| P95 Final Value | €16,775,930 |
+| Failed Simulations | 10,892 (10.9%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 9 |
 
 ---
