@@ -349,17 +349,17 @@ def plot_depletion_year_analysis(df: pd.DataFrame, output_dir: Path) -> None:
         logger.warning("No data for Depletion Year Analysis plot")
         return
 
-    # Left plot: Mean Depletion Year by Equity Index
+    # Left plot: Median Depletion Year by Equity Index
     ax1 = axes[0]
-    depletion_by_equity = subset.groupby("Equity")["Mean_Depletion"].mean().sort_values()
+    depletion_by_equity = subset.groupby("Equity")["Median_Depletion"].median().sort_values()
     bars = ax1.barh(depletion_by_equity.index, depletion_by_equity.values, color="coral")
-    ax1.set_xlabel("Mean Depletion Year", fontsize=12)
+    ax1.set_xlabel("Median Depletion Year", fontsize=12)
     ax1.set_ylabel("Equity Index", fontsize=12)
-    ax1.set_title("Mean Depletion Year by Equity Index\n(4% WR, Failed Scenarios)", fontsize=12)
+    ax1.set_title("Median Depletion Year by Equity Index\n(4% WR, Failed Scenarios)", fontsize=12)
     ax1.set_xlim(20, 30)
 
     for bar, val in zip(bars, depletion_by_equity.values):
-        ax1.text(val + 0.2, bar.get_y() + bar.get_height() / 2, f"{val:.1f}", va="center")
+        ax1.text(val + 0.2, bar.get_y() + bar.get_height() / 2, f"{val:.0f}", va="center")
 
     # Right plot: Min vs Mean vs Median Depletion for MSCI World
     ax2 = axes[1]
