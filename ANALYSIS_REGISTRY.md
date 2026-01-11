@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-11 18:18:59
+> Auto-generated from notebooks on 2026-01-11 20:22:28
 
 ## Methodology Summary
 
@@ -92,16 +92,16 @@
 | 0700 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 3.5% | 89.08% | €1,371,863 | €1,823,449 | 27 | 26.1 | 13 |
 | 0701 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 3.5% | 87.74% | €1,594,504 | €2,285,406 | 26 | 25.4 | 12 |
 | 0702 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 3.5% | 86.14% | €1,804,237 | €2,824,797 | 25 | 24.7 | 11 |
-| 0703 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 3.5% | 90.99% | €2,540,817 | €4,045,800 | 25 | 24.6 | 11 |
-| 0704 | MSCI World | - | 100 | HICP_EU | No Tax | 3.5% | 89.11% | €2,724,769 | €4,821,149 | 24 | 23.9 | 9 |
-| 0705 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 3.5% | 95.71% | €2,210,116 | €2,864,884 | 27 | 26.2 | 14 |
-| 0706 | MSCI World | BTP | 70/30 | HICP_EU | No Tax | 3.5% | 94.48% | €2,391,411 | €3,283,781 | 26 | 25.7 | 13 |
-| 0707 | MSCI World | BTP | 80/20 | HICP_EU | No Tax | 3.5% | 92.88% | €2,536,276 | €3,746,867 | 26 | 25.2 | 12 |
-| 0708 | MSCI World | BTP | 90/10 | HICP_EU | No Tax | 3.5% | 91.10% | €2,653,424 | €4,258,044 | 25 | 24.5 | 11 |
-| 0709 | MSCI World | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3.5% | 95.91% | €2,038,282 | €2,576,896 | 27 | 26.5 | 14 |
-| 0710 | MSCI World | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3.5% | 94.54% | €2,250,315 | €3,037,100 | 26 | 25.9 | 13 |
-| 0711 | MSCI World | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3.5% | 92.83% | €2,435,778 | €3,559,366 | 26 | 25.3 | 12 |
-| 0712 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3.5% | 91.05% | €2,599,385 | €4,151,293 | 25 | 24.6 | 11 |
+| 0703 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 3.5% | 84.46% | €1,990,377 | €3,452,839 | 24 | 23.9 | 9 |
+| 0704 | MSCI World | - | 100 | HICP_EU | No Tax | 3.5% | 82.56% | €2,146,780 | €4,182,659 | 24 | 23.2 | 8 |
+| 0705 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 3.5% | 89.74% | €1,695,244 | €2,339,870 | 26 | 25.7 | 13 |
+| 0706 | MSCI World | BTP | 70/30 | HICP_EU | No Tax | 3.5% | 88.36% | €1,861,537 | €2,731,496 | 26 | 25.1 | 12 |
+| 0707 | MSCI World | BTP | 80/20 | HICP_EU | No Tax | 3.5% | 86.66% | €1,988,842 | €3,166,802 | 25 | 24.5 | 11 |
+| 0708 | MSCI World | BTP | 90/10 | HICP_EU | No Tax | 3.5% | 84.77% | €2,090,054 | €3,649,220 | 24 | 23.8 | 9 |
+| 0709 | MSCI World | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3.5% | 89.74% | €1,542,400 | €2,074,590 | 27 | 25.9 | 13 |
+| 0710 | MSCI World | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3.5% | 88.17% | €1,733,153 | €2,503,931 | 26 | 25.3 | 12 |
+| 0711 | MSCI World | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3.5% | 86.48% | €1,900,663 | €2,993,496 | 25 | 24.6 | 11 |
+| 0712 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3.5% | 84.62% | €2,041,139 | €3,550,379 | 24 | 23.9 | 9 |
 
 ---
 
@@ -2329,15 +2329,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 90.99% |
-| Median Final Value | €2,540,817 |
-| Mean Final Value | €4,045,800 |
+| Success Rate | 84.46% |
+| Median Final Value | €1,990,377 |
+| Mean Final Value | €3,452,839 |
 | P5 Final Value | €0 |
-| P95 Final Value | €13,245,858 |
-| Failed Simulations | 9,007 (9.0%) |
-| Median Depletion Year | 25 |
-| Mean Depletion Year | 24.6 |
-| Min Depletion Year | 11 |
+| P95 Final Value | €12,027,739 |
+| Failed Simulations | 15,536 (15.5%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 9 |
 
 ---
 
@@ -2359,15 +2359,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 89.11% |
-| Median Final Value | €2,724,769 |
-| Mean Final Value | €4,821,149 |
+| Success Rate | 82.56% |
+| Median Final Value | €2,146,780 |
+| Mean Final Value | €4,182,659 |
 | P5 Final Value | €0 |
-| P95 Final Value | €16,775,930 |
-| Failed Simulations | 10,892 (10.9%) |
+| P95 Final Value | €15,379,630 |
+| Failed Simulations | 17,439 (17.4%) |
 | Median Depletion Year | 24 |
-| Mean Depletion Year | 23.9 |
-| Min Depletion Year | 9 |
+| Mean Depletion Year | 23.2 |
+| Min Depletion Year | 8 |
 
 ---
 
@@ -2389,15 +2389,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 95.71% |
-| Median Final Value | €2,210,116 |
-| Mean Final Value | €2,864,884 |
-| P5 Final Value | €55,971 |
-| P95 Final Value | €7,821,560 |
-| Failed Simulations | 4,291 (4.3%) |
-| Median Depletion Year | 27 |
-| Mean Depletion Year | 26.2 |
-| Min Depletion Year | 14 |
+| Success Rate | 89.74% |
+| Median Final Value | €1,695,244 |
+| Mean Final Value | €2,339,870 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,967,696 |
+| Failed Simulations | 10,264 (10.3%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.7 |
+| Min Depletion Year | 13 |
 
 ---
 
@@ -2419,15 +2419,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 94.48% |
-| Median Final Value | €2,391,411 |
-| Mean Final Value | €3,283,781 |
+| Success Rate | 88.36% |
+| Median Final Value | €1,861,537 |
+| Mean Final Value | €2,731,496 |
 | P5 Final Value | €0 |
-| P95 Final Value | €9,523,669 |
-| Failed Simulations | 5,519 (5.5%) |
+| P95 Final Value | €8,554,154 |
+| Failed Simulations | 11,640 (11.6%) |
 | Median Depletion Year | 26 |
-| Mean Depletion Year | 25.7 |
-| Min Depletion Year | 13 |
+| Mean Depletion Year | 25.1 |
+| Min Depletion Year | 12 |
 
 ---
 
@@ -2449,15 +2449,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 92.88% |
-| Median Final Value | €2,536,276 |
-| Mean Final Value | €3,746,867 |
+| Success Rate | 86.66% |
+| Median Final Value | €1,988,842 |
+| Mean Final Value | €3,166,802 |
 | P5 Final Value | €0 |
-| P95 Final Value | €11,567,912 |
-| Failed Simulations | 7,123 (7.1%) |
-| Median Depletion Year | 26 |
-| Mean Depletion Year | 25.2 |
-| Min Depletion Year | 12 |
+| P95 Final Value | €10,492,891 |
+| Failed Simulations | 13,343 (13.3%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.5 |
+| Min Depletion Year | 11 |
 
 ---
 
@@ -2479,15 +2479,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 91.10% |
-| Median Final Value | €2,653,424 |
-| Mean Final Value | €4,258,044 |
+| Success Rate | 84.77% |
+| Median Final Value | €2,090,054 |
+| Mean Final Value | €3,649,220 |
 | P5 Final Value | €0 |
-| P95 Final Value | €13,988,541 |
-| Failed Simulations | 8,903 (8.9%) |
-| Median Depletion Year | 25 |
-| Mean Depletion Year | 24.5 |
-| Min Depletion Year | 11 |
+| P95 Final Value | €12,723,639 |
+| Failed Simulations | 15,228 (15.2%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.8 |
+| Min Depletion Year | 9 |
 
 ---
 
@@ -2509,15 +2509,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 95.91% |
-| Median Final Value | €2,038,282 |
-| Mean Final Value | €2,576,896 |
-| P5 Final Value | €70,092 |
-| P95 Final Value | €6,839,761 |
-| Failed Simulations | 4,089 (4.1%) |
+| Success Rate | 89.74% |
+| Median Final Value | €1,542,400 |
+| Mean Final Value | €2,074,590 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,041,496 |
+| Failed Simulations | 10,263 (10.3%) |
 | Median Depletion Year | 27 |
-| Mean Depletion Year | 26.5 |
-| Min Depletion Year | 14 |
+| Mean Depletion Year | 25.9 |
+| Min Depletion Year | 13 |
 
 ---
 
@@ -2539,15 +2539,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 94.54% |
-| Median Final Value | €2,250,315 |
-| Mean Final Value | €3,037,100 |
+| Success Rate | 88.17% |
+| Median Final Value | €1,733,153 |
+| Mean Final Value | €2,503,931 |
 | P5 Final Value | €0 |
-| P95 Final Value | €8,671,513 |
-| Failed Simulations | 5,463 (5.5%) |
+| P95 Final Value | €7,749,608 |
+| Failed Simulations | 11,830 (11.8%) |
 | Median Depletion Year | 26 |
-| Mean Depletion Year | 25.9 |
-| Min Depletion Year | 13 |
+| Mean Depletion Year | 25.3 |
+| Min Depletion Year | 12 |
 
 ---
 
@@ -2569,15 +2569,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 92.83% |
-| Median Final Value | €2,435,778 |
-| Mean Final Value | €3,559,366 |
+| Success Rate | 86.48% |
+| Median Final Value | €1,900,663 |
+| Mean Final Value | €2,993,496 |
 | P5 Final Value | €0 |
-| P95 Final Value | €10,901,537 |
-| Failed Simulations | 7,166 (7.2%) |
-| Median Depletion Year | 26 |
-| Mean Depletion Year | 25.3 |
-| Min Depletion Year | 12 |
+| P95 Final Value | €9,842,846 |
+| Failed Simulations | 13,520 (13.5%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.6 |
+| Min Depletion Year | 11 |
 
 ---
 
@@ -2599,14 +2599,14 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 91.05% |
-| Median Final Value | €2,599,385 |
-| Mean Final Value | €4,151,293 |
+| Success Rate | 84.62% |
+| Median Final Value | €2,041,139 |
+| Mean Final Value | €3,550,379 |
 | P5 Final Value | €0 |
-| P95 Final Value | €13,611,084 |
-| Failed Simulations | 8,946 (8.9%) |
-| Median Depletion Year | 25 |
-| Mean Depletion Year | 24.6 |
-| Min Depletion Year | 11 |
+| P95 Final Value | €12,383,017 |
+| Failed Simulations | 15,384 (15.4%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 9 |
 
 ---
