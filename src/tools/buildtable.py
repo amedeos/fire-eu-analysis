@@ -77,6 +77,8 @@ FAMILY_NAMES = {
     "02": "MSCI ACWI NET",
     "03": "STOXX Europe 600",
     "04": "MSCI Europe NET",
+    "05": "MSCI EMU NET",
+    "06": "MSCI World NET (3% WR)",
 }
 
 
@@ -339,10 +341,10 @@ def generate_registry(
         "",
         "---",
         "",
-        "## Summary Table: Success Rate @ 4% WR",
+        "## Summary Table",
         "",
-        "| ID | Equity | Bond | Allocation | Inflation | Tax | SR@4% | Median Final | Mean Final | Median Depletion | Mean Depletion | Min Depletion |",
-        "|----|--------|------|------------|-----------|-----|-------|--------------|------------|------------------|----------------|---------------|",
+        "| ID | Equity | Bond | Allocation | Inflation | Tax | WR | Success Rate | Median Final | Mean Final | Median Depletion | Mean Depletion | Min Depletion |",
+        "|----|--------|------|------------|-----------|-----|----|--------------|--------------|------------|------------------|----------------|---------------|",
     ]
 
     # Sort notebooks by ID
@@ -360,9 +362,10 @@ def generate_registry(
         )
         min_depletion = str(nb.min_depletion_year) if nb.min_depletion_year else "-"
 
+        wr_display = f"{nb.withdrawal_rate:.0f}%" if nb.withdrawal_rate else "-"
         lines.append(
             f"| {nb.notebook_id} | {equity_display} | {bond_short} | {allocation} | "
-            f"{nb.inflation_series} | {nb.tax_status} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
+            f"{nb.inflation_series} | {nb.tax_status} | {wr_display} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
             f"{format_currency(nb.mean_final_value)} | {median_depletion} | {mean_depletion} | {min_depletion} |"
         )
 
@@ -413,8 +416,9 @@ def generate_registry(
                     f"| Tax Status | {nb.tax_status} |",
                     f"| Data Period | {nb.data_from} → {nb.data_to} |",
                     f"| Simulations | {nb.n_simulations:,} |",
+                    f"| Withdrawal Rate | {nb.withdrawal_rate:.1f}% |",
                     "",
-                    "**Results @ 4% WR:**",
+                    f"**Results @ {nb.withdrawal_rate:.0f}% WR:**",
                     "",
                     "| Metric | Value |",
                     "|--------|-------|",
