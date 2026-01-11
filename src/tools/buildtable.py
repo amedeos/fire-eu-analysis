@@ -4,9 +4,11 @@ Build ANALYSIS_REGISTRY.md from notebook outputs.
 
 Scans all notebooks in src/ with prefixes 01xx, 02xx, 03xx, 04xx, etc.
 and extracts simulation results to generate a comprehensive registry.
+Also exports results to CSV format.
 """
 
 import argparse
+import csv
 import logging
 import re
 from dataclasses import dataclass, field
@@ -453,6 +455,73 @@ def generate_registry(
     logger.info(f"Generated {output_path}")
 
 
+def generate_csv(notebooks: list[NotebookData], output_path: Path) -> None:
+    """Generate a CSV file with analysis results."""
+    sorted_notebooks = sorted(notebooks, key=lambda n: n.notebook_id)
+
+    fieldnames = [
+        "ID",
+        "Notebook",
+        "Equity",
+        "Bond",
+        "Allocation",
+        "Inflation",
+        "Tax",
+        "WR",
+        "Success_Rate",
+        "Median_Final",
+        "Mean_Final",
+        "P5_Final",
+        "P95_Final",
+        "Failed_Simulations",
+        "Failed_Pct",
+        "Median_Depletion",
+        "Mean_Depletion",
+        "Min_Depletion",
+        "Data_From",
+        "Data_To",
+        "N_Simulations",
+        "Block_Size_Months",
+    ]
+
+    with open(output_path, "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for nb in sorted_notebooks:
+            equity_display = get_display_name(nb.equity_index, EQUITY_DISPLAY_NAMES)
+            bond_short = format_bond_short(nb.bonds)
+            allocation = format_allocation(nb.equity_weight, nb.bonds)
+
+            row = {
+                "ID": nb.notebook_id,
+                "Notebook": nb.notebook_name,
+                "Equity": equity_display,
+                "Bond": bond_short,
+                "Allocation": allocation,
+                "Inflation": nb.inflation_series,
+                "Tax": nb.tax_status,
+                "WR": nb.withdrawal_rate,
+                "Success_Rate": nb.success_rate,
+                "Median_Final": nb.median_final_value,
+                "Mean_Final": nb.mean_final_value,
+                "P5_Final": nb.p5_final_value,
+                "P95_Final": nb.p95_final_value,
+                "Failed_Simulations": nb.failed_simulations,
+                "Failed_Pct": nb.failed_simulations_pct,
+                "Median_Depletion": nb.median_depletion_year if nb.median_depletion_year else "",
+                "Mean_Depletion": nb.mean_depletion_year if nb.mean_depletion_year else "",
+                "Min_Depletion": nb.min_depletion_year if nb.min_depletion_year else "",
+                "Data_From": nb.data_from,
+                "Data_To": nb.data_to,
+                "N_Simulations": nb.n_simulations,
+                "Block_Size_Months": nb.block_size_months,
+            }
+            writer.writerow(row)
+
+    logger.info(f"Generated {output_path}")
+
+
 def find_notebooks(src_dir: Path) -> list[Path]:
     """Find all analysis notebooks (01xx, 02xx, etc., excluding 00xx)."""
     notebooks = []
@@ -466,7 +535,7 @@ def find_notebooks(src_dir: Path) -> list[Path]:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate ANALYSIS_REGISTRY.md from notebook outputs"
+        description="Generate ANALYSIS_REGISTRY.md and CSV from notebook outputs"
     )
     parser.add_argument(
         "--src-dir",
@@ -478,7 +547,13 @@ def main():
         "--output",
         type=Path,
         default=Path("ANALYSIS_REGISTRY.md"),
-        help="Output file path (default: ANALYSIS_REGISTRY.md)",
+        help="Output markdown file path (default: ANALYSIS_REGISTRY.md)",
+    )
+    parser.add_argument(
+        "--csv-output",
+        type=Path,
+        default=Path("ANALYSIS_REGISTRY.csv"),
+        help="Output CSV file path (default: ANALYSIS_REGISTRY.csv)",
     )
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose logging"
@@ -511,8 +586,11 @@ def main():
 
     logger.info(f"Extracted data from {len(notebooks_data)} notebooks")
 
-    # Generate registry
+    # Generate registry (markdown)
     generate_registry(notebooks_data, args.output, args.src_dir)
+
+    # Generate CSV
+    generate_csv(notebooks_data, args.csv_output)
 
     return 0
 

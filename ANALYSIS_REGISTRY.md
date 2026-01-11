@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-11 16:46:17
+> Auto-generated from notebooks on 2026-01-11 16:57:00
 
 ## Methodology Summary
 
