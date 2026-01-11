@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-11 18:08:13
+> Auto-generated from notebooks on 2026-01-11 18:18:59
 
 ## Methodology Summary
 
@@ -91,7 +91,7 @@
 | 0612 | MSCI World | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3% | 91.05% | €2,599,385 | €4,151,293 | 25 | 24.6 | 11 |
 | 0700 | MSCI World | Bund | 60/40 | HICP_EU | No Tax | 3.5% | 89.08% | €1,371,863 | €1,823,449 | 27 | 26.1 | 13 |
 | 0701 | MSCI World | Bund | 70/30 | HICP_EU | No Tax | 3.5% | 87.74% | €1,594,504 | €2,285,406 | 26 | 25.4 | 12 |
-| 0702 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 3.5% | 92.75% | €2,331,297 | €3,376,173 | 26 | 25.3 | 12 |
+| 0702 | MSCI World | Bund | 80/20 | HICP_EU | No Tax | 3.5% | 86.14% | €1,804,237 | €2,824,797 | 25 | 24.7 | 11 |
 | 0703 | MSCI World | Bund | 90/10 | HICP_EU | No Tax | 3.5% | 90.99% | €2,540,817 | €4,045,800 | 25 | 24.6 | 11 |
 | 0704 | MSCI World | - | 100 | HICP_EU | No Tax | 3.5% | 89.11% | €2,724,769 | €4,821,149 | 24 | 23.9 | 9 |
 | 0705 | MSCI World | BTP | 60/40 | HICP_EU | No Tax | 3.5% | 95.71% | €2,210,116 | €2,864,884 | 27 | 26.2 | 14 |
@@ -2299,15 +2299,15 @@
 
 | Metric | Value |
 |--------|-------|
-| Success Rate | 92.75% |
-| Median Final Value | €2,331,297 |
-| Mean Final Value | €3,376,173 |
+| Success Rate | 86.14% |
+| Median Final Value | €1,804,237 |
+| Mean Final Value | €2,824,797 |
 | P5 Final Value | €0 |
-| P95 Final Value | €10,306,788 |
-| Failed Simulations | 7,249 (7.2%) |
-| Median Depletion Year | 26 |
-| Mean Depletion Year | 25.3 |
-| Min Depletion Year | 12 |
+| P95 Final Value | €9,275,872 |
+| Failed Simulations | 13,863 (13.9%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.7 |
+| Min Depletion Year | 11 |
 
 ---
 
