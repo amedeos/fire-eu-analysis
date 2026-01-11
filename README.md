@@ -33,6 +33,7 @@ The goal is to assess the sustainability of withdrawal rate strategies—especia
 |----------|-------------|
 | [src/README.md](src/README.md) | Complete list of Jupyter notebooks with descriptions and naming conventions |
 | [ANALYSIS_REGISTRY.md](ANALYSIS_REGISTRY.md) | Summary table of simulation results (success rates, final values, depletion years) |
+| [plots/README.md](plots/README.md) | Documentation for analysis plots with key insights |
 
 ---
 
