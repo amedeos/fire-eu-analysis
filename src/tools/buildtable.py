@@ -126,6 +126,15 @@ def extract_notebook_data(notebook_path: Path) -> NotebookData | None:
             if title_match:
                 data.description = title_match.group(1).strip()
 
+    # Extract ANNUAL_WITHDRAWAL_RATE from code cells (source of truth)
+    for cell in nb.cells:
+        if cell.cell_type == "code":
+            match = re.search(r"ANNUAL_WITHDRAWAL_RATE\s*=\s*([\d.]+)", cell.source)
+            if match:
+                # Convert to percentage and round to avoid floating point errors
+                data.withdrawal_rate = round(float(match.group(1)) * 100, 2)
+                break
+
     # Find code cells with relevant output
     output_text = ""
     depletion_percentiles_text = ""
@@ -176,10 +185,11 @@ def _parse_simulation_output(data: NotebookData, text: str) -> None:
     if match:
         data.block_size_months = int(match.group(1))
 
-    # Withdrawal rate
-    match = re.search(r"Withdrawal rate:\s*([\d.]+)%", text)
-    if match:
-        data.withdrawal_rate = float(match.group(1))
+    # Withdrawal rate (only if not already set from source code)
+    if data.withdrawal_rate == 0.0:
+        match = re.search(r"Withdrawal rate:\s*([\d.]+)%", text)
+        if match:
+            data.withdrawal_rate = float(match.group(1))
 
     # Tax status from output if not found in title
     if not data.tax_status:
@@ -365,7 +375,7 @@ def generate_registry(
         )
         min_depletion = str(nb.min_depletion_year) if nb.min_depletion_year else "-"
 
-        wr_display = f"{nb.withdrawal_rate:.0f}%" if nb.withdrawal_rate else "-"
+        wr_display = f"{nb.withdrawal_rate:g}%" if nb.withdrawal_rate else "-"
         lines.append(
             f"| {nb.notebook_id} | {equity_display} | {bond_short} | {allocation} | "
             f"{nb.inflation_series} | {nb.tax_status} | {wr_display} | {nb.success_rate:.2f}% | {format_currency(nb.median_final_value)} | "
@@ -421,7 +431,7 @@ def generate_registry(
                     f"| Simulations | {nb.n_simulations:,} |",
                     f"| Withdrawal Rate | {nb.withdrawal_rate:.1f}% |",
                     "",
-                    f"**Results @ {nb.withdrawal_rate:.0f}% WR:**",
+                    f"**Results @ {nb.withdrawal_rate:g}% WR:**",
                     "",
                     "| Metric | Value |",
                     "|--------|-------|",
