@@ -82,6 +82,7 @@ FAMILY_NAMES = {
     "05": "MSCI EMU NET",
     "06": "MSCI World NET (3% WR)",
     "07": "MSCI World NET (3.5% WR)",
+    "08": "MSCI ACWI NET (3% WR)",
 }
 
 

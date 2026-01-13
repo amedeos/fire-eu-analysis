@@ -14,6 +14,7 @@ This directory contains Jupyter notebooks for financial data analysis and Monte 
 | `05xx` | MSCI EMU (4% WR) | Simulations with MSCI EMU NET index |
 | `06xx` | MSCI World (3% WR) | Simulations with MSCI World NET index, 3% withdrawal rate |
 | `07xx` | MSCI World (3.5% WR) | Simulations with MSCI World NET index, 3.5% withdrawal rate |
+| `08xx` | MSCI ACWI (3% WR) | Simulations with MSCI ACWI NET index, 3% withdrawal rate |
 
 ## Data Extraction and Preparation Notebooks (00xx)
 
@@ -212,6 +213,34 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [0710_block_notax_i_hicp_35_m_world_b_deit_701515.ipynb](0710_block_notax_i_hicp_35_m_world_b_deit_701515.ipynb) | 70% MSCI World + 15% Bund + 15% BTP | 3.5% SWR simulation with Euro area HICP inflation |
 | [0711_block_notax_i_hicp_35_m_world_b_deit_801010.ipynb](0711_block_notax_i_hicp_35_m_world_b_deit_801010.ipynb) | 80% MSCI World + 10% Bund + 10% BTP | 3.5% SWR simulation with Euro area HICP inflation |
 | [0712_block_notax_i_hicp_35_m_world_b_deit_900505.ipynb](0712_block_notax_i_hicp_35_m_world_b_deit_900505.ipynb) | 90% MSCI World + 5% Bund + 5% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI ACWI + Bund Portfolios (08xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0800_block_notax_i_hicp_3_m_acwi_b_de_6040.ipynb](0800_block_notax_i_hicp_3_m_acwi_b_de_6040.ipynb) | 60% MSCI ACWI + 40% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [0801_block_notax_i_hicp_3_m_acwi_b_de_7030.ipynb](0801_block_notax_i_hicp_3_m_acwi_b_de_7030.ipynb) | 70% MSCI ACWI + 30% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [0802_block_notax_i_hicp_3_m_acwi_b_de_8020.ipynb](0802_block_notax_i_hicp_3_m_acwi_b_de_8020.ipynb) | 80% MSCI ACWI + 20% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [0803_block_notax_i_hicp_3_m_acwi_b_de_9010.ipynb](0803_block_notax_i_hicp_3_m_acwi_b_de_9010.ipynb) | 90% MSCI ACWI + 10% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [0804_block_notax_i_hicp_3_m_acwi_b_de_1000.ipynb](0804_block_notax_i_hicp_3_m_acwi_b_de_1000.ipynb) | 100% MSCI ACWI | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI ACWI + BTP Portfolios (08xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0805_block_notax_i_hicp_3_m_acwi_b_it_6040.ipynb](0805_block_notax_i_hicp_3_m_acwi_b_it_6040.ipynb) | 60% MSCI ACWI + 40% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [0806_block_notax_i_hicp_3_m_acwi_b_it_7030.ipynb](0806_block_notax_i_hicp_3_m_acwi_b_it_7030.ipynb) | 70% MSCI ACWI + 30% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [0807_block_notax_i_hicp_3_m_acwi_b_it_8020.ipynb](0807_block_notax_i_hicp_3_m_acwi_b_it_8020.ipynb) | 80% MSCI ACWI + 20% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [0808_block_notax_i_hicp_3_m_acwi_b_it_9010.ipynb](0808_block_notax_i_hicp_3_m_acwi_b_it_9010.ipynb) | 90% MSCI ACWI + 10% BTP | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI ACWI + Bund + BTP Portfolios (08xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [0809_block_notax_i_hicp_3_m_acwi_b_deit_602020.ipynb](0809_block_notax_i_hicp_3_m_acwi_b_deit_602020.ipynb) | 60% MSCI ACWI + 20% Bund + 20% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [0810_block_notax_i_hicp_3_m_acwi_b_deit_701515.ipynb](0810_block_notax_i_hicp_3_m_acwi_b_deit_701515.ipynb) | 70% MSCI ACWI + 15% Bund + 15% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [0811_block_notax_i_hicp_3_m_acwi_b_deit_801010.ipynb](0811_block_notax_i_hicp_3_m_acwi_b_deit_801010.ipynb) | 80% MSCI ACWI + 10% Bund + 10% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [0812_block_notax_i_hicp_3_m_acwi_b_deit_900505.ipynb](0812_block_notax_i_hicp_3_m_acwi_b_deit_900505.ipynb) | 90% MSCI ACWI + 5% Bund + 5% BTP | 3% SWR simulation with Euro area HICP inflation |
 
 ## Simulation Methodology
 
