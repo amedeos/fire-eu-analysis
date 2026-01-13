@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-13 09:09:49
+> Auto-generated from notebooks on 2026-01-13 13:44:27
 
 ## Methodology Summary
 
@@ -115,6 +115,19 @@
 | 0810 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3% | 93.92% | €2,145,976 | €2,922,148 | 26 | 25.8 | 13 |
 | 0811 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3% | 92.15% | €2,314,580 | €3,418,633 | 26 | 25.2 | 12 |
 | 0812 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3% | 90.29% | €2,461,915 | €3,982,077 | 25 | 24.5 | 11 |
+| 0900 | MSCI ACWI | Bund | 60/40 | HICP_EU | No Tax | 3.5% | 88.10% | €1,298,713 | €1,749,160 | 27 | 26.0 | 13 |
+| 0901 | MSCI ACWI | Bund | 70/30 | HICP_EU | No Tax | 3.5% | 86.76% | €1,507,410 | €2,189,406 | 26 | 25.3 | 12 |
+| 0902 | MSCI ACWI | Bund | 80/20 | HICP_EU | No Tax | 3.5% | 85.16% | €1,701,624 | €2,703,668 | 25 | 24.6 | 10 |
+| 0903 | MSCI ACWI | Bund | 90/10 | HICP_EU | No Tax | 3.5% | 83.38% | €1,868,426 | €3,302,990 | 24 | 23.8 | 9 |
+| 0904 | MSCI ACWI | - | 100 | HICP_EU | No Tax | 3.5% | 81.49% | €2,012,249 | €4,000,253 | 24 | 23.2 | 8 |
+| 0905 | MSCI ACWI | BTP | 60/40 | HICP_EU | No Tax | 3.5% | 88.80% | €1,612,472 | €2,251,544 | 26 | 25.6 | 13 |
+| 0906 | MSCI ACWI | BTP | 70/30 | HICP_EU | No Tax | 3.5% | 87.44% | €1,760,261 | €2,622,099 | 26 | 25.0 | 12 |
+| 0907 | MSCI ACWI | BTP | 80/20 | HICP_EU | No Tax | 3.5% | 85.71% | €1,877,876 | €3,034,610 | 25 | 24.4 | 10 |
+| 0908 | MSCI ACWI | BTP | 90/10 | HICP_EU | No Tax | 3.5% | 83.67% | €1,959,805 | €3,492,669 | 24 | 23.8 | 9 |
+| 0909 | MSCI ACWI | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3.5% | 88.81% | €1,464,507 | €1,993,343 | 26 | 25.8 | 13 |
+| 0910 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3.5% | 87.23% | €1,638,193 | €2,401,283 | 26 | 25.2 | 12 |
+| 0911 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3.5% | 85.52% | €1,790,501 | €2,866,877 | 25 | 24.5 | 10 |
+| 0912 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3.5% | 83.55% | €1,915,100 | €3,397,192 | 24 | 23.8 | 9 |
 
 ---
 
@@ -3013,5 +3026,397 @@
 | Median Depletion Year | 25 |
 | Mean Depletion Year | 24.5 |
 | Min Depletion Year | 11 |
+
+---
+
+### 09xx – MSCI ACWI NET (3.5% WR)
+
+#### 0900 – MSCI ACWI 60% + Bund 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0900_block_notax_i_hicp_35_m_acwi_b_de_6040.ipynb](src/0900_block_notax_i_hicp_35_m_acwi_b_de_6040.ipynb) |
+| Description | MSCI ACWI 60% + Bund 10Y 40% |
+| Equity Index | MSCI ACWI (60%) |
+| Bond | Bund 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 88.10% |
+| Median Final Value | €1,298,713 |
+| Mean Final Value | €1,749,160 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,126,490 |
+| Failed Simulations | 11,899 (11.9%) |
+| Median Depletion Year | 27 |
+| Mean Depletion Year | 26.0 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 0901 – MSCI ACWI 70% + Bund 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0901_block_notax_i_hicp_35_m_acwi_b_de_7030.ipynb](src/0901_block_notax_i_hicp_35_m_acwi_b_de_7030.ipynb) |
+| Description | MSCI ACWI 70% + Bund 10Y 30% |
+| Equity Index | MSCI ACWI (70%) |
+| Bond | Bund 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 86.76% |
+| Median Final Value | €1,507,410 |
+| Mean Final Value | €2,189,406 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,826,135 |
+| Failed Simulations | 13,241 (13.2%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.3 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 0902 – MSCI ACWI 80% + Bund 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0902_block_notax_i_hicp_35_m_acwi_b_de_8020.ipynb](src/0902_block_notax_i_hicp_35_m_acwi_b_de_8020.ipynb) |
+| Description | MSCI ACWI 80% + Bund 10Y 20% |
+| Equity Index | MSCI ACWI (80%) |
+| Bond | Bund 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 85.16% |
+| Median Final Value | €1,701,624 |
+| Mean Final Value | €2,703,668 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,976,306 |
+| Failed Simulations | 14,840 (14.8%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.6 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 0903 – MSCI ACWI 90% + Bund 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0903_block_notax_i_hicp_35_m_acwi_b_de_9010.ipynb](src/0903_block_notax_i_hicp_35_m_acwi_b_de_9010.ipynb) |
+| Description | MSCI ACWI 90% + Bund 10Y 10% |
+| Equity Index | MSCI ACWI (90%) |
+| Bond | Bund 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 83.38% |
+| Median Final Value | €1,868,426 |
+| Mean Final Value | €3,302,990 |
+| P5 Final Value | €0 |
+| P95 Final Value | €11,603,453 |
+| Failed Simulations | 16,620 (16.6%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.8 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 0904 – MSCI ACWI 100%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0904_block_notax_i_hicp_35_m_acwi_b_de_1000.ipynb](src/0904_block_notax_i_hicp_35_m_acwi_b_de_1000.ipynb) |
+| Description | MSCI ACWI 100% |
+| Equity Index | MSCI ACWI (100%) |
+| Bond | - |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 81.49% |
+| Median Final Value | €2,012,249 |
+| Mean Final Value | €4,000,253 |
+| P5 Final Value | €0 |
+| P95 Final Value | €14,845,970 |
+| Failed Simulations | 18,509 (18.5%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.2 |
+| Min Depletion Year | 8 |
+
+---
+
+#### 0905 – MSCI ACWI 60% + BTP 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0905_block_notax_i_hicp_35_m_acwi_b_it_6040.ipynb](src/0905_block_notax_i_hicp_35_m_acwi_b_it_6040.ipynb) |
+| Description | MSCI ACWI 60% + BTP 10Y 40% |
+| Equity Index | MSCI ACWI (60%) |
+| Bond | BTP 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 88.80% |
+| Median Final Value | €1,612,472 |
+| Mean Final Value | €2,251,544 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,762,739 |
+| Failed Simulations | 11,201 (11.2%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.6 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 0906 – MSCI ACWI 70% + BTP 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0906_block_notax_i_hicp_35_m_acwi_b_it_7030.ipynb](src/0906_block_notax_i_hicp_35_m_acwi_b_it_7030.ipynb) |
+| Description | MSCI ACWI 70% + BTP 10Y 30% |
+| Equity Index | MSCI ACWI (70%) |
+| Bond | BTP 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 87.44% |
+| Median Final Value | €1,760,261 |
+| Mean Final Value | €2,622,099 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,295,922 |
+| Failed Simulations | 12,556 (12.6%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.0 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 0907 – MSCI ACWI 80% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0907_block_notax_i_hicp_35_m_acwi_b_it_8020.ipynb](src/0907_block_notax_i_hicp_35_m_acwi_b_it_8020.ipynb) |
+| Description | MSCI ACWI 80% + BTP 10Y 20% |
+| Equity Index | MSCI ACWI (80%) |
+| Bond | BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 85.71% |
+| Median Final Value | €1,877,876 |
+| Mean Final Value | €3,034,610 |
+| P5 Final Value | €0 |
+| P95 Final Value | €10,147,768 |
+| Failed Simulations | 14,289 (14.3%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.4 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 0908 – MSCI ACWI 90% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0908_block_notax_i_hicp_35_m_acwi_b_it_9010.ipynb](src/0908_block_notax_i_hicp_35_m_acwi_b_it_9010.ipynb) |
+| Description | MSCI ACWI 90% + BTP 10Y 10% |
+| Equity Index | MSCI ACWI (90%) |
+| Bond | BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 83.67% |
+| Median Final Value | €1,959,805 |
+| Mean Final Value | €3,492,669 |
+| P5 Final Value | €0 |
+| P95 Final Value | €12,337,302 |
+| Failed Simulations | 16,327 (16.3%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.8 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 0909 – MSCI ACWI 60% + Bund 10Y 20% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0909_block_notax_i_hicp_35_m_acwi_b_deit_602020.ipynb](src/0909_block_notax_i_hicp_35_m_acwi_b_deit_602020.ipynb) |
+| Description | MSCI ACWI 60% + Bund 10Y 20% + BTP 10Y 20% |
+| Equity Index | MSCI ACWI (60%) |
+| Bond | Bund 10Y (20%) + BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 88.81% |
+| Median Final Value | €1,464,507 |
+| Mean Final Value | €1,993,343 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,863,898 |
+| Failed Simulations | 11,191 (11.2%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.8 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 0910 – MSCI ACWI 70% + Bund 10Y 15% + BTP 10Y 15%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0910_block_notax_i_hicp_35_m_acwi_b_deit_701515.ipynb](src/0910_block_notax_i_hicp_35_m_acwi_b_deit_701515.ipynb) |
+| Description | MSCI ACWI 70% + Bund 10Y 15% + BTP 10Y 15% |
+| Equity Index | MSCI ACWI (70%) |
+| Bond | Bund 10Y (15%) + BTP 10Y (15%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 87.23% |
+| Median Final Value | €1,638,193 |
+| Mean Final Value | €2,401,283 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,532,641 |
+| Failed Simulations | 12,766 (12.8%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.2 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 0911 – MSCI ACWI 80% + Bund 10Y 10% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0911_block_notax_i_hicp_35_m_acwi_b_deit_801010.ipynb](src/0911_block_notax_i_hicp_35_m_acwi_b_deit_801010.ipynb) |
+| Description | MSCI ACWI 80% + Bund 10Y 10% + BTP 10Y 10% |
+| Equity Index | MSCI ACWI (80%) |
+| Bond | Bund 10Y (10%) + BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 85.52% |
+| Median Final Value | €1,790,501 |
+| Mean Final Value | €2,866,877 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,544,221 |
+| Failed Simulations | 14,478 (14.5%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.5 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 0912 – MSCI ACWI 90% + Bund 10Y 5% + BTP 10Y 5%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [0912_block_notax_i_hicp_35_m_acwi_b_deit_900505.ipynb](src/0912_block_notax_i_hicp_35_m_acwi_b_deit_900505.ipynb) |
+| Description | MSCI ACWI 90% + Bund 10Y 5% + BTP 10Y 5% |
+| Equity Index | MSCI ACWI (90%) |
+| Bond | Bund 10Y (5%) + BTP 10Y (5%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 83.55% |
+| Median Final Value | €1,915,100 |
+| Mean Final Value | €3,397,192 |
+| P5 Final Value | €0 |
+| P95 Final Value | €11,949,844 |
+| Failed Simulations | 16,454 (16.5%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.8 |
+| Min Depletion Year | 9 |
 
 ---
