@@ -1110,6 +1110,668 @@ def plot_14_depletion_global_vs_european(df: pd.DataFrame, output_dir: Path) -> 
 
 
 # =============================================================================
+# PLOT 15: 4% Rule Reality Check
+# =============================================================================
+
+def plot_15_4pct_reality_check(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 15: 4% Rule Reality Check - How does the classic 4% rule perform
+    across all indices and allocations in Europe?
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 4% WR only
+    subset = df[df["WR"] == 4.0].copy()
+
+    if subset.empty:
+        logger.warning("No 4% WR data available")
+        plt.close()
+        return
+
+    # Top Left: Success Rate by Index and Allocation (Bund only)
+    ax1 = axes[0, 0]
+    bund_data = subset[subset["Bond"] == "Bund"]
+
+    allocations = sorted(bund_data["Equity_Pct"].unique())
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.15
+
+    for i, alloc in enumerate(allocations):
+        alloc_data = bund_data[bund_data["Equity_Pct"] == alloc].set_index("Equity")
+        values = [alloc_data.loc[idx, "Success_Rate"] if idx in alloc_data.index else 0
+                  for idx in INDEX_ORDER]
+        offset = (i - len(allocations)/2 + 0.5) * width
+        ax1.bar(x + offset, values, width, label=f"{alloc}/{100-alloc}",
+                alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("4% Rule: Success Rate by Index & Allocation\n(with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Equity/Bond", fontsize=9, ncol=2)
+    ax1.set_ylim(50, 100)
+    ax1.axhline(y=95, color="green", linestyle="--", alpha=0.7, linewidth=2)
+    ax1.text(0.02, 0.95, "US Historical ~95%", transform=ax1.transAxes,
+             fontsize=10, color="green", style="italic")
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: Gap from US benchmark (95%)
+    ax2 = axes[0, 1]
+    # Use 60/40 as reference
+    ref_data = bund_data[bund_data["Equity_Pct"] == 60].set_index("Equity")
+    ref_data = ref_data.reindex(INDEX_ORDER).dropna()
+
+    if not ref_data.empty:
+        gap = 95 - ref_data["Success_Rate"]
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in ref_data.index]
+        bars = ax2.barh(ref_data.index, gap, color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Gap from US Historical 95% (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("4% Rule: Gap from US Benchmark\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.axvline(x=0, color="green", linewidth=2)
+
+        # Add value labels
+        for bar, val in zip(bars, gap):
+            x_pos = val + 0.5 if val >= 0 else val - 2
+            ax2.text(x_pos, bar.get_y() + bar.get_height()/2,
+                     f"-{val:.1f}%" if val > 0 else f"+{-val:.1f}%",
+                     va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    # Bottom Left: Best vs Worst allocation for each index
+    ax3 = axes[1, 0]
+    best_worst = []
+    for equity in INDEX_ORDER:
+        eq_data = bund_data[bund_data["Equity"] == equity]
+        if not eq_data.empty:
+            best = eq_data.loc[eq_data["Success_Rate"].idxmax()]
+            worst = eq_data.loc[eq_data["Success_Rate"].idxmin()]
+            best_worst.append({
+                "Equity": equity,
+                "Best_Rate": best["Success_Rate"],
+                "Best_Alloc": f"{int(best['Equity_Pct'])}/{int(100-best['Equity_Pct'])}",
+                "Worst_Rate": worst["Success_Rate"],
+                "Worst_Alloc": f"{int(worst['Equity_Pct'])}/{int(100-worst['Equity_Pct'])}"
+            })
+
+    if best_worst:
+        bw_df = pd.DataFrame(best_worst).set_index("Equity")
+        x = np.arange(len(bw_df))
+        width = 0.35
+
+        bars1 = ax3.bar(x - width/2, bw_df["Best_Rate"], width,
+                        label="Best Allocation", color="#27ae60", alpha=0.85)
+        bars2 = ax3.bar(x + width/2, bw_df["Worst_Rate"], width,
+                        label="Worst Allocation", color="#e74c3c", alpha=0.85)
+
+        ax3.set_xticks(x)
+        ax3.set_xticklabels(bw_df.index, rotation=15, ha="right", fontsize=11)
+        ax3.set_xlabel("Equity Index", fontsize=12)
+        ax3.set_ylabel("Success Rate (%)", fontsize=12)
+        ax3.set_title("4% Rule: Best vs Worst Allocation\n(with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax3.legend(fontsize=10)
+        ax3.set_ylim(50, 100)
+        ax3.grid(True, alpha=0.3, axis="y")
+
+        # Add allocation labels
+        for i, (bar, alloc) in enumerate(zip(bars1, bw_df["Best_Alloc"])):
+            ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                     alloc, ha="center", fontsize=9, fontweight="bold")
+        for i, (bar, alloc) in enumerate(zip(bars2, bw_df["Worst_Alloc"])):
+            ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                     alloc, ha="center", fontsize=9, fontweight="bold")
+
+    # Bottom Right: Summary table as text
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    # Create summary statistics
+    summary_text = "4% RULE EUROPEAN REALITY CHECK\n"
+    summary_text += "=" * 45 + "\n\n"
+    summary_text += f"US Historical Success Rate: ~95%\n\n"
+    summary_text += "European Results (60/40 with Bund):\n"
+    summary_text += "-" * 45 + "\n"
+
+    for equity in INDEX_ORDER:
+        eq_data = ref_data.loc[equity] if equity in ref_data.index else None
+        if eq_data is not None:
+            rate = eq_data["Success_Rate"]
+            gap = 95 - rate
+            status = "✓" if rate >= 90 else "⚠" if rate >= 80 else "✗"
+            summary_text += f"{status} {equity:15} {rate:5.1f}%  (gap: -{gap:.1f}%)\n"
+
+    summary_text += "-" * 45 + "\n"
+    avg_rate = ref_data["Success_Rate"].mean() if not ref_data.empty else 0
+    summary_text += f"\nAverage European: {avg_rate:.1f}%\n"
+    summary_text += f"Gap from US:      -{95-avg_rate:.1f}%\n\n"
+    summary_text += "Legend: ✓ ≥90%  ⚠ 80-90%  ✗ <80%"
+
+    ax4.text(0.1, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=12, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="wheat", alpha=0.5))
+
+    fig.suptitle("The 4% Rule in Europe: A Reality Check",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "15_4pct_reality_check.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 15_4pct_reality_check.png")
+
+
+# =============================================================================
+# PLOT 16: 4% Allocation Sensitivity
+# =============================================================================
+
+def plot_16_4pct_allocation_sensitivity(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 16: How does success rate at 4% WR change with equity allocation?
+    Sensitivity curve from conservative to aggressive.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 4% WR and Bund
+    subset = df[(df["WR"] == 4.0) & (df["Bond"] == "Bund")].copy()
+
+    if subset.empty:
+        logger.warning("No 4% WR Bund data available")
+        plt.close()
+        return
+
+    # Left: Line plot - Success rate vs Equity allocation
+    ax1 = axes[0]
+
+    for equity in INDEX_ORDER:
+        eq_data = subset[subset["Equity"] == equity].sort_values("Equity_Pct")
+        if not eq_data.empty:
+            ax1.plot(eq_data["Equity_Pct"], eq_data["Success_Rate"],
+                     marker="o", linewidth=2.5, markersize=8,
+                     color=EQUITY_COLORS.get(equity, "gray"),
+                     label=equity, alpha=0.9)
+
+    ax1.set_xlabel("Equity Allocation (%)", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("4% Rule: Sensitivity to Equity Allocation\n(with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(fontsize=10, loc="lower right")
+    ax1.set_xlim(55, 105)
+    ax1.set_ylim(60, 100)
+    ax1.axhline(y=95, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.axhline(y=80, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.text(57, 96, "US Historical", fontsize=9, color="green")
+    ax1.text(57, 81, "80% threshold", fontsize=9, color="orange")
+    ax1.grid(True, alpha=0.3)
+
+    # Right: Heatmap of success rates
+    ax2 = axes[1]
+    pivot = subset.pivot_table(
+        index="Equity", columns="Equity_Pct", values="Success_Rate"
+    )
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+
+    if not pivot.empty:
+        sns.heatmap(
+            pivot,
+            annot=True,
+            fmt=".1f",
+            cmap="RdYlGn",
+            center=80,
+            vmin=60,
+            vmax=95,
+            ax=ax2,
+            cbar_kws={"label": "Success Rate (%)"},
+            annot_kws={"size": 11, "weight": "bold"},
+            linewidths=2,
+            linecolor="white",
+        )
+        ax2.set_xlabel("Equity Allocation (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("4% Rule: Success Rate Matrix\n(with Bund)",
+                      fontsize=13, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "16_4pct_allocation_sensitivity.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 16_4pct_allocation_sensitivity.png")
+
+
+# =============================================================================
+# PLOT 17: 4% Worst Case Scenarios
+# =============================================================================
+
+def plot_17_4pct_worst_case(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 17: Worst case scenarios at 4% WR - Focus on low percentiles.
+    How bad can it get?
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 4% WR
+    subset = df[df["WR"] == 4.0].copy()
+
+    if subset.empty:
+        logger.warning("No 4% WR data available")
+        plt.close()
+        return
+
+    # Top Left: P5 Final Value by Index (60/40 Bund)
+    ax1 = axes[0, 0]
+    mask = (subset["Equity_Pct"] == 60) & (subset["Bond"] == "Bund")
+    data_60 = subset[mask].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not data_60.empty:
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_60.index]
+        bars = ax1.barh(data_60.index, data_60["P5_Final"] / 1000, color=colors, alpha=0.85)
+
+        ax1.set_xlabel("5th Percentile Final Value (€ thousands)", fontsize=12)
+        ax1.set_ylabel("Equity Index", fontsize=12)
+        ax1.set_title("4% Rule: Worst 5% Outcomes\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax1.axvline(x=0, color="red", linewidth=2, linestyle="--")
+        ax1.text(5, -0.3, "Portfolio depleted", fontsize=9, color="red")
+
+        # Add value labels
+        for bar, val in zip(bars, data_60["P5_Final"]):
+            label = f"€{val/1000:,.0f}k" if val > 0 else "Depleted"
+            ax1.text(max(val/1000, 0) + 10, bar.get_y() + bar.get_height()/2,
+                     label, va="center", fontsize=10, fontweight="bold")
+        ax1.grid(True, alpha=0.3, axis="x")
+        ax1.set_xlim(-50, max(data_60["P5_Final"]/1000) * 1.3)
+
+    # Top Right: Failed simulations percentage
+    ax2 = axes[0, 1]
+    if not data_60.empty and "Failed_Pct" in data_60.columns:
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_60.index]
+        bars = ax2.barh(data_60.index, data_60["Failed_Pct"], color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Portfolio Failure Rate (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("4% Rule: Failure Rate\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.axvline(x=5, color="green", linewidth=1.5, linestyle="--", alpha=0.7)
+        ax2.text(6, -0.3, "US Historical ~5%", fontsize=9, color="green")
+
+        # Add value labels
+        for bar, val in zip(bars, data_60["Failed_Pct"]):
+            ax2.text(val + 0.5, bar.get_y() + bar.get_height()/2,
+                     f"{val:.1f}%", va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    # Bottom Left: Min Depletion Year (earliest failure)
+    ax3 = axes[1, 0]
+    if not data_60.empty and "Min_Depletion" in data_60.columns:
+        min_dep = data_60["Min_Depletion"].dropna()
+        if not min_dep.empty:
+            colors = [EQUITY_COLORS.get(eq, "gray") for eq in min_dep.index]
+            bars = ax3.barh(min_dep.index, min_dep.values, color=colors, alpha=0.85)
+
+            ax3.set_xlabel("Earliest Depletion Year", fontsize=12)
+            ax3.set_ylabel("Equity Index", fontsize=12)
+            ax3.set_title("4% Rule: Earliest Failure (Worst Case)\n(60/40 with Bund)",
+                          fontsize=13, fontweight="bold")
+            ax3.set_xlim(0, 20)
+            ax3.axvline(x=10, color="red", linewidth=1.5, linestyle="--", alpha=0.7)
+            ax3.text(10.5, -0.3, "10-year mark", fontsize=9, color="red")
+
+            # Add value labels
+            for bar, val in zip(bars, min_dep.values):
+                ax3.text(val + 0.3, bar.get_y() + bar.get_height()/2,
+                         f"Year {val:.0f}", va="center", fontsize=11, fontweight="bold")
+            ax3.grid(True, alpha=0.3, axis="x")
+
+    # Bottom Right: Comparison of P5, Median, P95 for 60/40
+    ax4 = axes[1, 1]
+    if not data_60.empty:
+        x = np.arange(len(data_60))
+        width = 0.25
+
+        p5 = data_60["P5_Final"] / 1_000_000
+        median = data_60["Median_Final"] / 1_000_000
+        p95 = data_60["P95_Final"] / 1_000_000
+
+        ax4.bar(x - width, p5, width, label="P5 (Worst 5%)", color="#e74c3c", alpha=0.85)
+        ax4.bar(x, median, width, label="Median", color="#f39c12", alpha=0.85)
+        ax4.bar(x + width, p95, width, label="P95 (Best 5%)", color="#27ae60", alpha=0.85)
+
+        ax4.set_xticks(x)
+        ax4.set_xticklabels(data_60.index, rotation=15, ha="right", fontsize=10)
+        ax4.set_xlabel("Equity Index", fontsize=12)
+        ax4.set_ylabel("Final Portfolio Value (€ millions)", fontsize=12)
+        ax4.set_title("4% Rule: Range of Outcomes\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax4.legend(fontsize=10)
+        ax4.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5)
+        ax4.text(0.02, 1.05, "Initial €1M", fontsize=9, color="gray")
+        ax4.grid(True, alpha=0.3, axis="y")
+
+    fig.suptitle("4% Rule: Worst Case Scenario Analysis",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "17_4pct_worst_case.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 17_4pct_worst_case.png")
+
+
+# =============================================================================
+# PLOT 18: 4% Depletion Timeline
+# =============================================================================
+
+def plot_18_4pct_depletion_timeline(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 18: When do portfolios fail at 4%? Distribution of depletion years.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 4% WR with depletion data
+    subset = df[(df["WR"] == 4.0) & (df["Min_Depletion"].notna())].copy()
+
+    if subset.empty:
+        logger.warning("No 4% WR depletion data available")
+        plt.close()
+        return
+
+    # Left: Min vs Median Depletion by Index (60/40 Bund)
+    ax1 = axes[0]
+    mask = (subset["Equity_Pct"] == 60) & (subset["Bond"] == "Bund")
+    data_60 = subset[mask].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not data_60.empty:
+        x = np.arange(len(data_60))
+        width = 0.35
+
+        bars1 = ax1.bar(x - width/2, data_60["Min_Depletion"], width,
+                        label="Earliest Failure", color="#e74c3c", alpha=0.85)
+        bars2 = ax1.bar(x + width/2, data_60["Median_Depletion"], width,
+                        label="Median Failure", color="#3498db", alpha=0.85)
+
+        ax1.set_xticks(x)
+        ax1.set_xticklabels(data_60.index, rotation=15, ha="right", fontsize=11)
+        ax1.set_xlabel("Equity Index", fontsize=12)
+        ax1.set_ylabel("Depletion Year", fontsize=12)
+        ax1.set_title("4% Rule: When Portfolios Fail\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax1.legend(fontsize=10)
+        ax1.set_ylim(0, 32)
+        ax1.axhline(y=30, color="green", linestyle="--", alpha=0.7, linewidth=2)
+        ax1.text(0.02, 0.97, "30-year horizon", transform=ax1.transAxes,
+                 fontsize=9, color="green")
+        ax1.grid(True, alpha=0.3, axis="y")
+
+        # Add value labels
+        for bar in bars1:
+            ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                     f"{bar.get_height():.0f}", ha="center", fontsize=10)
+        for bar in bars2:
+            ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                     f"{bar.get_height():.0f}", ha="center", fontsize=10)
+
+    # Right: Depletion timeline across allocations
+    ax2 = axes[1]
+    bund_data = subset[subset["Bond"] == "Bund"]
+
+    for equity in INDEX_ORDER:
+        eq_data = bund_data[bund_data["Equity"] == equity].sort_values("Equity_Pct")
+        if not eq_data.empty:
+            ax2.plot(eq_data["Equity_Pct"], eq_data["Median_Depletion"],
+                     marker="o", linewidth=2.5, markersize=8,
+                     color=EQUITY_COLORS.get(equity, "gray"),
+                     label=equity, alpha=0.9)
+
+    ax2.set_xlabel("Equity Allocation (%)", fontsize=12)
+    ax2.set_ylabel("Median Depletion Year", fontsize=12)
+    ax2.set_title("4% Rule: Median Failure Year by Allocation\n(with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax2.legend(fontsize=10)
+    ax2.set_xlim(55, 105)
+    ax2.set_ylim(22, 28)
+    ax2.axhline(y=30, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax2.grid(True, alpha=0.3)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "18_4pct_depletion_timeline.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 18_4pct_depletion_timeline.png")
+
+
+# =============================================================================
+# PLOT 19: 4% Bond Impact
+# =============================================================================
+
+def plot_19_4pct_bond_impact(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 19: How do different bonds affect 4% success rate?
+    Bund vs BTP vs Mix comparison.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 4% WR and 60/40
+    subset = df[(df["WR"] == 4.0) & (df["Equity_Pct"] == 60)].copy()
+
+    if subset.empty:
+        logger.warning("No 4% WR 60/40 data available")
+        plt.close()
+        return
+
+    bond_types = subset["Bond"].unique()
+
+    # Define bond colors
+    bond_colors = {
+        "Bund": "#3498db",
+        "BTP": "#e74c3c",
+        "Bund/BTP": "#9b59b6",
+        "OAT": "#f39c12",
+    }
+
+    # Left: Success Rate by Index and Bond Type
+    ax1 = axes[0]
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.2
+
+    for i, bond in enumerate(sorted(bond_types)):
+        bond_data = subset[subset["Bond"] == bond].set_index("Equity")
+        values = [bond_data.loc[idx, "Success_Rate"] if idx in bond_data.index else 0
+                  for idx in INDEX_ORDER]
+        offset = (i - len(bond_types)/2 + 0.5) * width
+        ax1.bar(x + offset, values, width, label=bond,
+                color=bond_colors.get(bond, "gray"), alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("4% Rule: Bond Type Impact\n(60/40 Allocation)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Bond Type", fontsize=10)
+    ax1.set_ylim(60, 95)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Heatmap of success rates
+    ax2 = axes[1]
+    pivot = subset.pivot_table(
+        index="Equity", columns="Bond", values="Success_Rate"
+    )
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+
+    if not pivot.empty:
+        sns.heatmap(
+            pivot,
+            annot=True,
+            fmt=".1f",
+            cmap="RdYlGn",
+            center=80,
+            vmin=65,
+            vmax=90,
+            ax=ax2,
+            cbar_kws={"label": "Success Rate (%)"},
+            annot_kws={"size": 12, "weight": "bold"},
+            linewidths=2,
+            linecolor="white",
+        )
+        ax2.set_xlabel("Bond Type", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("4% Rule: Bond Impact Matrix\n(60/40 Allocation)",
+                      fontsize=13, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "19_4pct_bond_impact.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 19_4pct_bond_impact.png")
+
+
+# =============================================================================
+# PLOT 20: 4% Global vs European Gap
+# =============================================================================
+
+def plot_20_4pct_global_vs_european_gap(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 20: Quantify the "cost" of investing only in Europe at 4%.
+    Global indices vs European indices direct comparison.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 4% WR and 60/40 Bund
+    subset = df[(df["WR"] == 4.0) & (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")].copy()
+
+    if subset.empty:
+        logger.warning("No 4% WR 60/40 Bund data available")
+        plt.close()
+        return
+
+    # Categorize indices
+    subset["Category"] = subset["Equity"].apply(
+        lambda x: "Global" if x in GLOBAL_INDICES else "European"
+    )
+
+    # Top Left: Success Rate Comparison
+    ax1 = axes[0, 0]
+    global_data = subset[subset["Category"] == "Global"]["Success_Rate"]
+    european_data = subset[subset["Category"] == "European"]["Success_Rate"]
+
+    categories = ["Global\n(World, ACWI)", "European\n(Europe, EMU)"]
+    means = [global_data.mean() if not global_data.empty else 0,
+             european_data.mean() if not european_data.empty else 0]
+    colors = ["#27ae60", "#e74c3c"]
+
+    bars = ax1.bar(categories, means, color=colors, alpha=0.85, width=0.6)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("4% Rule: Global vs European\nAverage Success Rate",
+                  fontsize=13, fontweight="bold")
+    ax1.set_ylim(60, 90)
+    ax1.axhline(y=95, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.text(0.02, 0.95, "US Historical ~95%", transform=ax1.transAxes,
+             fontsize=9, color="green")
+
+    # Add value labels and gap
+    for bar, val in zip(bars, means):
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                 f"{val:.1f}%", ha="center", fontsize=14, fontweight="bold")
+
+    gap = means[0] - means[1]
+    ax1.annotate("", xy=(1, means[1]), xytext=(1, means[0]),
+                 arrowprops=dict(arrowstyle="<->", color="black", lw=2))
+    ax1.text(1.15, (means[0] + means[1])/2, f"Gap:\n{gap:.1f}%",
+             fontsize=11, fontweight="bold", va="center")
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: Individual Index Comparison
+    ax2 = axes[0, 1]
+    data_plot = subset.set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not data_plot.empty:
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_plot.index]
+        bars = ax2.barh(data_plot.index, data_plot["Success_Rate"], color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Success Rate (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("4% Rule: Individual Index Performance\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.set_xlim(60, 90)
+
+        # Add category separator
+        ax2.axhline(y=1.5, color="black", linestyle="-", linewidth=2, alpha=0.5)
+        ax2.text(61, 2.7, "GLOBAL", fontsize=10, fontweight="bold", alpha=0.7)
+        ax2.text(61, 0.3, "EUROPEAN", fontsize=10, fontweight="bold", alpha=0.7)
+
+        # Add value labels
+        for bar, val in zip(bars, data_plot["Success_Rate"]):
+            ax2.text(val + 0.5, bar.get_y() + bar.get_height()/2,
+                     f"{val:.1f}%", va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    # Bottom Left: Median Final Value Comparison
+    ax3 = axes[1, 0]
+    if not data_plot.empty:
+        x = np.arange(len(data_plot))
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_plot.index]
+        bars = ax3.bar(x, data_plot["Median_Final"] / 1_000_000, color=colors, alpha=0.85)
+
+        ax3.set_xticks(x)
+        ax3.set_xticklabels(data_plot.index, rotation=15, ha="right", fontsize=11)
+        ax3.set_xlabel("Equity Index", fontsize=12)
+        ax3.set_ylabel("Median Final Value (€ millions)", fontsize=12)
+        ax3.set_title("4% Rule: Median Final Portfolio Value\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax3.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5, linewidth=1.5)
+        ax3.text(0.02, 1.05, "Initial €1M", fontsize=9, color="gray")
+
+        # Add value labels
+        for bar in bars:
+            ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.03,
+                     f"€{bar.get_height():.2f}M", ha="center", fontsize=10, fontweight="bold")
+        ax3.grid(True, alpha=0.3, axis="y")
+
+    # Bottom Right: Summary - Cost of European Investing
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    # Calculate costs
+    global_sr = global_data.mean() if not global_data.empty else 0
+    european_sr = european_data.mean() if not european_data.empty else 0
+    sr_cost = global_sr - european_sr
+
+    global_med = subset[subset["Category"] == "Global"]["Median_Final"].mean()
+    european_med = subset[subset["Category"] == "European"]["Median_Final"].mean()
+    med_cost = (global_med - european_med) / 1000
+
+    summary_text = "THE COST OF EUROPEAN-ONLY INVESTING\n"
+    summary_text += "AT 4% WITHDRAWAL RATE (60/40 with Bund)\n"
+    summary_text += "=" * 50 + "\n\n"
+
+    summary_text += "SUCCESS RATE:\n"
+    summary_text += f"  Global Average:    {global_sr:.1f}%\n"
+    summary_text += f"  European Average:  {european_sr:.1f}%\n"
+    summary_text += f"  Cost:              -{sr_cost:.1f} percentage points\n\n"
+
+    summary_text += "MEDIAN FINAL VALUE:\n"
+    summary_text += f"  Global Average:    €{global_med/1_000_000:.2f}M\n"
+    summary_text += f"  European Average:  €{european_med/1_000_000:.2f}M\n"
+    summary_text += f"  Cost:              -€{med_cost:.0f}k\n\n"
+
+    summary_text += "-" * 50 + "\n"
+    summary_text += "INTERPRETATION:\n"
+    summary_text += f"Investing in European-only indices at 4% WR\n"
+    summary_text += f"reduces success probability by ~{sr_cost:.0f}%\n"
+    summary_text += f"and median wealth by ~€{med_cost:.0f}k.\n\n"
+    summary_text += "Global diversification provides meaningful\n"
+    summary_text += "improvements for European investors."
+
+    ax4.text(0.05, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=11, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="lightyellow", alpha=0.8))
+
+    fig.suptitle("4% Rule: The Cost of Home Bias",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "20_4pct_global_vs_european_gap.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 20_4pct_global_vs_european_gap.png")
+
+
+# =============================================================================
 # MAIN FUNCTION
 # =============================================================================
 
@@ -1169,6 +1831,14 @@ def main():
     plot_12_depletion_spread_analysis(df, args.output_dir)
     plot_13_failure_rate_vs_depletion(df, args.output_dir)
     plot_14_depletion_global_vs_european(df, args.output_dir)
+
+    # 4% WR specific plots
+    plot_15_4pct_reality_check(df, args.output_dir)
+    plot_16_4pct_allocation_sensitivity(df, args.output_dir)
+    plot_17_4pct_worst_case(df, args.output_dir)
+    plot_18_4pct_depletion_timeline(df, args.output_dir)
+    plot_19_4pct_bond_impact(df, args.output_dir)
+    plot_20_4pct_global_vs_european_gap(df, args.output_dir)
 
     logger.info("All plots generated successfully!")
     return 0
