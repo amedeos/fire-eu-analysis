@@ -621,7 +621,7 @@ def plot_09_depletion_year_analysis(df: pd.DataFrame, output_dir: Path) -> None:
         plt.close()
         return
 
-    # Left plot: Mean Depletion Year by Index and WR (60/40 Bund)
+    # Left plot: Median Depletion Year by Index and WR (60/40 Bund)
     ax1 = axes[0]
     mask = (subset["Equity_Pct"] == 60) & (subset["Bond"] == "Bund")
     plot_data = subset[mask].copy()
@@ -633,7 +633,7 @@ def plot_09_depletion_year_analysis(df: pd.DataFrame, output_dir: Path) -> None:
 
         for i, wr in enumerate(withdrawal_rates):
             wr_data = plot_data[plot_data["WR"] == wr].set_index("Equity")
-            values = [wr_data.loc[idx, "Mean_Depletion"] if idx in wr_data.index else 0
+            values = [wr_data.loc[idx, "Median_Depletion"] if idx in wr_data.index else 0
                       for idx in INDEX_ORDER]
             offset = (i - 1) * width
             bars = ax1.bar(x + offset, values, width, label=f"{wr:g}% WR",
@@ -642,8 +642,8 @@ def plot_09_depletion_year_analysis(df: pd.DataFrame, output_dir: Path) -> None:
         ax1.set_xticks(x)
         ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=10)
         ax1.set_xlabel("Equity Index", fontsize=12)
-        ax1.set_ylabel("Mean Depletion Year", fontsize=12)
-        ax1.set_title("Mean Depletion Year (Failed Scenarios)\n60/40 with Bund",
+        ax1.set_ylabel("Median Depletion Year", fontsize=12)
+        ax1.set_title("Median Depletion Year (Failed Scenarios)\n60/40 with Bund",
                       fontsize=13, fontweight="bold")
         ax1.legend(fontsize=10)
         ax1.set_ylim(20, 28)
@@ -731,18 +731,18 @@ def plot_10_depletion_risk_heatmap(df: pd.DataFrame, output_dir: Path) -> None:
                       fontsize=13, fontweight="bold")
         ax1.set_xticklabels([f"{float(x.get_text()):g}%" for x in ax1.get_xticklabels()], fontsize=11)
 
-    # Right: Mean Depletion Year (60/40 allocation)
+    # Right: Median Depletion Year (60/40 allocation)
     ax2 = axes[1]
-    pivot_mean = subset[mask_60].pivot_table(
-        index="Equity", columns="WR", values="Mean_Depletion", aggfunc="mean"
+    pivot_median = subset[mask_60].pivot_table(
+        index="Equity", columns="WR", values="Median_Depletion", aggfunc="median"
     )
-    pivot_mean = pivot_mean.reindex([i for i in INDEX_ORDER if i in pivot_mean.index])
+    pivot_median = pivot_median.reindex([i for i in INDEX_ORDER if i in pivot_median.index])
 
-    if not pivot_mean.empty:
+    if not pivot_median.empty:
         sns.heatmap(
-            pivot_mean,
+            pivot_median,
             annot=True,
-            fmt=".1f",
+            fmt=".0f",
             cmap="RdYlGn",
             center=25,
             vmin=20,
@@ -755,7 +755,7 @@ def plot_10_depletion_risk_heatmap(df: pd.DataFrame, output_dir: Path) -> None:
         )
         ax2.set_xlabel("Withdrawal Rate (%)", fontsize=12)
         ax2.set_ylabel("", fontsize=12)
-        ax2.set_title("Average Depletion Year (Failed Scenarios)\n60/40 with Bund",
+        ax2.set_title("Median Depletion Year (Failed Scenarios)\n60/40 with Bund",
                       fontsize=13, fontweight="bold")
         ax2.set_xticklabels([f"{float(x.get_text()):g}%" for x in ax2.get_xticklabels()], fontsize=11)
 
@@ -794,15 +794,15 @@ def plot_11_depletion_vs_allocation(df: pd.DataFrame, output_dir: Path) -> None:
             if wr_data.empty:
                 continue
 
-            # Plot Min, Mean, Median depletion
+            # Plot Min and Median depletion
             ax.fill_between(wr_data["Equity_Pct"],
                            wr_data["Min_Depletion"],
-                           wr_data["Mean_Depletion"],
+                           wr_data["Median_Depletion"],
                            alpha=0.2, color=WR_COLORS.get(wr, "gray"))
-            ax.plot(wr_data["Equity_Pct"], wr_data["Mean_Depletion"],
+            ax.plot(wr_data["Equity_Pct"], wr_data["Median_Depletion"],
                     marker="o", markersize=6, linewidth=2,
                     color=WR_COLORS.get(wr, "gray"),
-                    label=f"{wr:g}% WR (Mean)")
+                    label=f"{wr:g}% WR (Median)")
             ax.plot(wr_data["Equity_Pct"], wr_data["Min_Depletion"],
                     marker="v", markersize=5, linewidth=1.5,
                     linestyle="--", color=WR_COLORS.get(wr, "gray"),
@@ -821,7 +821,7 @@ def plot_11_depletion_vs_allocation(df: pd.DataFrame, output_dir: Path) -> None:
         ax.axhline(y=30, color="green", linestyle=":", alpha=0.5, linewidth=1.5)
 
     fig.suptitle("Depletion Year vs Equity Allocation\n"
-                 "(Solid=Mean, Dashed=Min, Shaded=Range)",
+                 "(Solid=Median, Dashed=Min, Shaded=Range)",
                  fontsize=15, fontweight="bold", y=1.02)
 
     plt.tight_layout()
@@ -850,13 +850,13 @@ def plot_12_depletion_spread_analysis(df: pd.DataFrame, output_dir: Path) -> Non
         plt.close()
         return
 
-    # Calculate spread
-    subset["Depletion_Spread"] = subset["Mean_Depletion"] - subset["Min_Depletion"]
+    # Calculate spread (Median - Min)
+    subset["Depletion_Spread"] = subset["Median_Depletion"] - subset["Min_Depletion"]
 
     # Left: Spread by Index and WR
     ax1 = axes[0]
     pivot_spread = subset.pivot_table(
-        index="Equity", columns="WR", values="Depletion_Spread", aggfunc="mean"
+        index="Equity", columns="WR", values="Depletion_Spread", aggfunc="median"
     )
     pivot_spread = pivot_spread.reindex([i for i in INDEX_ORDER if i in pivot_spread.index])
 
@@ -864,33 +864,31 @@ def plot_12_depletion_spread_analysis(df: pd.DataFrame, output_dir: Path) -> Non
         pivot_spread.plot(kind="bar", ax=ax1, width=0.8,
                           color=[WR_COLORS.get(c, "gray") for c in pivot_spread.columns])
         ax1.set_xlabel("Equity Index", fontsize=12)
-        ax1.set_ylabel("Spread (Mean - Min Depletion Years)", fontsize=12)
+        ax1.set_ylabel("Spread (Median - Min Depletion Years)", fontsize=12)
         ax1.set_title("Depletion Year Spread by Index\n(Larger = More Uncertainty)",
                       fontsize=13, fontweight="bold")
         ax1.set_xticklabels(ax1.get_xticklabels(), rotation=15, ha="right")
         ax1.legend(title="WR", labels=[f"{wr:g}%" for wr in pivot_spread.columns])
         ax1.grid(True, alpha=0.3, axis="y")
 
-    # Right: Visualization of Min vs Mean vs Median for 4% WR
+    # Right: Visualization of Min vs Median for 4% WR
     ax2 = axes[1]
     subset_4pct = subset[subset["WR"] == 4.0].set_index("Equity").reindex(INDEX_ORDER).dropna()
 
     if not subset_4pct.empty:
         x = np.arange(len(subset_4pct))
-        width = 0.25
+        width = 0.3
 
-        ax2.bar(x - width, subset_4pct["Min_Depletion"], width,
+        ax2.bar(x - width/2, subset_4pct["Min_Depletion"], width,
                 label="Min (Worst Case)", color="#e74c3c", alpha=0.85)
-        ax2.bar(x, subset_4pct["Median_Depletion"], width,
-                label="Median", color="#f39c12", alpha=0.85)
-        ax2.bar(x + width, subset_4pct["Mean_Depletion"], width,
-                label="Mean", color="#27ae60", alpha=0.85)
+        ax2.bar(x + width/2, subset_4pct["Median_Depletion"], width,
+                label="Median", color="#27ae60", alpha=0.85)
 
         ax2.set_xticks(x)
         ax2.set_xticklabels(subset_4pct.index, rotation=15, ha="right", fontsize=10)
         ax2.set_xlabel("Equity Index", fontsize=12)
         ax2.set_ylabel("Depletion Year", fontsize=12)
-        ax2.set_title("Depletion Year Statistics (4% WR)\n60/40 with Bund",
+        ax2.set_title("Depletion Year: Min vs Median (4% WR)\n60/40 with Bund",
                       fontsize=13, fontweight="bold")
         ax2.legend(fontsize=10)
         ax2.set_ylim(0, 30)
@@ -898,13 +896,11 @@ def plot_12_depletion_spread_analysis(df: pd.DataFrame, output_dir: Path) -> Non
         ax2.grid(True, alpha=0.3, axis="y")
 
         # Add value labels
-        for i, (min_v, med_v, mean_v) in enumerate(zip(
+        for i, (min_v, med_v) in enumerate(zip(
                 subset_4pct["Min_Depletion"],
-                subset_4pct["Median_Depletion"],
-                subset_4pct["Mean_Depletion"])):
-            ax2.text(i - width, min_v + 0.5, f"{min_v:.0f}", ha="center", fontsize=9)
-            ax2.text(i, med_v + 0.5, f"{med_v:.0f}", ha="center", fontsize=9)
-            ax2.text(i + width, mean_v + 0.5, f"{mean_v:.1f}", ha="center", fontsize=9)
+                subset_4pct["Median_Depletion"])):
+            ax2.text(i - width/2, min_v + 0.5, f"{min_v:.0f}", ha="center", fontsize=10)
+            ax2.text(i + width/2, med_v + 0.5, f"{med_v:.0f}", ha="center", fontsize=10)
 
     plt.tight_layout()
     plt.savefig(output_dir / "12_depletion_spread_analysis.png", dpi=150)
@@ -924,7 +920,7 @@ def plot_13_failure_rate_vs_depletion(df: pd.DataFrame, output_dir: Path) -> Non
     fig, ax = plt.subplots(figsize=FIGSIZE_SQUARE)
 
     # Filter to Bund portfolios with depletion data
-    mask = (df["Bond"] == "Bund") & (df["Mean_Depletion"].notna())
+    mask = (df["Bond"] == "Bund") & (df["Median_Depletion"].notna())
     subset = df[mask].copy()
 
     if subset.empty:
@@ -943,7 +939,7 @@ def plot_13_failure_rate_vs_depletion(df: pd.DataFrame, output_dir: Path) -> Non
                 continue
             ax.scatter(
                 data["Failure_Rate"],
-                data["Mean_Depletion"],
+                data["Median_Depletion"],
                 c=WR_COLORS.get(wr, "gray"),
                 marker=EQUITY_MARKERS.get(equity, "o"),
                 s=100,
@@ -967,8 +963,8 @@ def plot_13_failure_rate_vs_depletion(df: pd.DataFrame, output_dir: Path) -> Non
               title="Equity Index", title_fontsize=11)
 
     ax.set_xlabel("Failure Rate (%)", fontsize=13)
-    ax.set_ylabel("Mean Depletion Year", fontsize=13)
-    ax.set_title("Failure Rate vs Mean Depletion Year\n"
+    ax.set_ylabel("Median Depletion Year", fontsize=13)
+    ax.set_title("Failure Rate vs Median Depletion Year\n"
                  "Do Higher Failure Rates Mean Earlier Failures?",
                  fontsize=14, fontweight="bold")
     ax.grid(True, alpha=0.3)
@@ -1016,13 +1012,13 @@ def plot_14_depletion_global_vs_european(df: pd.DataFrame, output_dir: Path) -> 
     for wr in withdrawal_rates:
         wr_data = subset[subset["WR"] == wr]
         global_min = wr_data[wr_data["Equity"].isin(GLOBAL_INDICES)]["Min_Depletion"].mean()
-        global_mean = wr_data[wr_data["Equity"].isin(GLOBAL_INDICES)]["Mean_Depletion"].mean()
+        global_median = wr_data[wr_data["Equity"].isin(GLOBAL_INDICES)]["Median_Depletion"].mean()
         european_min = wr_data[wr_data["Equity"].isin(EUROPEAN_INDICES)]["Min_Depletion"].mean()
-        european_mean = wr_data[wr_data["Equity"].isin(EUROPEAN_INDICES)]["Mean_Depletion"].mean()
+        european_median = wr_data[wr_data["Equity"].isin(EUROPEAN_INDICES)]["Median_Depletion"].mean()
         results.append({
             "WR": wr,
-            "Global_Min": global_min, "Global_Mean": global_mean,
-            "European_Min": european_min, "European_Mean": european_mean
+            "Global_Min": global_min, "Global_Median": global_median,
+            "European_Min": european_min, "European_Median": european_median
         })
 
     results_df = pd.DataFrame(results)
@@ -1055,18 +1051,18 @@ def plot_14_depletion_global_vs_european(df: pd.DataFrame, output_dir: Path) -> 
         ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
                  f"{bar.get_height():.0f}", ha="center", fontsize=10)
 
-    # Middle: Mean Depletion Comparison
+    # Middle: Median Depletion Comparison
     ax2 = axes[1]
-    bars3 = ax2.bar(x - width/2, results_df["Global_Mean"], width,
+    bars3 = ax2.bar(x - width/2, results_df["Global_Median"], width,
                     label="Global", color="#2ecc71", alpha=0.85)
-    bars4 = ax2.bar(x + width/2, results_df["European_Mean"], width,
+    bars4 = ax2.bar(x + width/2, results_df["European_Median"], width,
                     label="European", color="#e74c3c", alpha=0.85)
 
     ax2.set_xticks(x)
     ax2.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
     ax2.set_xlabel("Withdrawal Rate", fontsize=12)
-    ax2.set_ylabel("Mean Depletion Year", fontsize=12)
-    ax2.set_title("Average Failure Year\n60/40 with Bund",
+    ax2.set_ylabel("Median Depletion Year", fontsize=12)
+    ax2.set_title("Median Failure Year\n60/40 with Bund",
                   fontsize=13, fontweight="bold")
     ax2.legend(fontsize=10)
     ax2.set_ylim(20, 28)
@@ -1084,10 +1080,10 @@ def plot_14_depletion_global_vs_european(df: pd.DataFrame, output_dir: Path) -> 
     # Right: Gap Analysis (Years earlier for European)
     ax3 = axes[2]
     gap_min = results_df["Global_Min"] - results_df["European_Min"]
-    gap_mean = results_df["Global_Mean"] - results_df["European_Mean"]
+    gap_median = results_df["Global_Median"] - results_df["European_Median"]
 
     ax3.bar(x - width/2, gap_min, width, label="Min Gap", color="#3498db", alpha=0.85)
-    ax3.bar(x + width/2, gap_mean, width, label="Mean Gap", color="#9b59b6", alpha=0.85)
+    ax3.bar(x + width/2, gap_median, width, label="Median Gap", color="#9b59b6", alpha=0.85)
 
     ax3.set_xticks(x)
     ax3.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
@@ -1100,9 +1096,9 @@ def plot_14_depletion_global_vs_european(df: pd.DataFrame, output_dir: Path) -> 
     ax3.grid(True, alpha=0.3, axis="y")
 
     # Add value labels
-    for i, (g_min, g_mean) in enumerate(zip(gap_min, gap_mean)):
+    for i, (g_min, g_median) in enumerate(zip(gap_min, gap_median)):
         ax3.text(i - width/2, g_min + 0.1, f"+{g_min:.1f}", ha="center", fontsize=10)
-        ax3.text(i + width/2, g_mean + 0.1, f"+{g_mean:.1f}", ha="center", fontsize=10)
+        ax3.text(i + width/2, g_median + 0.1, f"+{g_median:.1f}", ha="center", fontsize=10)
 
     fig.suptitle("Depletion Year: Global vs European Indices",
                  fontsize=16, fontweight="bold", y=1.02)
