@@ -1,6 +1,6 @@
 # Analysis Registry
 
-> Auto-generated from notebooks on 2026-01-13 13:44:27
+> Auto-generated from notebooks on 2026-01-14 16:29:42
 
 ## Methodology Summary
 
@@ -128,6 +128,58 @@
 | 0910 | MSCI ACWI | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3.5% | 87.23% | €1,638,193 | €2,401,283 | 26 | 25.2 | 12 |
 | 0911 | MSCI ACWI | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3.5% | 85.52% | €1,790,501 | €2,866,877 | 25 | 24.5 | 10 |
 | 0912 | MSCI ACWI | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3.5% | 83.55% | €1,915,100 | €3,397,192 | 24 | 23.8 | 9 |
+| 1000 | MSCI Europe | Bund | 60/40 | HICP_EU | No Tax | 3% | 90.13% | €1,200,484 | €1,608,994 | 27 | 26.2 | 14 |
+| 1001 | MSCI Europe | Bund | 70/30 | HICP_EU | No Tax | 3% | 87.06% | €1,262,025 | €1,874,273 | 26 | 25.5 | 12 |
+| 1002 | MSCI Europe | Bund | 80/20 | HICP_EU | No Tax | 3% | 83.77% | €1,291,488 | €2,168,847 | 25 | 24.7 | 11 |
+| 1003 | MSCI Europe | Bund | 90/10 | HICP_EU | No Tax | 3% | 80.43% | €1,285,244 | €2,494,825 | 24 | 23.9 | 10 |
+| 1004 | MSCI Europe | - | 100 | HICP_EU | No Tax | 3% | 77.16% | €1,241,261 | €2,854,528 | 24 | 23.2 | 9 |
+| 1005 | MSCI Europe | BTP | 60/40 | HICP_EU | No Tax | 3% | 89.75% | €1,434,071 | €2,037,550 | 26 | 25.7 | 13 |
+| 1006 | MSCI Europe | BTP | 70/30 | HICP_EU | No Tax | 3% | 87.10% | €1,432,562 | €2,225,983 | 26 | 25.1 | 12 |
+| 1007 | MSCI Europe | BTP | 80/20 | HICP_EU | No Tax | 3% | 83.88% | €1,401,623 | €2,424,944 | 25 | 24.5 | 11 |
+| 1008 | MSCI Europe | BTP | 90/10 | HICP_EU | No Tax | 3% | 80.52% | €1,337,104 | €2,634,496 | 24 | 23.9 | 10 |
+| 1009 | MSCI Europe | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3% | 90.20% | €1,323,981 | €1,817,843 | 27 | 26.0 | 14 |
+| 1010 | MSCI Europe | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3% | 87.21% | €1,353,111 | €2,046,739 | 26 | 25.3 | 12 |
+| 1011 | MSCI Europe | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3% | 83.90% | €1,349,410 | €2,295,241 | 25 | 24.6 | 11 |
+| 1012 | MSCI Europe | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3% | 80.50% | €1,310,955 | €2,564,204 | 24 | 23.9 | 10 |
+| 1100 | MSCI Europe | Bund | 60/40 | HICP_EU | No Tax | 3.5% | 79.16% | €791,309 | €1,219,263 | 26 | 25.5 | 13 |
+| 1101 | MSCI Europe | Bund | 70/30 | HICP_EU | No Tax | 3.5% | 76.55% | €840,854 | €1,471,970 | 25 | 24.7 | 11 |
+| 1102 | MSCI Europe | Bund | 80/20 | HICP_EU | No Tax | 3.5% | 73.80% | €862,721 | €1,753,355 | 24 | 23.9 | 10 |
+| 1103 | MSCI Europe | Bund | 90/10 | HICP_EU | No Tax | 3.5% | 70.95% | €852,264 | €2,065,412 | 24 | 23.1 | 9 |
+| 1104 | MSCI Europe | - | 100 | HICP_EU | No Tax | 3.5% | 68.15% | €807,027 | €2,410,304 | 23 | 22.4 | 8 |
+| 1105 | MSCI Europe | BTP | 60/40 | HICP_EU | No Tax | 3.5% | 80.16% | €998,133 | €1,609,716 | 26 | 25.0 | 12 |
+| 1106 | MSCI Europe | BTP | 70/30 | HICP_EU | No Tax | 3.5% | 77.38% | €993,590 | €1,792,968 | 25 | 24.4 | 11 |
+| 1107 | MSCI Europe | BTP | 80/20 | HICP_EU | No Tax | 3.5% | 74.40% | €960,762 | €1,987,685 | 24 | 23.7 | 10 |
+| 1108 | MSCI Europe | BTP | 90/10 | HICP_EU | No Tax | 3.5% | 71.28% | €899,304 | €2,193,582 | 23 | 23.1 | 9 |
+| 1109 | MSCI Europe | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3.5% | 80.02% | €901,141 | €1,408,219 | 26 | 25.3 | 12 |
+| 1110 | MSCI Europe | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3.5% | 77.14% | €922,220 | €1,628,649 | 25 | 24.6 | 11 |
+| 1111 | MSCI Europe | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3.5% | 74.16% | €915,557 | €1,868,690 | 24 | 23.8 | 10 |
+| 1112 | MSCI Europe | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3.5% | 71.12% | €875,916 | €2,129,009 | 23 | 23.1 | 9 |
+| 1200 | MSCI EMU | Bund | 60/40 | HICP_EU | No Tax | 3% | 86.20% | €1,088,472 | €1,587,766 | 26 | 25.7 | 13 |
+| 1201 | MSCI EMU | Bund | 70/30 | HICP_EU | No Tax | 3% | 82.42% | €1,106,364 | €1,851,005 | 25 | 24.9 | 12 |
+| 1202 | MSCI EMU | Bund | 80/20 | HICP_EU | No Tax | 3% | 78.60% | €1,082,813 | €2,143,489 | 25 | 24.0 | 10 |
+| 1203 | MSCI EMU | Bund | 90/10 | HICP_EU | No Tax | 3% | 74.85% | €1,022,252 | €2,467,166 | 24 | 23.2 | 9 |
+| 1204 | MSCI EMU | - | 100 | HICP_EU | No Tax | 3% | 71.07% | €929,650 | €2,824,304 | 23 | 22.4 | 8 |
+| 1205 | MSCI EMU | BTP | 60/40 | HICP_EU | No Tax | 3% | 85.74% | €1,287,557 | €2,024,926 | 26 | 25.2 | 12 |
+| 1206 | MSCI EMU | BTP | 70/30 | HICP_EU | No Tax | 3% | 82.34% | €1,246,104 | €2,210,392 | 25 | 24.5 | 11 |
+| 1207 | MSCI EMU | BTP | 80/20 | HICP_EU | No Tax | 3% | 78.65% | €1,173,676 | €2,405,736 | 24 | 23.8 | 10 |
+| 1208 | MSCI EMU | BTP | 90/10 | HICP_EU | No Tax | 3% | 74.92% | €1,063,178 | €2,610,506 | 23 | 23.1 | 9 |
+| 1209 | MSCI EMU | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3% | 86.26% | €1,196,165 | €1,800,272 | 26 | 25.5 | 13 |
+| 1210 | MSCI EMU | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3% | 82.50% | €1,178,489 | €2,026,879 | 25 | 24.7 | 11 |
+| 1211 | MSCI EMU | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3% | 78.67% | €1,128,981 | €2,272,731 | 24 | 23.9 | 10 |
+| 1212 | MSCI EMU | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3% | 74.91% | €1,041,853 | €2,538,312 | 24 | 23.1 | 9 |
+| 1300 | MSCI EMU | Bund | 60/40 | HICP_EU | No Tax | 3.5% | 74.67% | €691,761 | €1,215,332 | 25 | 24.9 | 12 |
+| 1301 | MSCI EMU | Bund | 70/30 | HICP_EU | No Tax | 3.5% | 71.58% | €699,079 | €1,468,573 | 24 | 24.0 | 11 |
+| 1302 | MSCI EMU | Bund | 80/20 | HICP_EU | No Tax | 3.5% | 68.44% | €674,721 | €1,750,325 | 24 | 23.2 | 9 |
+| 1303 | MSCI EMU | Bund | 90/10 | HICP_EU | No Tax | 3.5% | 65.33% | €617,549 | €2,062,354 | 23 | 22.4 | 8 |
+| 1304 | MSCI EMU | - | 100 | HICP_EU | No Tax | 3.5% | 62.30% | €531,095 | €2,406,763 | 22 | 21.6 | 7 |
+| 1305 | MSCI EMU | BTP | 60/40 | HICP_EU | No Tax | 3.5% | 75.45% | €862,311 | €1,614,827 | 25 | 24.4 | 11 |
+| 1306 | MSCI EMU | BTP | 70/30 | HICP_EU | No Tax | 3.5% | 72.36% | €821,294 | €1,797,794 | 24 | 23.7 | 10 |
+| 1307 | MSCI EMU | BTP | 80/20 | HICP_EU | No Tax | 3.5% | 69.01% | €751,371 | €1,991,126 | 23 | 23.0 | 9 |
+| 1308 | MSCI EMU | BTP | 90/10 | HICP_EU | No Tax | 3.5% | 65.63% | €653,355 | €2,194,354 | 23 | 22.3 | 8 |
+| 1309 | MSCI EMU | Bund+BTP | 60/20/20 | HICP_EU | No Tax | 3.5% | 75.37% | €782,972 | €1,408,299 | 25 | 24.7 | 11 |
+| 1310 | MSCI EMU | Bund+BTP | 70/15/15 | HICP_EU | No Tax | 3.5% | 72.14% | €764,414 | €1,629,028 | 24 | 23.9 | 10 |
+| 1311 | MSCI EMU | Bund+BTP | 80/10/10 | HICP_EU | No Tax | 3.5% | 68.81% | €714,991 | €1,868,717 | 23 | 23.1 | 9 |
+| 1312 | MSCI EMU | Bund+BTP | 90/5/5 | HICP_EU | No Tax | 3.5% | 65.49% | €636,142 | €2,127,814 | 23 | 22.3 | 8 |
 
 ---
 
@@ -3418,5 +3470,1573 @@
 | Median Depletion Year | 24 |
 | Mean Depletion Year | 23.8 |
 | Min Depletion Year | 9 |
+
+---
+
+### 10xx – MSCI Europe NET (3% WR)
+
+#### 1000 – MSCI Europe 60% + Bund 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1000_block_notax_i_hicp_3_m_europe_b_de_6040.ipynb](src/1000_block_notax_i_hicp_3_m_europe_b_de_6040.ipynb) |
+| Description | MSCI Europe 60% + Bund 10Y 40% |
+| Equity Index | MSCI Europe (60%) |
+| Bond | Bund 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 90.13% |
+| Median Final Value | €1,200,484 |
+| Mean Final Value | €1,608,994 |
+| P5 Final Value | €0 |
+| P95 Final Value | €4,685,340 |
+| Failed Simulations | 9,874 (9.9%) |
+| Median Depletion Year | 27 |
+| Mean Depletion Year | 26.2 |
+| Min Depletion Year | 14 |
+
+---
+
+#### 1001 – MSCI Europe 70% + Bund 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1001_block_notax_i_hicp_3_m_europe_b_de_7030.ipynb](src/1001_block_notax_i_hicp_3_m_europe_b_de_7030.ipynb) |
+| Description | MSCI Europe 70% + Bund 10Y 30% |
+| Equity Index | MSCI Europe (70%) |
+| Bond | Bund 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 87.06% |
+| Median Final Value | €1,262,025 |
+| Mean Final Value | €1,874,273 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,949,730 |
+| Failed Simulations | 12,940 (12.9%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.5 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1002 – MSCI Europe 80% + Bund 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1002_block_notax_i_hicp_3_m_europe_b_de_8020.ipynb](src/1002_block_notax_i_hicp_3_m_europe_b_de_8020.ipynb) |
+| Description | MSCI Europe 80% + Bund 10Y 20% |
+| Equity Index | MSCI Europe (80%) |
+| Bond | Bund 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 83.77% |
+| Median Final Value | €1,291,488 |
+| Mean Final Value | €2,168,847 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,448,409 |
+| Failed Simulations | 16,232 (16.2%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.7 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1003 – MSCI Europe 90% + Bund 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1003_block_notax_i_hicp_3_m_europe_b_de_9010.ipynb](src/1003_block_notax_i_hicp_3_m_europe_b_de_9010.ipynb) |
+| Description | MSCI Europe 90% + Bund 10Y 10% |
+| Equity Index | MSCI Europe (90%) |
+| Bond | Bund 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 80.43% |
+| Median Final Value | €1,285,244 |
+| Mean Final Value | €2,494,825 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,192,287 |
+| Failed Simulations | 19,567 (19.6%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1004 – MSCI Europe 100%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1004_block_notax_i_hicp_3_m_europe_b_de_1000.ipynb](src/1004_block_notax_i_hicp_3_m_europe_b_de_1000.ipynb) |
+| Description | MSCI Europe 100% |
+| Equity Index | MSCI Europe (100%) |
+| Bond | - |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 77.16% |
+| Median Final Value | €1,241,261 |
+| Mean Final Value | €2,854,528 |
+| P5 Final Value | €0 |
+| P95 Final Value | €11,184,802 |
+| Failed Simulations | 22,844 (22.8%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.2 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1005 – MSCI Europe 60% + BTP 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1005_block_notax_i_hicp_3_m_europe_b_it_6040.ipynb](src/1005_block_notax_i_hicp_3_m_europe_b_it_6040.ipynb) |
+| Description | MSCI Europe 60% + BTP 10Y 40% |
+| Equity Index | MSCI Europe (60%) |
+| Bond | BTP 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 89.75% |
+| Median Final Value | €1,434,071 |
+| Mean Final Value | €2,037,550 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,182,404 |
+| Failed Simulations | 10,248 (10.2%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.7 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 1006 – MSCI Europe 70% + BTP 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1006_block_notax_i_hicp_3_m_europe_b_it_7030.ipynb](src/1006_block_notax_i_hicp_3_m_europe_b_it_7030.ipynb) |
+| Description | MSCI Europe 70% + BTP 10Y 30% |
+| Equity Index | MSCI Europe (70%) |
+| Bond | BTP 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 87.10% |
+| Median Final Value | €1,432,562 |
+| Mean Final Value | €2,225,983 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,232,771 |
+| Failed Simulations | 12,903 (12.9%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.1 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1007 – MSCI Europe 80% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1007_block_notax_i_hicp_3_m_europe_b_it_8020.ipynb](src/1007_block_notax_i_hicp_3_m_europe_b_it_8020.ipynb) |
+| Description | MSCI Europe 80% + BTP 10Y 20% |
+| Equity Index | MSCI Europe (80%) |
+| Bond | BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 83.88% |
+| Median Final Value | €1,401,623 |
+| Mean Final Value | €2,424,944 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,441,619 |
+| Failed Simulations | 16,119 (16.1%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.5 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1008 – MSCI Europe 90% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1008_block_notax_i_hicp_3_m_europe_b_it_9010.ipynb](src/1008_block_notax_i_hicp_3_m_europe_b_it_9010.ipynb) |
+| Description | MSCI Europe 90% + BTP 10Y 10% |
+| Equity Index | MSCI Europe (90%) |
+| Bond | BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 80.52% |
+| Median Final Value | €1,337,104 |
+| Mean Final Value | €2,634,496 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,749,228 |
+| Failed Simulations | 19,483 (19.5%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1009 – MSCI Europe 60% + Bund 10Y 20% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1009_block_notax_i_hicp_3_m_europe_b_deit_602020.ipynb](src/1009_block_notax_i_hicp_3_m_europe_b_deit_602020.ipynb) |
+| Description | MSCI Europe 60% + Bund 10Y 20% + BTP 10Y 20% |
+| Equity Index | MSCI Europe (60%) |
+| Bond | Bund 10Y (20%) + BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 90.20% |
+| Median Final Value | €1,323,981 |
+| Mean Final Value | €1,817,843 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,377,665 |
+| Failed Simulations | 9,803 (9.8%) |
+| Median Depletion Year | 27 |
+| Mean Depletion Year | 26.0 |
+| Min Depletion Year | 14 |
+
+---
+
+#### 1010 – MSCI Europe 70% + Bund 10Y 15% + BTP 10Y 15%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1010_block_notax_i_hicp_3_m_europe_b_deit_701515.ipynb](src/1010_block_notax_i_hicp_3_m_europe_b_deit_701515.ipynb) |
+| Description | MSCI Europe 70% + Bund 10Y 15% + BTP 10Y 15% |
+| Equity Index | MSCI Europe (70%) |
+| Bond | Bund 10Y (15%) + BTP 10Y (15%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 87.21% |
+| Median Final Value | €1,353,111 |
+| Mean Final Value | €2,046,739 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,566,216 |
+| Failed Simulations | 12,787 (12.8%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.3 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1011 – MSCI Europe 80% + Bund 10Y 10% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1011_block_notax_i_hicp_3_m_europe_b_deit_801010.ipynb](src/1011_block_notax_i_hicp_3_m_europe_b_deit_801010.ipynb) |
+| Description | MSCI Europe 80% + Bund 10Y 10% + BTP 10Y 10% |
+| Equity Index | MSCI Europe (80%) |
+| Bond | Bund 10Y (10%) + BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 83.90% |
+| Median Final Value | €1,349,410 |
+| Mean Final Value | €2,295,241 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,939,016 |
+| Failed Simulations | 16,103 (16.1%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.6 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1012 – MSCI Europe 90% + Bund 10Y 5% + BTP 10Y 5%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1012_block_notax_i_hicp_3_m_europe_b_deit_900505.ipynb](src/1012_block_notax_i_hicp_3_m_europe_b_deit_900505.ipynb) |
+| Description | MSCI Europe 90% + Bund 10Y 5% + BTP 10Y 5% |
+| Equity Index | MSCI Europe (90%) |
+| Bond | Bund 10Y (5%) + BTP 10Y (5%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 80.50% |
+| Median Final Value | €1,310,955 |
+| Mean Final Value | €2,564,204 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,473,091 |
+| Failed Simulations | 19,505 (19.5%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 10 |
+
+---
+
+### 11xx – MSCI Europe NET (3.5% WR)
+
+#### 1100 – MSCI Europe 60% + Bund 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1100_block_notax_i_hicp_35_m_europe_b_de_6040.ipynb](src/1100_block_notax_i_hicp_35_m_europe_b_de_6040.ipynb) |
+| Description | MSCI Europe 60% + Bund 10Y 40% |
+| Equity Index | MSCI Europe (60%) |
+| Bond | Bund 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 79.16% |
+| Median Final Value | €791,309 |
+| Mean Final Value | €1,219,263 |
+| P5 Final Value | €0 |
+| P95 Final Value | €4,027,399 |
+| Failed Simulations | 20,844 (20.8%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.5 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 1101 – MSCI Europe 70% + Bund 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1101_block_notax_i_hicp_35_m_europe_b_de_7030.ipynb](src/1101_block_notax_i_hicp_35_m_europe_b_de_7030.ipynb) |
+| Description | MSCI Europe 70% + Bund 10Y 30% |
+| Equity Index | MSCI Europe (70%) |
+| Bond | Bund 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 76.55% |
+| Median Final Value | €840,854 |
+| Mean Final Value | €1,471,970 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,204,912 |
+| Failed Simulations | 23,455 (23.5%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.7 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1102 – MSCI Europe 80% + Bund 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1102_block_notax_i_hicp_35_m_europe_b_de_8020.ipynb](src/1102_block_notax_i_hicp_35_m_europe_b_de_8020.ipynb) |
+| Description | MSCI Europe 80% + Bund 10Y 20% |
+| Equity Index | MSCI Europe (80%) |
+| Bond | Bund 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 73.80% |
+| Median Final Value | €862,721 |
+| Mean Final Value | €1,753,355 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,598,348 |
+| Failed Simulations | 26,201 (26.2%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1103 – MSCI Europe 90% + Bund 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1103_block_notax_i_hicp_35_m_europe_b_de_9010.ipynb](src/1103_block_notax_i_hicp_35_m_europe_b_de_9010.ipynb) |
+| Description | MSCI Europe 90% + Bund 10Y 10% |
+| Equity Index | MSCI Europe (90%) |
+| Bond | Bund 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 70.95% |
+| Median Final Value | €852,264 |
+| Mean Final Value | €2,065,412 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,213,141 |
+| Failed Simulations | 29,047 (29.0%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.1 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1104 – MSCI Europe 100%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1104_block_notax_i_hicp_35_m_europe_b_de_1000.ipynb](src/1104_block_notax_i_hicp_35_m_europe_b_de_1000.ipynb) |
+| Description | MSCI Europe 100% |
+| Equity Index | MSCI Europe (100%) |
+| Bond | - |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 68.15% |
+| Median Final Value | €807,027 |
+| Mean Final Value | €2,410,304 |
+| P5 Final Value | €0 |
+| P95 Final Value | €10,077,813 |
+| Failed Simulations | 31,849 (31.8%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 22.4 |
+| Min Depletion Year | 8 |
+
+---
+
+#### 1105 – MSCI Europe 60% + BTP 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1105_block_notax_i_hicp_35_m_europe_b_it_6040.ipynb](src/1105_block_notax_i_hicp_35_m_europe_b_it_6040.ipynb) |
+| Description | MSCI Europe 60% + BTP 10Y 40% |
+| Equity Index | MSCI Europe (60%) |
+| Bond | BTP 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 80.16% |
+| Median Final Value | €998,133 |
+| Mean Final Value | €1,609,716 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,426,350 |
+| Failed Simulations | 19,843 (19.8%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.0 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1106 – MSCI Europe 70% + BTP 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1106_block_notax_i_hicp_35_m_europe_b_it_7030.ipynb](src/1106_block_notax_i_hicp_35_m_europe_b_it_7030.ipynb) |
+| Description | MSCI Europe 70% + BTP 10Y 30% |
+| Equity Index | MSCI Europe (70%) |
+| Bond | BTP 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 77.38% |
+| Median Final Value | €993,590 |
+| Mean Final Value | €1,792,968 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,417,303 |
+| Failed Simulations | 22,619 (22.6%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.4 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1107 – MSCI Europe 80% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1107_block_notax_i_hicp_35_m_europe_b_it_8020.ipynb](src/1107_block_notax_i_hicp_35_m_europe_b_it_8020.ipynb) |
+| Description | MSCI Europe 80% + BTP 10Y 20% |
+| Equity Index | MSCI Europe (80%) |
+| Bond | BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 74.40% |
+| Median Final Value | €960,762 |
+| Mean Final Value | €1,987,685 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,524,112 |
+| Failed Simulations | 25,596 (25.6%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.7 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1108 – MSCI Europe 90% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1108_block_notax_i_hicp_35_m_europe_b_it_9010.ipynb](src/1108_block_notax_i_hicp_35_m_europe_b_it_9010.ipynb) |
+| Description | MSCI Europe 90% + BTP 10Y 10% |
+| Equity Index | MSCI Europe (90%) |
+| Bond | BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 71.28% |
+| Median Final Value | €899,304 |
+| Mean Final Value | €2,193,582 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,757,471 |
+| Failed Simulations | 28,721 (28.7%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 23.1 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1109 – MSCI Europe 60% + Bund 10Y 20% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1109_block_notax_i_hicp_35_m_europe_b_deit_602020.ipynb](src/1109_block_notax_i_hicp_35_m_europe_b_deit_602020.ipynb) |
+| Description | MSCI Europe 60% + Bund 10Y 20% + BTP 10Y 20% |
+| Equity Index | MSCI Europe (60%) |
+| Bond | Bund 10Y (20%) + BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 80.02% |
+| Median Final Value | €901,141 |
+| Mean Final Value | €1,408,219 |
+| P5 Final Value | €0 |
+| P95 Final Value | €4,673,419 |
+| Failed Simulations | 19,981 (20.0%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.3 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1110 – MSCI Europe 70% + Bund 10Y 15% + BTP 10Y 15%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1110_block_notax_i_hicp_35_m_europe_b_deit_701515.ipynb](src/1110_block_notax_i_hicp_35_m_europe_b_deit_701515.ipynb) |
+| Description | MSCI Europe 70% + Bund 10Y 15% + BTP 10Y 15% |
+| Equity Index | MSCI Europe (70%) |
+| Bond | Bund 10Y (15%) + BTP 10Y (15%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 77.14% |
+| Median Final Value | €922,220 |
+| Mean Final Value | €1,628,649 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,778,758 |
+| Failed Simulations | 22,863 (22.9%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.6 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1111 – MSCI Europe 80% + Bund 10Y 10% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1111_block_notax_i_hicp_35_m_europe_b_deit_801010.ipynb](src/1111_block_notax_i_hicp_35_m_europe_b_deit_801010.ipynb) |
+| Description | MSCI Europe 80% + Bund 10Y 10% + BTP 10Y 10% |
+| Equity Index | MSCI Europe (80%) |
+| Bond | Bund 10Y (10%) + BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 74.16% |
+| Median Final Value | €915,557 |
+| Mean Final Value | €1,868,690 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,057,211 |
+| Failed Simulations | 25,843 (25.8%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.8 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1112 – MSCI Europe 90% + Bund 10Y 5% + BTP 10Y 5%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1112_block_notax_i_hicp_35_m_europe_b_deit_900505.ipynb](src/1112_block_notax_i_hicp_35_m_europe_b_deit_900505.ipynb) |
+| Description | MSCI Europe 90% + Bund 10Y 5% + BTP 10Y 5% |
+| Equity Index | MSCI Europe (90%) |
+| Bond | Bund 10Y (5%) + BTP 10Y (5%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 71.12% |
+| Median Final Value | €875,916 |
+| Mean Final Value | €2,129,009 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,495,139 |
+| Failed Simulations | 28,881 (28.9%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 23.1 |
+| Min Depletion Year | 9 |
+
+---
+
+### 12xx – MSCI EMU NET (3% WR)
+
+#### 1200 – MSCI EMU 60% + Bund 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1200_block_notax_i_hicp_3_m_emu_b_de_6040.ipynb](src/1200_block_notax_i_hicp_3_m_emu_b_de_6040.ipynb) |
+| Description | MSCI EMU 60% + Bund 10Y 40% |
+| Equity Index | MSCI EMU (60%) |
+| Bond | Bund 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 86.20% |
+| Median Final Value | €1,088,472 |
+| Mean Final Value | €1,587,766 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,000,208 |
+| Failed Simulations | 13,795 (13.8%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.7 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 1201 – MSCI EMU 70% + Bund 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1201_block_notax_i_hicp_3_m_emu_b_de_7030.ipynb](src/1201_block_notax_i_hicp_3_m_emu_b_de_7030.ipynb) |
+| Description | MSCI EMU 70% + Bund 10Y 30% |
+| Equity Index | MSCI EMU (70%) |
+| Bond | Bund 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 82.42% |
+| Median Final Value | €1,106,364 |
+| Mean Final Value | €1,851,005 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,379,731 |
+| Failed Simulations | 17,584 (17.6%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.9 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1202 – MSCI EMU 80% + Bund 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1202_block_notax_i_hicp_3_m_emu_b_de_8020.ipynb](src/1202_block_notax_i_hicp_3_m_emu_b_de_8020.ipynb) |
+| Description | MSCI EMU 80% + Bund 10Y 20% |
+| Equity Index | MSCI EMU (80%) |
+| Bond | Bund 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 78.60% |
+| Median Final Value | €1,082,813 |
+| Mean Final Value | €2,143,489 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,988,765 |
+| Failed Simulations | 21,400 (21.4%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.0 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1203 – MSCI EMU 90% + Bund 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1203_block_notax_i_hicp_3_m_emu_b_de_9010.ipynb](src/1203_block_notax_i_hicp_3_m_emu_b_de_9010.ipynb) |
+| Description | MSCI EMU 90% + Bund 10Y 10% |
+| Equity Index | MSCI EMU (90%) |
+| Bond | Bund 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 74.85% |
+| Median Final Value | €1,022,252 |
+| Mean Final Value | €2,467,166 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,826,830 |
+| Failed Simulations | 25,152 (25.2%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.2 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1204 – MSCI EMU 100%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1204_block_notax_i_hicp_3_m_emu_b_de_1000.ipynb](src/1204_block_notax_i_hicp_3_m_emu_b_de_1000.ipynb) |
+| Description | MSCI EMU 100% |
+| Equity Index | MSCI EMU (100%) |
+| Bond | - |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 71.07% |
+| Median Final Value | €929,650 |
+| Mean Final Value | €2,824,304 |
+| P5 Final Value | €0 |
+| P95 Final Value | €11,890,435 |
+| Failed Simulations | 28,933 (28.9%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 22.4 |
+| Min Depletion Year | 8 |
+
+---
+
+#### 1205 – MSCI EMU 60% + BTP 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1205_block_notax_i_hicp_3_m_emu_b_it_6040.ipynb](src/1205_block_notax_i_hicp_3_m_emu_b_it_6040.ipynb) |
+| Description | MSCI EMU 60% + BTP 10Y 40% |
+| Equity Index | MSCI EMU (60%) |
+| Bond | BTP 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 85.74% |
+| Median Final Value | €1,287,557 |
+| Mean Final Value | €2,024,926 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,682,543 |
+| Failed Simulations | 14,264 (14.3%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.2 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1206 – MSCI EMU 70% + BTP 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1206_block_notax_i_hicp_3_m_emu_b_it_7030.ipynb](src/1206_block_notax_i_hicp_3_m_emu_b_it_7030.ipynb) |
+| Description | MSCI EMU 70% + BTP 10Y 30% |
+| Equity Index | MSCI EMU (70%) |
+| Bond | BTP 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 82.34% |
+| Median Final Value | €1,246,104 |
+| Mean Final Value | €2,210,392 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,821,697 |
+| Failed Simulations | 17,655 (17.7%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.5 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1207 – MSCI EMU 80% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1207_block_notax_i_hicp_3_m_emu_b_it_8020.ipynb](src/1207_block_notax_i_hicp_3_m_emu_b_it_8020.ipynb) |
+| Description | MSCI EMU 80% + BTP 10Y 20% |
+| Equity Index | MSCI EMU (80%) |
+| Bond | BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 78.65% |
+| Median Final Value | €1,173,676 |
+| Mean Final Value | €2,405,736 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,101,816 |
+| Failed Simulations | 21,352 (21.4%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.8 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1208 – MSCI EMU 90% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1208_block_notax_i_hicp_3_m_emu_b_it_9010.ipynb](src/1208_block_notax_i_hicp_3_m_emu_b_it_9010.ipynb) |
+| Description | MSCI EMU 90% + BTP 10Y 10% |
+| Equity Index | MSCI EMU (90%) |
+| Bond | BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 74.92% |
+| Median Final Value | €1,063,178 |
+| Mean Final Value | €2,610,506 |
+| P5 Final Value | €0 |
+| P95 Final Value | €10,448,522 |
+| Failed Simulations | 25,076 (25.1%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 23.1 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1209 – MSCI EMU 60% + Bund 10Y 20% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1209_block_notax_i_hicp_3_m_emu_b_deit_602020.ipynb](src/1209_block_notax_i_hicp_3_m_emu_b_deit_602020.ipynb) |
+| Description | MSCI EMU 60% + Bund 10Y 20% + BTP 10Y 20% |
+| Equity Index | MSCI EMU (60%) |
+| Bond | Bund 10Y (20%) + BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 86.26% |
+| Median Final Value | €1,196,165 |
+| Mean Final Value | €1,800,272 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,782,437 |
+| Failed Simulations | 13,737 (13.7%) |
+| Median Depletion Year | 26 |
+| Mean Depletion Year | 25.5 |
+| Min Depletion Year | 13 |
+
+---
+
+#### 1210 – MSCI EMU 70% + Bund 10Y 15% + BTP 10Y 15%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1210_block_notax_i_hicp_3_m_emu_b_deit_701515.ipynb](src/1210_block_notax_i_hicp_3_m_emu_b_deit_701515.ipynb) |
+| Description | MSCI EMU 70% + Bund 10Y 15% + BTP 10Y 15% |
+| Equity Index | MSCI EMU (70%) |
+| Bond | Bund 10Y (15%) + BTP 10Y (15%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 82.50% |
+| Median Final Value | €1,178,489 |
+| Mean Final Value | €2,026,879 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,073,308 |
+| Failed Simulations | 17,497 (17.5%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.7 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1211 – MSCI EMU 80% + Bund 10Y 10% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1211_block_notax_i_hicp_3_m_emu_b_deit_801010.ipynb](src/1211_block_notax_i_hicp_3_m_emu_b_deit_801010.ipynb) |
+| Description | MSCI EMU 80% + Bund 10Y 10% + BTP 10Y 10% |
+| Equity Index | MSCI EMU (80%) |
+| Bond | Bund 10Y (10%) + BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 78.67% |
+| Median Final Value | €1,128,981 |
+| Mean Final Value | €2,272,731 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,534,382 |
+| Failed Simulations | 21,333 (21.3%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1212 – MSCI EMU 90% + Bund 10Y 5% + BTP 10Y 5%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1212_block_notax_i_hicp_3_m_emu_b_deit_900505.ipynb](src/1212_block_notax_i_hicp_3_m_emu_b_deit_900505.ipynb) |
+| Description | MSCI EMU 90% + Bund 10Y 5% + BTP 10Y 5% |
+| Equity Index | MSCI EMU (90%) |
+| Bond | Bund 10Y (5%) + BTP 10Y (5%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.0% |
+
+**Results @ 3% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 74.91% |
+| Median Final Value | €1,041,853 |
+| Mean Final Value | €2,538,312 |
+| P5 Final Value | €0 |
+| P95 Final Value | €10,133,553 |
+| Failed Simulations | 25,085 (25.1%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.1 |
+| Min Depletion Year | 9 |
+
+---
+
+### 13xx – MSCI EMU NET (3.5% WR)
+
+#### 1300 – MSCI EMU 60% + Bund 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1300_block_notax_i_hicp_35_m_emu_b_de_6040.ipynb](src/1300_block_notax_i_hicp_35_m_emu_b_de_6040.ipynb) |
+| Description | MSCI EMU 60% + Bund 10Y 40% |
+| Equity Index | MSCI EMU (60%) |
+| Bond | Bund 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 74.67% |
+| Median Final Value | €691,761 |
+| Mean Final Value | €1,215,332 |
+| P5 Final Value | €0 |
+| P95 Final Value | €4,317,890 |
+| Failed Simulations | 25,329 (25.3%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.9 |
+| Min Depletion Year | 12 |
+
+---
+
+#### 1301 – MSCI EMU 70% + Bund 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1301_block_notax_i_hicp_35_m_emu_b_de_7030.ipynb](src/1301_block_notax_i_hicp_35_m_emu_b_de_7030.ipynb) |
+| Description | MSCI EMU 70% + Bund 10Y 30% |
+| Equity Index | MSCI EMU (70%) |
+| Bond | Bund 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 71.58% |
+| Median Final Value | €699,079 |
+| Mean Final Value | €1,468,573 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,611,341 |
+| Failed Simulations | 28,421 (28.4%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 24.0 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1302 – MSCI EMU 80% + Bund 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1302_block_notax_i_hicp_35_m_emu_b_de_8020.ipynb](src/1302_block_notax_i_hicp_35_m_emu_b_de_8020.ipynb) |
+| Description | MSCI EMU 80% + Bund 10Y 20% |
+| Equity Index | MSCI EMU (80%) |
+| Bond | Bund 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 68.44% |
+| Median Final Value | €674,721 |
+| Mean Final Value | €1,750,325 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,112,888 |
+| Failed Simulations | 31,561 (31.6%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.2 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1303 – MSCI EMU 90% + Bund 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1303_block_notax_i_hicp_35_m_emu_b_de_9010.ipynb](src/1303_block_notax_i_hicp_35_m_emu_b_de_9010.ipynb) |
+| Description | MSCI EMU 90% + Bund 10Y 10% |
+| Equity Index | MSCI EMU (90%) |
+| Bond | Bund 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 65.33% |
+| Median Final Value | €617,549 |
+| Mean Final Value | €2,062,354 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,844,336 |
+| Failed Simulations | 34,669 (34.7%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 22.4 |
+| Min Depletion Year | 8 |
+
+---
+
+#### 1304 – MSCI EMU 100%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1304_block_notax_i_hicp_35_m_emu_b_de_1000.ipynb](src/1304_block_notax_i_hicp_35_m_emu_b_de_1000.ipynb) |
+| Description | MSCI EMU 100% |
+| Equity Index | MSCI EMU (100%) |
+| Bond | - |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 62.30% |
+| Median Final Value | €531,095 |
+| Mean Final Value | €2,406,763 |
+| P5 Final Value | €0 |
+| P95 Final Value | €10,779,451 |
+| Failed Simulations | 37,697 (37.7%) |
+| Median Depletion Year | 22 |
+| Mean Depletion Year | 21.6 |
+| Min Depletion Year | 7 |
+
+---
+
+#### 1305 – MSCI EMU 60% + BTP 10Y 40%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1305_block_notax_i_hicp_35_m_emu_b_it_6040.ipynb](src/1305_block_notax_i_hicp_35_m_emu_b_it_6040.ipynb) |
+| Description | MSCI EMU 60% + BTP 10Y 40% |
+| Equity Index | MSCI EMU (60%) |
+| Bond | BTP 10Y (40%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 75.45% |
+| Median Final Value | €862,311 |
+| Mean Final Value | €1,614,827 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,878,841 |
+| Failed Simulations | 24,551 (24.6%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.4 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1306 – MSCI EMU 70% + BTP 10Y 30%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1306_block_notax_i_hicp_35_m_emu_b_it_7030.ipynb](src/1306_block_notax_i_hicp_35_m_emu_b_it_7030.ipynb) |
+| Description | MSCI EMU 70% + BTP 10Y 30% |
+| Equity Index | MSCI EMU (70%) |
+| Bond | BTP 10Y (30%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 72.36% |
+| Median Final Value | €821,294 |
+| Mean Final Value | €1,797,794 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,965,314 |
+| Failed Simulations | 27,643 (27.6%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.7 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1307 – MSCI EMU 80% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1307_block_notax_i_hicp_35_m_emu_b_it_8020.ipynb](src/1307_block_notax_i_hicp_35_m_emu_b_it_8020.ipynb) |
+| Description | MSCI EMU 80% + BTP 10Y 20% |
+| Equity Index | MSCI EMU (80%) |
+| Bond | BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 69.01% |
+| Median Final Value | €751,371 |
+| Mean Final Value | €1,991,126 |
+| P5 Final Value | €0 |
+| P95 Final Value | €8,140,818 |
+| Failed Simulations | 30,989 (31.0%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 23.0 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1308 – MSCI EMU 90% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1308_block_notax_i_hicp_35_m_emu_b_it_9010.ipynb](src/1308_block_notax_i_hicp_35_m_emu_b_it_9010.ipynb) |
+| Description | MSCI EMU 90% + BTP 10Y 10% |
+| Equity Index | MSCI EMU (90%) |
+| Bond | BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 65.63% |
+| Median Final Value | €653,355 |
+| Mean Final Value | €2,194,354 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,414,787 |
+| Failed Simulations | 34,366 (34.4%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 22.3 |
+| Min Depletion Year | 8 |
+
+---
+
+#### 1309 – MSCI EMU 60% + Bund 10Y 20% + BTP 10Y 20%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1309_block_notax_i_hicp_35_m_emu_b_deit_602020.ipynb](src/1309_block_notax_i_hicp_35_m_emu_b_deit_602020.ipynb) |
+| Description | MSCI EMU 60% + Bund 10Y 20% + BTP 10Y 20% |
+| Equity Index | MSCI EMU (60%) |
+| Bond | Bund 10Y (20%) + BTP 10Y (20%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 75.37% |
+| Median Final Value | €782,972 |
+| Mean Final Value | €1,408,299 |
+| P5 Final Value | €0 |
+| P95 Final Value | €5,046,212 |
+| Failed Simulations | 24,635 (24.6%) |
+| Median Depletion Year | 25 |
+| Mean Depletion Year | 24.7 |
+| Min Depletion Year | 11 |
+
+---
+
+#### 1310 – MSCI EMU 70% + Bund 10Y 15% + BTP 10Y 15%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1310_block_notax_i_hicp_35_m_emu_b_deit_701515.ipynb](src/1310_block_notax_i_hicp_35_m_emu_b_deit_701515.ipynb) |
+| Description | MSCI EMU 70% + Bund 10Y 15% + BTP 10Y 15% |
+| Equity Index | MSCI EMU (70%) |
+| Bond | Bund 10Y (15%) + BTP 10Y (15%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 72.14% |
+| Median Final Value | €764,414 |
+| Mean Final Value | €1,629,028 |
+| P5 Final Value | €0 |
+| P95 Final Value | €6,260,436 |
+| Failed Simulations | 27,859 (27.9%) |
+| Median Depletion Year | 24 |
+| Mean Depletion Year | 23.9 |
+| Min Depletion Year | 10 |
+
+---
+
+#### 1311 – MSCI EMU 80% + Bund 10Y 10% + BTP 10Y 10%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1311_block_notax_i_hicp_35_m_emu_b_deit_801010.ipynb](src/1311_block_notax_i_hicp_35_m_emu_b_deit_801010.ipynb) |
+| Description | MSCI EMU 80% + Bund 10Y 10% + BTP 10Y 10% |
+| Equity Index | MSCI EMU (80%) |
+| Bond | Bund 10Y (10%) + BTP 10Y (10%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 68.81% |
+| Median Final Value | €714,991 |
+| Mean Final Value | €1,868,717 |
+| P5 Final Value | €0 |
+| P95 Final Value | €7,606,706 |
+| Failed Simulations | 31,195 (31.2%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 23.1 |
+| Min Depletion Year | 9 |
+
+---
+
+#### 1312 – MSCI EMU 90% + Bund 10Y 5% + BTP 10Y 5%
+
+| Parameter | Value |
+|-----------|-------|
+| Notebook | [1312_block_notax_i_hicp_35_m_emu_b_deit_900505.ipynb](src/1312_block_notax_i_hicp_35_m_emu_b_deit_900505.ipynb) |
+| Description | MSCI EMU 90% + Bund 10Y 5% + BTP 10Y 5% |
+| Equity Index | MSCI EMU (90%) |
+| Bond | Bund 10Y (5%) + BTP 10Y (5%) |
+| Inflation | HICP Euro Area |
+| Tax Status | No Tax |
+| Data Period | 2000-12-30 → 2025-10-31 |
+| Simulations | 100,000 |
+| Withdrawal Rate | 3.5% |
+
+**Results @ 3.5% WR:**
+
+| Metric | Value |
+|--------|-------|
+| Success Rate | 65.49% |
+| Median Final Value | €636,142 |
+| Mean Final Value | €2,127,814 |
+| P5 Final Value | €0 |
+| P95 Final Value | €9,130,317 |
+| Failed Simulations | 34,513 (34.5%) |
+| Median Depletion Year | 23 |
+| Mean Depletion Year | 22.3 |
+| Min Depletion Year | 8 |
 
 ---

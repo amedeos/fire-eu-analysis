@@ -16,6 +16,10 @@ This directory contains Jupyter notebooks for financial data analysis and Monte 
 | `07xx` | MSCI World (3.5% WR) | Simulations with MSCI World NET index, 3.5% withdrawal rate |
 | `08xx` | MSCI ACWI (3% WR) | Simulations with MSCI ACWI NET index, 3% withdrawal rate |
 | `09xx` | MSCI ACWI (3.5% WR) | Simulations with MSCI ACWI NET index, 3.5% withdrawal rate |
+| `10xx` | MSCI Europe (3% WR) | Simulations with MSCI Europe NET index, 3% withdrawal rate |
+| `11xx` | MSCI Europe (3.5% WR) | Simulations with MSCI Europe NET index, 3.5% withdrawal rate |
+| `12xx` | MSCI EMU (3% WR) | Simulations with MSCI EMU NET index, 3% withdrawal rate |
+| `13xx` | MSCI EMU (3.5% WR) | Simulations with MSCI EMU NET index, 3.5% withdrawal rate |
 
 ## Data Extraction and Preparation Notebooks (00xx)
 
@@ -270,6 +274,118 @@ These notebooks perform Monte Carlo simulations using block bootstrap methodolog
 | [0910_block_notax_i_hicp_35_m_acwi_b_deit_701515.ipynb](0910_block_notax_i_hicp_35_m_acwi_b_deit_701515.ipynb) | 70% MSCI ACWI + 15% Bund + 15% BTP | 3.5% SWR simulation with Euro area HICP inflation |
 | [0911_block_notax_i_hicp_35_m_acwi_b_deit_801010.ipynb](0911_block_notax_i_hicp_35_m_acwi_b_deit_801010.ipynb) | 80% MSCI ACWI + 10% Bund + 10% BTP | 3.5% SWR simulation with Euro area HICP inflation |
 | [0912_block_notax_i_hicp_35_m_acwi_b_deit_900505.ipynb](0912_block_notax_i_hicp_35_m_acwi_b_deit_900505.ipynb) | 90% MSCI ACWI + 5% Bund + 5% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + Bund Portfolios (10xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1000_block_notax_i_hicp_3_m_europe_b_de_6040.ipynb](1000_block_notax_i_hicp_3_m_europe_b_de_6040.ipynb) | 60% MSCI Europe + 40% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1001_block_notax_i_hicp_3_m_europe_b_de_7030.ipynb](1001_block_notax_i_hicp_3_m_europe_b_de_7030.ipynb) | 70% MSCI Europe + 30% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1002_block_notax_i_hicp_3_m_europe_b_de_8020.ipynb](1002_block_notax_i_hicp_3_m_europe_b_de_8020.ipynb) | 80% MSCI Europe + 20% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1003_block_notax_i_hicp_3_m_europe_b_de_9010.ipynb](1003_block_notax_i_hicp_3_m_europe_b_de_9010.ipynb) | 90% MSCI Europe + 10% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1004_block_notax_i_hicp_3_m_europe_b_de_1000.ipynb](1004_block_notax_i_hicp_3_m_europe_b_de_1000.ipynb) | 100% MSCI Europe | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + BTP Portfolios (10xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1005_block_notax_i_hicp_3_m_europe_b_it_6040.ipynb](1005_block_notax_i_hicp_3_m_europe_b_it_6040.ipynb) | 60% MSCI Europe + 40% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1006_block_notax_i_hicp_3_m_europe_b_it_7030.ipynb](1006_block_notax_i_hicp_3_m_europe_b_it_7030.ipynb) | 70% MSCI Europe + 30% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1007_block_notax_i_hicp_3_m_europe_b_it_8020.ipynb](1007_block_notax_i_hicp_3_m_europe_b_it_8020.ipynb) | 80% MSCI Europe + 20% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1008_block_notax_i_hicp_3_m_europe_b_it_9010.ipynb](1008_block_notax_i_hicp_3_m_europe_b_it_9010.ipynb) | 90% MSCI Europe + 10% BTP | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + Bund + BTP Portfolios (10xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1009_block_notax_i_hicp_3_m_europe_b_deit_602020.ipynb](1009_block_notax_i_hicp_3_m_europe_b_deit_602020.ipynb) | 60% MSCI Europe + 20% Bund + 20% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1010_block_notax_i_hicp_3_m_europe_b_deit_701515.ipynb](1010_block_notax_i_hicp_3_m_europe_b_deit_701515.ipynb) | 70% MSCI Europe + 15% Bund + 15% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1011_block_notax_i_hicp_3_m_europe_b_deit_801010.ipynb](1011_block_notax_i_hicp_3_m_europe_b_deit_801010.ipynb) | 80% MSCI Europe + 10% Bund + 10% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1012_block_notax_i_hicp_3_m_europe_b_deit_900505.ipynb](1012_block_notax_i_hicp_3_m_europe_b_deit_900505.ipynb) | 90% MSCI Europe + 5% Bund + 5% BTP | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + Bund Portfolios (11xx, No Tax, 3.5% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1100_block_notax_i_hicp_35_m_europe_b_de_6040.ipynb](1100_block_notax_i_hicp_35_m_europe_b_de_6040.ipynb) | 60% MSCI Europe + 40% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1101_block_notax_i_hicp_35_m_europe_b_de_7030.ipynb](1101_block_notax_i_hicp_35_m_europe_b_de_7030.ipynb) | 70% MSCI Europe + 30% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1102_block_notax_i_hicp_35_m_europe_b_de_8020.ipynb](1102_block_notax_i_hicp_35_m_europe_b_de_8020.ipynb) | 80% MSCI Europe + 20% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1103_block_notax_i_hicp_35_m_europe_b_de_9010.ipynb](1103_block_notax_i_hicp_35_m_europe_b_de_9010.ipynb) | 90% MSCI Europe + 10% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1104_block_notax_i_hicp_35_m_europe_b_de_1000.ipynb](1104_block_notax_i_hicp_35_m_europe_b_de_1000.ipynb) | 100% MSCI Europe | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + BTP Portfolios (11xx, No Tax, 3.5% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1105_block_notax_i_hicp_35_m_europe_b_it_6040.ipynb](1105_block_notax_i_hicp_35_m_europe_b_it_6040.ipynb) | 60% MSCI Europe + 40% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1106_block_notax_i_hicp_35_m_europe_b_it_7030.ipynb](1106_block_notax_i_hicp_35_m_europe_b_it_7030.ipynb) | 70% MSCI Europe + 30% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1107_block_notax_i_hicp_35_m_europe_b_it_8020.ipynb](1107_block_notax_i_hicp_35_m_europe_b_it_8020.ipynb) | 80% MSCI Europe + 20% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1108_block_notax_i_hicp_35_m_europe_b_it_9010.ipynb](1108_block_notax_i_hicp_35_m_europe_b_it_9010.ipynb) | 90% MSCI Europe + 10% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI Europe + Bund + BTP Portfolios (11xx, No Tax, 3.5% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1109_block_notax_i_hicp_35_m_europe_b_deit_602020.ipynb](1109_block_notax_i_hicp_35_m_europe_b_deit_602020.ipynb) | 60% MSCI Europe + 20% Bund + 20% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1110_block_notax_i_hicp_35_m_europe_b_deit_701515.ipynb](1110_block_notax_i_hicp_35_m_europe_b_deit_701515.ipynb) | 70% MSCI Europe + 15% Bund + 15% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1111_block_notax_i_hicp_35_m_europe_b_deit_801010.ipynb](1111_block_notax_i_hicp_35_m_europe_b_deit_801010.ipynb) | 80% MSCI Europe + 10% Bund + 10% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1112_block_notax_i_hicp_35_m_europe_b_deit_900505.ipynb](1112_block_notax_i_hicp_35_m_europe_b_deit_900505.ipynb) | 90% MSCI Europe + 5% Bund + 5% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + Bund Portfolios (12xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1200_block_notax_i_hicp_3_m_emu_b_de_6040.ipynb](1200_block_notax_i_hicp_3_m_emu_b_de_6040.ipynb) | 60% MSCI EMU + 40% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1201_block_notax_i_hicp_3_m_emu_b_de_7030.ipynb](1201_block_notax_i_hicp_3_m_emu_b_de_7030.ipynb) | 70% MSCI EMU + 30% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1202_block_notax_i_hicp_3_m_emu_b_de_8020.ipynb](1202_block_notax_i_hicp_3_m_emu_b_de_8020.ipynb) | 80% MSCI EMU + 20% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1203_block_notax_i_hicp_3_m_emu_b_de_9010.ipynb](1203_block_notax_i_hicp_3_m_emu_b_de_9010.ipynb) | 90% MSCI EMU + 10% Bund | 3% SWR simulation with Euro area HICP inflation |
+| [1204_block_notax_i_hicp_3_m_emu_b_de_1000.ipynb](1204_block_notax_i_hicp_3_m_emu_b_de_1000.ipynb) | 100% MSCI EMU | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + BTP Portfolios (12xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1205_block_notax_i_hicp_3_m_emu_b_it_6040.ipynb](1205_block_notax_i_hicp_3_m_emu_b_it_6040.ipynb) | 60% MSCI EMU + 40% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1206_block_notax_i_hicp_3_m_emu_b_it_7030.ipynb](1206_block_notax_i_hicp_3_m_emu_b_it_7030.ipynb) | 70% MSCI EMU + 30% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1207_block_notax_i_hicp_3_m_emu_b_it_8020.ipynb](1207_block_notax_i_hicp_3_m_emu_b_it_8020.ipynb) | 80% MSCI EMU + 20% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1208_block_notax_i_hicp_3_m_emu_b_it_9010.ipynb](1208_block_notax_i_hicp_3_m_emu_b_it_9010.ipynb) | 90% MSCI EMU + 10% BTP | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + Bund + BTP Portfolios (12xx, No Tax, 3% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1209_block_notax_i_hicp_3_m_emu_b_deit_602020.ipynb](1209_block_notax_i_hicp_3_m_emu_b_deit_602020.ipynb) | 60% MSCI EMU + 20% Bund + 20% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1210_block_notax_i_hicp_3_m_emu_b_deit_701515.ipynb](1210_block_notax_i_hicp_3_m_emu_b_deit_701515.ipynb) | 70% MSCI EMU + 15% Bund + 15% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1211_block_notax_i_hicp_3_m_emu_b_deit_801010.ipynb](1211_block_notax_i_hicp_3_m_emu_b_deit_801010.ipynb) | 80% MSCI EMU + 10% Bund + 10% BTP | 3% SWR simulation with Euro area HICP inflation |
+| [1212_block_notax_i_hicp_3_m_emu_b_deit_900505.ipynb](1212_block_notax_i_hicp_3_m_emu_b_deit_900505.ipynb) | 90% MSCI EMU + 5% Bund + 5% BTP | 3% SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + Bund Portfolios (13xx, No Tax, 3.5% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1300_block_notax_i_hicp_35_m_emu_b_de_6040.ipynb](1300_block_notax_i_hicp_35_m_emu_b_de_6040.ipynb) | 60% MSCI EMU + 40% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1301_block_notax_i_hicp_35_m_emu_b_de_7030.ipynb](1301_block_notax_i_hicp_35_m_emu_b_de_7030.ipynb) | 70% MSCI EMU + 30% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1302_block_notax_i_hicp_35_m_emu_b_de_8020.ipynb](1302_block_notax_i_hicp_35_m_emu_b_de_8020.ipynb) | 80% MSCI EMU + 20% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1303_block_notax_i_hicp_35_m_emu_b_de_9010.ipynb](1303_block_notax_i_hicp_35_m_emu_b_de_9010.ipynb) | 90% MSCI EMU + 10% Bund | 3.5% SWR simulation with Euro area HICP inflation |
+| [1304_block_notax_i_hicp_35_m_emu_b_de_1000.ipynb](1304_block_notax_i_hicp_35_m_emu_b_de_1000.ipynb) | 100% MSCI EMU | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + BTP Portfolios (13xx, No Tax, 3.5% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1305_block_notax_i_hicp_35_m_emu_b_it_6040.ipynb](1305_block_notax_i_hicp_35_m_emu_b_it_6040.ipynb) | 60% MSCI EMU + 40% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1306_block_notax_i_hicp_35_m_emu_b_it_7030.ipynb](1306_block_notax_i_hicp_35_m_emu_b_it_7030.ipynb) | 70% MSCI EMU + 30% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1307_block_notax_i_hicp_35_m_emu_b_it_8020.ipynb](1307_block_notax_i_hicp_35_m_emu_b_it_8020.ipynb) | 80% MSCI EMU + 20% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1308_block_notax_i_hicp_35_m_emu_b_it_9010.ipynb](1308_block_notax_i_hicp_35_m_emu_b_it_9010.ipynb) | 90% MSCI EMU + 10% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+
+### MSCI EMU + Bund + BTP Portfolios (13xx, No Tax, 3.5% WR)
+
+| Notebook | Allocation | Description |
+|----------|-------------|-------------|
+| [1309_block_notax_i_hicp_35_m_emu_b_deit_602020.ipynb](1309_block_notax_i_hicp_35_m_emu_b_deit_602020.ipynb) | 60% MSCI EMU + 20% Bund + 20% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1310_block_notax_i_hicp_35_m_emu_b_deit_701515.ipynb](1310_block_notax_i_hicp_35_m_emu_b_deit_701515.ipynb) | 70% MSCI EMU + 15% Bund + 15% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1311_block_notax_i_hicp_35_m_emu_b_deit_801010.ipynb](1311_block_notax_i_hicp_35_m_emu_b_deit_801010.ipynb) | 80% MSCI EMU + 10% Bund + 10% BTP | 3.5% SWR simulation with Euro area HICP inflation |
+| [1312_block_notax_i_hicp_35_m_emu_b_deit_900505.ipynb](1312_block_notax_i_hicp_35_m_emu_b_deit_900505.ipynb) | 90% MSCI EMU + 5% Bund + 5% BTP | 3.5% SWR simulation with Euro area HICP inflation |
 
 ## Simulation Methodology
 
