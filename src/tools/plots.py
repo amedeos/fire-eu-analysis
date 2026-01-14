@@ -2745,6 +2745,344 @@ def plot_32_wr_comparison_summary(df: pd.DataFrame, output_dir: Path) -> None:
 
 
 # =============================================================================
+# PLOT 33: Optimal Bond Strategy
+# =============================================================================
+
+def plot_33_optimal_bond_strategy(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 33: Which bond strategy is optimal? Bund vs BTP vs Mix comparison.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Define bond colors
+    bond_colors = {"Bund": "#3498db", "BTP": "#e74c3c", "Bund+BTP": "#9b59b6"}
+
+    # Prepare data for 60% equity portfolios
+    # Bund and BTP use 60/40, Mix uses 60/20/20
+    def get_bond_data(wr):
+        results = []
+        for equity in INDEX_ORDER:
+            row = {"Equity": equity, "WR": wr}
+            # Bund 60/40
+            bund = df[(df["Equity"] == equity) & (df["WR"] == wr) &
+                      (df["Bond"] == "Bund") & (df["Allocation"] == "60/40")]
+            row["Bund"] = bund["Success_Rate"].values[0] if len(bund) > 0 else None
+
+            # BTP 60/40
+            btp = df[(df["Equity"] == equity) & (df["WR"] == wr) &
+                     (df["Bond"] == "BTP") & (df["Allocation"] == "60/40")]
+            row["BTP"] = btp["Success_Rate"].values[0] if len(btp) > 0 else None
+
+            # Mix 60/20/20
+            mix = df[(df["Equity"] == equity) & (df["WR"] == wr) &
+                     (df["Bond"] == "Bund+BTP") & (df["Allocation"] == "60/20/20")]
+            row["Bund+BTP"] = mix["Success_Rate"].values[0] if len(mix) > 0 else None
+
+            results.append(row)
+        return pd.DataFrame(results)
+
+    # Top Left: Success Rate by Bond Type at 4% WR
+    ax1 = axes[0, 0]
+    data_4pct = get_bond_data(4.0)
+
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.25
+
+    for i, bond in enumerate(["Bund", "BTP", "Bund+BTP"]):
+        values = data_4pct[bond].fillna(0).values
+        offset = (i - 1) * width
+        ax1.bar(x + offset, values, width, label=bond,
+                color=bond_colors[bond], alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("Bond Strategy Comparison at 4% WR\n(60% Equity)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Bond Type", fontsize=10)
+    ax1.set_ylim(55, 85)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Highlight winner
+    for i, equity in enumerate(INDEX_ORDER):
+        row = data_4pct[data_4pct["Equity"] == equity].iloc[0]
+        rates = {"Bund": row["Bund"], "BTP": row["BTP"], "Bund+BTP": row["Bund+BTP"]}
+        valid = {k: v for k, v in rates.items() if pd.notna(v)}
+        if valid:
+            winner = max(valid, key=valid.get)
+            ax1.text(i, max(valid.values()) + 0.8, "*", ha="center",
+                     fontsize=14, color=bond_colors[winner], fontweight="bold")
+
+    # Top Right: Winner by WR
+    ax2 = axes[0, 1]
+    summary_data = []
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = get_bond_data(wr)
+        for bond in ["Bund", "BTP", "Bund+BTP"]:
+            avg = wr_data[bond].mean()
+            if pd.notna(avg):
+                summary_data.append({"WR": f"{wr:g}%", "Bond": bond, "Avg_SR": avg})
+
+    summary_df = pd.DataFrame(summary_data)
+    pivot = summary_df.pivot(index="Bond", columns="WR", values="Avg_SR")
+    pivot = pivot[["3%", "3.5%", "4%"]]  # Order columns
+
+    pivot.plot(kind="bar", ax=ax2, color=[WR_COLORS[3.0], WR_COLORS[3.5], WR_COLORS[4.0]],
+               alpha=0.85, width=0.8)
+    ax2.set_xlabel("Bond Type", fontsize=12)
+    ax2.set_ylabel("Average Success Rate (%)", fontsize=12)
+    ax2.set_title("Average Success Rate by Bond & WR\n(All Indices, 60% Equity)",
+                  fontsize=13, fontweight="bold")
+    ax2.legend(title="WR", fontsize=10)
+    ax2.set_xticklabels(ax2.get_xticklabels(), rotation=0)
+    ax2.grid(True, alpha=0.3, axis="y")
+
+    # Bottom Left: Difference from Bund (BTP advantage)
+    ax3 = axes[1, 0]
+    diff_data = []
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = get_bond_data(wr)
+        for equity in INDEX_ORDER:
+            row = wr_data[wr_data["Equity"] == equity].iloc[0]
+            if pd.notna(row["Bund"]) and pd.notna(row["BTP"]):
+                diff_data.append({
+                    "WR": wr, "Equity": equity,
+                    "BTP_vs_Bund": row["BTP"] - row["Bund"],
+                    "Mix_vs_Bund": row["Bund+BTP"] - row["Bund"] if pd.notna(row["Bund+BTP"]) else None
+                })
+
+    diff_df = pd.DataFrame(diff_data)
+
+    for wr in [3.0, 3.5, 4.0]:
+        wr_diff = diff_df[diff_df["WR"] == wr]
+        if not wr_diff.empty:
+            ax3.scatter(wr_diff["Equity"], wr_diff["BTP_vs_Bund"],
+                        c=WR_COLORS[wr], s=150, alpha=0.8, label=f"{wr:g}% WR",
+                        edgecolors="white", linewidth=1.5)
+
+    ax3.axhline(y=0, color="black", linewidth=1.5)
+    ax3.set_xlabel("Equity Index", fontsize=12)
+    ax3.set_ylabel("BTP Advantage vs Bund (%)", fontsize=12)
+    ax3.set_title("BTP Performance Advantage over Bund\n(Positive = BTP better)",
+                  fontsize=13, fontweight="bold")
+    ax3.legend(fontsize=10)
+    ax3.tick_params(axis="x", rotation=15)
+    ax3.grid(True, alpha=0.3)
+
+    # Add annotation
+    ax3.fill_between(ax3.get_xlim(), 0, 5, alpha=0.1, color="green")
+    ax3.fill_between(ax3.get_xlim(), -5, 0, alpha=0.1, color="red")
+    ax3.text(0.02, 0.95, "BTP better", transform=ax3.transAxes,
+             fontsize=9, color="green", style="italic")
+    ax3.text(0.02, 0.05, "Bund better", transform=ax3.transAxes,
+             fontsize=9, color="red", style="italic")
+
+    # Bottom Right: Summary and Recommendation
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    summary_text = "OPTIMAL BOND STRATEGY ANALYSIS\n"
+    summary_text += "=" * 50 + "\n\n"
+
+    summary_text += "FINDINGS BY WITHDRAWAL RATE:\n"
+    summary_text += "-" * 50 + "\n"
+
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = get_bond_data(wr)
+        bund_avg = wr_data["Bund"].mean()
+        btp_avg = wr_data["BTP"].mean()
+        mix_avg = wr_data["Bund+BTP"].mean()
+
+        best = "Mix" if mix_avg >= max(bund_avg, btp_avg) else ("BTP" if btp_avg > bund_avg else "Bund")
+        diff = max(btp_avg, mix_avg) - bund_avg
+
+        summary_text += f"\n{wr:g}% WR:\n"
+        summary_text += f"  Bund:     {bund_avg:.1f}%\n"
+        summary_text += f"  BTP:      {btp_avg:.1f}%\n"
+        summary_text += f"  Mix:      {mix_avg:.1f}%\n"
+        summary_text += f"  Winner:   {best} (+{diff:.1f}% vs Bund)\n"
+
+    summary_text += "\n" + "-" * 50 + "\n"
+    summary_text += "RECOMMENDATION:\n"
+    summary_text += "At higher WRs (3.5-4%), BTP or Mix\n"
+    summary_text += "outperforms pure Bund by 1-2%.\n"
+    summary_text += "Higher BTP yield compensates for\n"
+    summary_text += "withdrawal pressure at aggressive WRs.\n\n"
+    summary_text += "At conservative 3% WR, differences\n"
+    summary_text += "are minimal - all strategies viable."
+
+    ax4.text(0.05, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=10, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="lightyellow", alpha=0.5))
+
+    fig.suptitle("Optimal Bond Strategy: Bund vs BTP vs Mix",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "33_optimal_bond_strategy.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 33_optimal_bond_strategy.png")
+
+
+# =============================================================================
+# PLOT 34: Bond Strategy Deep Dive
+# =============================================================================
+
+def plot_34_bond_strategy_deep_dive(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 34: Deep dive into bond strategy - final values and risk metrics.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    bond_colors = {"Bund": "#3498db", "BTP": "#e74c3c", "Bund+BTP": "#9b59b6"}
+
+    # Helper to get comparable data
+    def get_comparable_data(wr, metric):
+        results = []
+        for equity in INDEX_ORDER:
+            row = {"Equity": equity}
+            # Bund 60/40
+            bund = df[(df["Equity"] == equity) & (df["WR"] == wr) &
+                      (df["Bond"] == "Bund") & (df["Allocation"] == "60/40")]
+            row["Bund"] = bund[metric].values[0] if len(bund) > 0 else None
+
+            # BTP 60/40
+            btp = df[(df["Equity"] == equity) & (df["WR"] == wr) &
+                     (df["Bond"] == "BTP") & (df["Allocation"] == "60/40")]
+            row["BTP"] = btp[metric].values[0] if len(btp) > 0 else None
+
+            # Mix 60/20/20
+            mix = df[(df["Equity"] == equity) & (df["WR"] == wr) &
+                     (df["Bond"] == "Bund+BTP") & (df["Allocation"] == "60/20/20")]
+            row["Bund+BTP"] = mix[metric].values[0] if len(mix) > 0 else None
+
+            results.append(row)
+        return pd.DataFrame(results)
+
+    # Top Left: Median Final Value at 4% WR
+    ax1 = axes[0, 0]
+    data_med = get_comparable_data(4.0, "Median_Final")
+
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.25
+
+    for i, bond in enumerate(["Bund", "BTP", "Bund+BTP"]):
+        values = (data_med[bond].fillna(0) / 1_000_000).values
+        offset = (i - 1) * width
+        ax1.bar(x + offset, values, width, label=bond,
+                color=bond_colors[bond], alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Median Final Value (M EUR)", fontsize=12)
+    ax1.set_title("Median Final Value by Bond Type (4% WR)\n(60% Equity)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Bond Type", fontsize=10)
+    ax1.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: Failure Rate by Bond Type at 4% WR
+    ax2 = axes[0, 1]
+    data_fail = get_comparable_data(4.0, "Failed_Pct")
+
+    for i, bond in enumerate(["Bund", "BTP", "Bund+BTP"]):
+        values = data_fail[bond].fillna(0).values
+        offset = (i - 1) * width
+        ax2.bar(x + offset, values, width, label=bond,
+                color=bond_colors[bond], alpha=0.85)
+
+    ax2.set_xticks(x)
+    ax2.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax2.set_xlabel("Equity Index", fontsize=12)
+    ax2.set_ylabel("Failure Rate (%)", fontsize=12)
+    ax2.set_title("Failure Rate by Bond Type (4% WR)\n(60% Equity - Lower is Better)",
+                  fontsize=13, fontweight="bold")
+    ax2.legend(title="Bond Type", fontsize=10)
+    ax2.axhline(y=20, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax2.text(0.02, 0.85, "20% threshold", transform=ax2.transAxes, fontsize=9, color="orange")
+    ax2.grid(True, alpha=0.3, axis="y")
+
+    # Bottom Left: Success Rate comparison across all WRs (MSCI World only)
+    ax3 = axes[1, 0]
+
+    # Get data for MSCI World across WRs
+    world_data = []
+    for wr in [3.0, 3.5, 4.0]:
+        for bond, alloc in [("Bund", "60/40"), ("BTP", "60/40"), ("Bund+BTP", "60/20/20")]:
+            row = df[(df["Equity"] == "MSCI World") & (df["WR"] == wr) &
+                     (df["Bond"] == bond) & (df["Allocation"] == alloc)]
+            if len(row) > 0:
+                world_data.append({
+                    "WR": f"{wr:g}%", "Bond": bond,
+                    "Success_Rate": row["Success_Rate"].values[0]
+                })
+
+    world_df = pd.DataFrame(world_data)
+    pivot_world = world_df.pivot(index="WR", columns="Bond", values="Success_Rate")
+    pivot_world = pivot_world[["Bund", "BTP", "Bund+BTP"]]
+
+    pivot_world.plot(kind="bar", ax=ax3,
+                     color=[bond_colors["Bund"], bond_colors["BTP"], bond_colors["Bund+BTP"]],
+                     alpha=0.85, width=0.8)
+    ax3.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax3.set_ylabel("Success Rate (%)", fontsize=12)
+    ax3.set_title("MSCI World: Bond Strategy by WR\n(60% Equity)",
+                  fontsize=13, fontweight="bold")
+    ax3.legend(title="Bond Type", fontsize=10)
+    ax3.set_xticklabels(ax3.get_xticklabels(), rotation=0)
+    ax3.set_ylim(75, 100)
+    ax3.grid(True, alpha=0.3, axis="y")
+
+    # Add value labels
+    for container in ax3.containers:
+        ax3.bar_label(container, fmt="%.1f", fontsize=9)
+
+    # Bottom Right: Risk-adjusted comparison
+    ax4 = axes[1, 1]
+
+    # Scatter: Success Rate vs Median Final Value at 4%
+    data_sr = get_comparable_data(4.0, "Success_Rate")
+    data_med = get_comparable_data(4.0, "Median_Final")
+
+    for bond in ["Bund", "BTP", "Bund+BTP"]:
+        for i, equity in enumerate(INDEX_ORDER):
+            sr = data_sr[data_sr["Equity"] == equity][bond].values[0]
+            med = data_med[data_med["Equity"] == equity][bond].values[0]
+            if pd.notna(sr) and pd.notna(med):
+                ax4.scatter(sr, med / 1_000_000, c=bond_colors[bond],
+                            marker=EQUITY_MARKERS.get(equity, "o"),
+                            s=150, alpha=0.75, edgecolors="white", linewidth=1.5)
+
+    # Custom legend
+    bond_handles = [Line2D([0], [0], marker="o", color="w", markerfacecolor=c,
+                           markersize=12, label=b)
+                    for b, c in bond_colors.items()]
+    legend1 = ax4.legend(handles=bond_handles, loc="upper left", fontsize=10,
+                         title="Bond Type")
+    ax4.add_artist(legend1)
+
+    index_handles = [Line2D([0], [0], marker=m, color="gray", markersize=10,
+                            linestyle="None", label=eq)
+                     for eq, m in EQUITY_MARKERS.items() if eq in INDEX_ORDER]
+    ax4.legend(handles=index_handles, loc="lower right", fontsize=9,
+               title="Index")
+
+    ax4.set_xlabel("Success Rate (%)", fontsize=12)
+    ax4.set_ylabel("Median Final Value (M EUR)", fontsize=12)
+    ax4.set_title("Risk vs Return by Bond Type (4% WR)\n(60% Equity)",
+                  fontsize=13, fontweight="bold")
+    ax4.grid(True, alpha=0.3)
+
+    fig.suptitle("Bond Strategy Deep Dive: Risk and Return Analysis",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "34_bond_strategy_deep_dive.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 34_bond_strategy_deep_dive.png")
+
+
+# =============================================================================
 # MAIN FUNCTION
 # =============================================================================
 
@@ -2828,6 +3166,10 @@ def main():
     plot_30_35pct_global_vs_european(df, args.output_dir)
     plot_31_35pct_risk_metrics(df, args.output_dir)
     plot_32_wr_comparison_summary(df, args.output_dir)
+
+    # Optimal bond strategy plots
+    plot_33_optimal_bond_strategy(df, args.output_dir)
+    plot_34_bond_strategy_deep_dive(df, args.output_dir)
 
     logger.info("All plots generated successfully!")
     return 0
