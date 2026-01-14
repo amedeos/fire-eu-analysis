@@ -27,21 +27,30 @@ The goal is to assess the sustainability of withdrawal rate strategies—especia
 
 Summary of Monte Carlo simulation results (100,000 runs, 30-year horizon, block bootstrap):
 
-| Portfolio | Withdrawal Rate | Success Rate |
-|-----------|-----------------|--------------|
-| MSCI World + Bund 60/40 | 4% | 78.3% |
-| MSCI World + Bund 60/40 | 3.5% | 89.1% |
-| MSCI World + Bund 60/40 | 3% | 95.8% |
-| MSCI World + BTP 60/40 | 4% | 80.5% |
-| MSCI ACWI + Bund 60/40 | 4% | 77.0% |
-| MSCI Europe + Bund 60/40 | 4% | 65.0% |
-| MSCI EMU + Bund 60/40 | 4% | 60.9% |
+### Success Rates by Index and Withdrawal Rate (60/40 with Bund)
+
+| Equity Index | 3% WR | 3.5% WR | 4% WR |
+|--------------|-------|---------|-------|
+| MSCI World | 95.8% | 89.1% | 78.3% |
+| MSCI ACWI | 95.3% | 88.1% | 77.0% |
+| MSCI Europe | 90.1% | 79.2% | 65.0% |
+| MSCI EMU | 86.2% | 74.7% | 60.9% |
+
+### Bond Strategy Comparison (60% Equity, 4% WR)
+
+| Bond Type | MSCI World | MSCI Europe | Advantage |
+|-----------|------------|-------------|-----------|
+| Bund | 78.3% | 65.0% | Baseline |
+| BTP | 80.5% | 67.9% | +2% |
+| Bund+BTP Mix | 79.9% | 66.8% | +1.5% |
 
 **Key findings:**
-- The traditional 4% rule shows ~78% success rate for European investors (vs ~95% in US studies)
-- Reducing withdrawal rate to 3% increases success rate to >95%
-- Global diversification (MSCI World) outperforms European-only indices by 13-17 percentage points
-- Italian BTPs slightly outperform German Bunds due to higher yields in the 2000-2025 period
+1. **The 4% rule doesn't work well in Europe** - success rates are 65-80% vs US ~95%
+2. **3-3.5% WR is more appropriate** for European investors
+3. **Global diversification matters** - World/ACWI outperform Europe/EMU by 10-15%
+4. **BTP outperforms Bund** at higher WRs due to yield advantage (+2%)
+5. **Allocation matters less than WR** - 60/40 to 80/20 have similar outcomes
+6. **Home bias is costly** - European-only portfolios have significantly lower success rates
 
 For complete results, see [ANALYSIS_REGISTRY.md](ANALYSIS_REGISTRY.md).
 
@@ -54,7 +63,7 @@ For complete results, see [ANALYSIS_REGISTRY.md](ANALYSIS_REGISTRY.md).
 | [src/README.md](src/README.md) | Complete list of Jupyter notebooks with descriptions and naming conventions |
 | [ANALYSIS_REGISTRY.md](ANALYSIS_REGISTRY.md) | Summary table of simulation results (success rates, final values, depletion years) |
 | [ANALYSIS_REGISTRY.csv](ANALYSIS_REGISTRY.csv) | Same data in CSV format for further analysis |
-| [plots/README.md](plots/README.md) | Documentation for analysis plots with key insights |
+| [plots/README.md](plots/README.md) | Documentation for 34 analysis plots with key insights |
 
 ---
 
@@ -81,11 +90,23 @@ fire-eu-analysis/
 │   ├── 05xx_*.ipynb         # MSCI EMU simulations (4% WR)
 │   ├── 06xx_*.ipynb         # MSCI World simulations (3% WR)
 │   ├── 07xx_*.ipynb         # MSCI World simulations (3.5% WR)
+│   ├── 08xx_*.ipynb         # MSCI ACWI simulations (3% WR)
+│   ├── 09xx_*.ipynb         # MSCI ACWI simulations (3.5% WR)
+│   ├── 10xx_*.ipynb         # MSCI Europe simulations (3% WR)
+│   ├── 11xx_*.ipynb         # MSCI Europe simulations (3.5% WR)
+│   ├── 12xx_*.ipynb         # MSCI EMU simulations (3% WR)
+│   ├── 13xx_*.ipynb         # MSCI EMU simulations (3.5% WR)
 │   └── tools/               # Utility scripts
 │       ├── buildtable.py    # Generate ANALYSIS_REGISTRY.md/.csv
-│       └── plots.py         # Generate analysis plots
+│       └── plots.py         # Generate 34 analysis plots
 │
-├── plots/                   # Generated analysis plots
+├── plots/                   # 34 generated analysis plots
+│   ├── 01-08_*.png          # General analysis (success rates, heatmaps)
+│   ├── 09-14_*.png          # Depletion analysis (when portfolios fail)
+│   ├── 15-20_*.png          # 4% WR specific analysis
+│   ├── 21-26_*.png          # 3% WR specific analysis
+│   ├── 27-32_*.png          # 3.5% WR specific analysis
+│   └── 33-34_*.png          # Optimal bond strategy analysis
 │
 ├── fire.sh                  # Podman container management script
 ├── ANALYSIS_REGISTRY.md     # Auto-generated results summary
