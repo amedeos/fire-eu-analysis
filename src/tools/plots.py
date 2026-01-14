@@ -683,6 +683,437 @@ def plot_09_depletion_year_analysis(df: pd.DataFrame, output_dir: Path) -> None:
 
 
 # =============================================================================
+# PLOT 10: Depletion Risk Heatmap (Worst Case)
+# =============================================================================
+
+def plot_10_depletion_risk_heatmap(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 10: Depletion Risk Heatmap showing Min Depletion Year.
+    Worst case scenario - when do portfolios fail in the most adverse conditions?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+    # Filter to Bund portfolios with depletion data
+    mask = (df["Bond"] == "Bund") & (df["Min_Depletion"].notna())
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No data for Depletion Risk Heatmap")
+        plt.close()
+        return
+
+    # Left: Min Depletion Year (60/40 allocation)
+    ax1 = axes[0]
+    mask_60 = subset["Equity_Pct"] == 60
+    pivot_min = subset[mask_60].pivot_table(
+        index="Equity", columns="WR", values="Min_Depletion", aggfunc="min"
+    )
+    pivot_min = pivot_min.reindex([i for i in INDEX_ORDER if i in pivot_min.index])
+
+    if not pivot_min.empty:
+        sns.heatmap(
+            pivot_min,
+            annot=True,
+            fmt=".0f",
+            cmap="RdYlGn",
+            center=15,
+            vmin=5,
+            vmax=25,
+            ax=ax1,
+            cbar_kws={"label": "Year"},
+            annot_kws={"size": 14, "weight": "bold"},
+            linewidths=2,
+            linecolor="white",
+        )
+        ax1.set_xlabel("Withdrawal Rate (%)", fontsize=12)
+        ax1.set_ylabel("Equity Index", fontsize=12)
+        ax1.set_title("Earliest Portfolio Depletion (Worst Case)\n60/40 with Bund",
+                      fontsize=13, fontweight="bold")
+        ax1.set_xticklabels([f"{float(x.get_text()):g}%" for x in ax1.get_xticklabels()], fontsize=11)
+
+    # Right: Mean Depletion Year (60/40 allocation)
+    ax2 = axes[1]
+    pivot_mean = subset[mask_60].pivot_table(
+        index="Equity", columns="WR", values="Mean_Depletion", aggfunc="mean"
+    )
+    pivot_mean = pivot_mean.reindex([i for i in INDEX_ORDER if i in pivot_mean.index])
+
+    if not pivot_mean.empty:
+        sns.heatmap(
+            pivot_mean,
+            annot=True,
+            fmt=".1f",
+            cmap="RdYlGn",
+            center=25,
+            vmin=20,
+            vmax=28,
+            ax=ax2,
+            cbar_kws={"label": "Year"},
+            annot_kws={"size": 14, "weight": "bold"},
+            linewidths=2,
+            linecolor="white",
+        )
+        ax2.set_xlabel("Withdrawal Rate (%)", fontsize=12)
+        ax2.set_ylabel("", fontsize=12)
+        ax2.set_title("Average Depletion Year (Failed Scenarios)\n60/40 with Bund",
+                      fontsize=13, fontweight="bold")
+        ax2.set_xticklabels([f"{float(x.get_text()):g}%" for x in ax2.get_xticklabels()], fontsize=11)
+
+    fig.suptitle("Depletion Year Risk Analysis: When Do Portfolios Fail?",
+                 fontsize=15, fontweight="bold", y=1.02)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "10_depletion_risk_heatmap.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 10_depletion_risk_heatmap.png")
+
+
+# =============================================================================
+# PLOT 11: Depletion Year vs Allocation
+# =============================================================================
+
+def plot_11_depletion_vs_allocation(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 11: How equity allocation affects depletion year.
+    Does more equity lead to earlier failures?
+    """
+    fig, axes = plt.subplots(2, 2, figsize=FIGSIZE_GRID_2x2)
+    axes = axes.flatten()
+
+    for ax, equity in zip(axes, INDEX_ORDER):
+        # Filter to this equity index and Bund, 4% WR
+        mask = (df["Equity"] == equity) & (df["Bond"] == "Bund") & (df["Min_Depletion"].notna())
+        subset = df[mask].copy()
+
+        if subset.empty:
+            ax.set_title(f"{equity}\n(No data)", fontsize=12)
+            continue
+
+        for wr in sorted(subset["WR"].unique()):
+            wr_data = subset[subset["WR"] == wr].sort_values("Equity_Pct")
+            if wr_data.empty:
+                continue
+
+            # Plot Min, Mean, Median depletion
+            ax.fill_between(wr_data["Equity_Pct"],
+                           wr_data["Min_Depletion"],
+                           wr_data["Mean_Depletion"],
+                           alpha=0.2, color=WR_COLORS.get(wr, "gray"))
+            ax.plot(wr_data["Equity_Pct"], wr_data["Mean_Depletion"],
+                    marker="o", markersize=6, linewidth=2,
+                    color=WR_COLORS.get(wr, "gray"),
+                    label=f"{wr:g}% WR (Mean)")
+            ax.plot(wr_data["Equity_Pct"], wr_data["Min_Depletion"],
+                    marker="v", markersize=5, linewidth=1.5,
+                    linestyle="--", color=WR_COLORS.get(wr, "gray"),
+                    alpha=0.7)
+
+        ax.set_xlabel("Equity Allocation (%)", fontsize=11)
+        ax.set_ylabel("Depletion Year", fontsize=11)
+        ax.set_title(f"{equity} + Bund", fontsize=13, fontweight="bold",
+                     color=EQUITY_COLORS.get(equity, "black"))
+        ax.set_xlim(55, 105)
+        ax.set_ylim(5, 30)
+        ax.legend(loc="lower left", fontsize=9)
+        ax.grid(True, alpha=0.3)
+
+        # Reference line at 30 years
+        ax.axhline(y=30, color="green", linestyle=":", alpha=0.5, linewidth=1.5)
+
+    fig.suptitle("Depletion Year vs Equity Allocation\n"
+                 "(Solid=Mean, Dashed=Min, Shaded=Range)",
+                 fontsize=15, fontweight="bold", y=1.02)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "11_depletion_vs_allocation.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 11_depletion_vs_allocation.png")
+
+
+# =============================================================================
+# PLOT 12: Depletion Spread Analysis
+# =============================================================================
+
+def plot_12_depletion_spread_analysis(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 12: Spread between Mean and Min depletion year.
+    Shows how wide the risk tail is - larger spread = more uncertainty.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 60/40 Bund with depletion data
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund") & (df["Min_Depletion"].notna())
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No data for Depletion Spread Analysis")
+        plt.close()
+        return
+
+    # Calculate spread
+    subset["Depletion_Spread"] = subset["Mean_Depletion"] - subset["Min_Depletion"]
+
+    # Left: Spread by Index and WR
+    ax1 = axes[0]
+    pivot_spread = subset.pivot_table(
+        index="Equity", columns="WR", values="Depletion_Spread", aggfunc="mean"
+    )
+    pivot_spread = pivot_spread.reindex([i for i in INDEX_ORDER if i in pivot_spread.index])
+
+    if not pivot_spread.empty:
+        pivot_spread.plot(kind="bar", ax=ax1, width=0.8,
+                          color=[WR_COLORS.get(c, "gray") for c in pivot_spread.columns])
+        ax1.set_xlabel("Equity Index", fontsize=12)
+        ax1.set_ylabel("Spread (Mean - Min Depletion Years)", fontsize=12)
+        ax1.set_title("Depletion Year Spread by Index\n(Larger = More Uncertainty)",
+                      fontsize=13, fontweight="bold")
+        ax1.set_xticklabels(ax1.get_xticklabels(), rotation=15, ha="right")
+        ax1.legend(title="WR", labels=[f"{wr:g}%" for wr in pivot_spread.columns])
+        ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Visualization of Min vs Mean vs Median for 4% WR
+    ax2 = axes[1]
+    subset_4pct = subset[subset["WR"] == 4.0].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not subset_4pct.empty:
+        x = np.arange(len(subset_4pct))
+        width = 0.25
+
+        ax2.bar(x - width, subset_4pct["Min_Depletion"], width,
+                label="Min (Worst Case)", color="#e74c3c", alpha=0.85)
+        ax2.bar(x, subset_4pct["Median_Depletion"], width,
+                label="Median", color="#f39c12", alpha=0.85)
+        ax2.bar(x + width, subset_4pct["Mean_Depletion"], width,
+                label="Mean", color="#27ae60", alpha=0.85)
+
+        ax2.set_xticks(x)
+        ax2.set_xticklabels(subset_4pct.index, rotation=15, ha="right", fontsize=10)
+        ax2.set_xlabel("Equity Index", fontsize=12)
+        ax2.set_ylabel("Depletion Year", fontsize=12)
+        ax2.set_title("Depletion Year Statistics (4% WR)\n60/40 with Bund",
+                      fontsize=13, fontweight="bold")
+        ax2.legend(fontsize=10)
+        ax2.set_ylim(0, 30)
+        ax2.axhline(y=30, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+        ax2.grid(True, alpha=0.3, axis="y")
+
+        # Add value labels
+        for i, (min_v, med_v, mean_v) in enumerate(zip(
+                subset_4pct["Min_Depletion"],
+                subset_4pct["Median_Depletion"],
+                subset_4pct["Mean_Depletion"])):
+            ax2.text(i - width, min_v + 0.5, f"{min_v:.0f}", ha="center", fontsize=9)
+            ax2.text(i, med_v + 0.5, f"{med_v:.0f}", ha="center", fontsize=9)
+            ax2.text(i + width, mean_v + 0.5, f"{mean_v:.1f}", ha="center", fontsize=9)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "12_depletion_spread_analysis.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 12_depletion_spread_analysis.png")
+
+
+# =============================================================================
+# PLOT 13: Failure Rate vs Depletion Year
+# =============================================================================
+
+def plot_13_failure_rate_vs_depletion(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 13: Relationship between failure rate and when failures occur.
+    Trade-off: do portfolios that fail more often also fail earlier?
+    """
+    fig, ax = plt.subplots(figsize=FIGSIZE_SQUARE)
+
+    # Filter to Bund portfolios with depletion data
+    mask = (df["Bond"] == "Bund") & (df["Mean_Depletion"].notna())
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No data for Failure Rate vs Depletion plot")
+        plt.close()
+        return
+
+    # Calculate failure rate (100 - Success_Rate)
+    subset["Failure_Rate"] = 100 - subset["Success_Rate"]
+
+    # Plot each combination
+    for wr in sorted(subset["WR"].unique()):
+        for equity in INDEX_ORDER:
+            data = subset[(subset["WR"] == wr) & (subset["Equity"] == equity)]
+            if data.empty:
+                continue
+            ax.scatter(
+                data["Failure_Rate"],
+                data["Mean_Depletion"],
+                c=WR_COLORS.get(wr, "gray"),
+                marker=EQUITY_MARKERS.get(equity, "o"),
+                s=100,
+                alpha=0.75,
+                edgecolors="white",
+                linewidth=1,
+            )
+
+    # Create custom legend
+    wr_handles = [Line2D([0], [0], marker="o", color="w", markerfacecolor=c,
+                         markersize=12, label=f"{wr:g}% WR")
+                  for wr, c in sorted(WR_COLORS.items())]
+    index_handles = [Line2D([0], [0], marker=m, color="gray", markersize=12,
+                            linestyle="None", label=eq)
+                     for eq, m in EQUITY_MARKERS.items() if eq in INDEX_ORDER]
+
+    legend1 = ax.legend(handles=wr_handles, loc="upper right", fontsize=10,
+                        title="Withdrawal Rate", title_fontsize=11)
+    ax.add_artist(legend1)
+    ax.legend(handles=index_handles, loc="lower left", fontsize=10,
+              title="Equity Index", title_fontsize=11)
+
+    ax.set_xlabel("Failure Rate (%)", fontsize=13)
+    ax.set_ylabel("Mean Depletion Year", fontsize=13)
+    ax.set_title("Failure Rate vs Mean Depletion Year\n"
+                 "Do Higher Failure Rates Mean Earlier Failures?",
+                 fontsize=14, fontweight="bold")
+    ax.grid(True, alpha=0.3)
+
+    # Add trend indication
+    ax.axhline(y=25, color="orange", linestyle=":", alpha=0.5, linewidth=1.5)
+    ax.axvline(x=20, color="orange", linestyle=":", alpha=0.5, linewidth=1.5)
+
+    # Annotate quadrants
+    ax.text(5, 27, "Low Risk\nLate Failure", fontsize=10, color="green",
+            ha="center", style="italic", alpha=0.8)
+    ax.text(35, 22, "High Risk\nEarly Failure", fontsize=10, color="red",
+            ha="center", style="italic", alpha=0.8)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "13_failure_rate_vs_depletion.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 13_failure_rate_vs_depletion.png")
+
+
+# =============================================================================
+# PLOT 14: Depletion Global vs European Comparison
+# =============================================================================
+
+def plot_14_depletion_global_vs_european(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 14: Depletion year comparison between Global and European indices.
+    Do European indices fail earlier than global ones?
+    """
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+    # Filter to 60/40 Bund with depletion data
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund") & (df["Min_Depletion"].notna())
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No data for Depletion Global vs European plot")
+        plt.close()
+        return
+
+    withdrawal_rates = sorted(subset["WR"].unique())
+
+    # Calculate averages for global and european
+    results = []
+    for wr in withdrawal_rates:
+        wr_data = subset[subset["WR"] == wr]
+        global_min = wr_data[wr_data["Equity"].isin(GLOBAL_INDICES)]["Min_Depletion"].mean()
+        global_mean = wr_data[wr_data["Equity"].isin(GLOBAL_INDICES)]["Mean_Depletion"].mean()
+        european_min = wr_data[wr_data["Equity"].isin(EUROPEAN_INDICES)]["Min_Depletion"].mean()
+        european_mean = wr_data[wr_data["Equity"].isin(EUROPEAN_INDICES)]["Mean_Depletion"].mean()
+        results.append({
+            "WR": wr,
+            "Global_Min": global_min, "Global_Mean": global_mean,
+            "European_Min": european_min, "European_Mean": european_mean
+        })
+
+    results_df = pd.DataFrame(results)
+
+    # Left: Min Depletion Comparison
+    ax1 = axes[0]
+    x = np.arange(len(withdrawal_rates))
+    width = 0.35
+
+    bars1 = ax1.bar(x - width/2, results_df["Global_Min"], width,
+                    label="Global (World+ACWI)", color="#2ecc71", alpha=0.85)
+    bars2 = ax1.bar(x + width/2, results_df["European_Min"], width,
+                    label="European (Europe+EMU)", color="#e74c3c", alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
+    ax1.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax1.set_ylabel("Min Depletion Year", fontsize=12)
+    ax1.set_title("Earliest Failure (Worst Case)\n60/40 with Bund",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(fontsize=10)
+    ax1.set_ylim(0, 20)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Add value labels
+    for bar in bars1:
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
+                 f"{bar.get_height():.0f}", ha="center", fontsize=10)
+    for bar in bars2:
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
+                 f"{bar.get_height():.0f}", ha="center", fontsize=10)
+
+    # Middle: Mean Depletion Comparison
+    ax2 = axes[1]
+    bars3 = ax2.bar(x - width/2, results_df["Global_Mean"], width,
+                    label="Global", color="#2ecc71", alpha=0.85)
+    bars4 = ax2.bar(x + width/2, results_df["European_Mean"], width,
+                    label="European", color="#e74c3c", alpha=0.85)
+
+    ax2.set_xticks(x)
+    ax2.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
+    ax2.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax2.set_ylabel("Mean Depletion Year", fontsize=12)
+    ax2.set_title("Average Failure Year\n60/40 with Bund",
+                  fontsize=13, fontweight="bold")
+    ax2.legend(fontsize=10)
+    ax2.set_ylim(20, 28)
+    ax2.grid(True, alpha=0.3, axis="y")
+    ax2.axhline(y=30, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+
+    # Add value labels
+    for bar in bars3:
+        ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
+                 f"{bar.get_height():.1f}", ha="center", fontsize=10)
+    for bar in bars4:
+        ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.1,
+                 f"{bar.get_height():.1f}", ha="center", fontsize=10)
+
+    # Right: Gap Analysis (Years earlier for European)
+    ax3 = axes[2]
+    gap_min = results_df["Global_Min"] - results_df["European_Min"]
+    gap_mean = results_df["Global_Mean"] - results_df["European_Mean"]
+
+    ax3.bar(x - width/2, gap_min, width, label="Min Gap", color="#3498db", alpha=0.85)
+    ax3.bar(x + width/2, gap_mean, width, label="Mean Gap", color="#9b59b6", alpha=0.85)
+
+    ax3.set_xticks(x)
+    ax3.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
+    ax3.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax3.set_ylabel("Gap (Years)", fontsize=12)
+    ax3.set_title("How Much Earlier European Fails\n(Positive = Global lasts longer)",
+                  fontsize=13, fontweight="bold")
+    ax3.legend(fontsize=10)
+    ax3.axhline(y=0, color="black", linewidth=1)
+    ax3.grid(True, alpha=0.3, axis="y")
+
+    # Add value labels
+    for i, (g_min, g_mean) in enumerate(zip(gap_min, gap_mean)):
+        ax3.text(i - width/2, g_min + 0.1, f"+{g_min:.1f}", ha="center", fontsize=10)
+        ax3.text(i + width/2, g_mean + 0.1, f"+{g_mean:.1f}", ha="center", fontsize=10)
+
+    fig.suptitle("Depletion Year: Global vs European Indices",
+                 fontsize=16, fontweight="bold", y=1.02)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "14_depletion_global_vs_european.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 14_depletion_global_vs_european.png")
+
+
+# =============================================================================
 # MAIN FUNCTION
 # =============================================================================
 
@@ -735,6 +1166,13 @@ def main():
     plot_07_risk_return_scatter(df, args.output_dir)
     plot_08_final_value_distribution(df, args.output_dir)
     plot_09_depletion_year_analysis(df, args.output_dir)
+
+    # Depletion-focused plots
+    plot_10_depletion_risk_heatmap(df, args.output_dir)
+    plot_11_depletion_vs_allocation(df, args.output_dir)
+    plot_12_depletion_spread_analysis(df, args.output_dir)
+    plot_13_failure_rate_vs_depletion(df, args.output_dir)
+    plot_14_depletion_global_vs_european(df, args.output_dir)
 
     logger.info("All plots generated successfully!")
     return 0
