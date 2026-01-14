@@ -1772,6 +1772,979 @@ def plot_20_4pct_global_vs_european_gap(df: pd.DataFrame, output_dir: Path) -> N
 
 
 # =============================================================================
+# PLOT 21: 3% Safety Analysis
+# =============================================================================
+
+def plot_21_3pct_safety_analysis(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 21: 3% WR Safety Analysis - How safe is the conservative approach?
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 3% WR only
+    subset = df[df["WR"] == 3.0].copy()
+
+    if subset.empty:
+        logger.warning("No 3% WR data available")
+        plt.close()
+        return
+
+    # Top Left: Success Rate by Index and Allocation (Bund only)
+    ax1 = axes[0, 0]
+    bund_data = subset[subset["Bond"] == "Bund"]
+
+    allocations = sorted(bund_data["Equity_Pct"].unique())
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.15
+
+    for i, alloc in enumerate(allocations):
+        alloc_data = bund_data[bund_data["Equity_Pct"] == alloc].set_index("Equity")
+        values = [alloc_data.loc[idx, "Success_Rate"] if idx in alloc_data.index else 0
+                  for idx in INDEX_ORDER]
+        offset = (i - len(allocations)/2 + 0.5) * width
+        ax1.bar(x + offset, values, width, label=f"{alloc}/{100-alloc}", alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("3% Rule: Success Rate by Index & Allocation\n(with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Equity/Bond", fontsize=9, ncol=2)
+    ax1.set_ylim(85, 100)
+    ax1.axhline(y=95, color="green", linestyle="--", alpha=0.7, linewidth=2)
+    ax1.text(0.02, 0.92, "95% target", transform=ax1.transAxes,
+             fontsize=10, color="green", style="italic")
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: All indices above 95%?
+    ax2 = axes[0, 1]
+    ref_data = bund_data[bund_data["Equity_Pct"] == 60].set_index("Equity")
+    ref_data = ref_data.reindex(INDEX_ORDER).dropna()
+
+    if not ref_data.empty:
+        colors = ["#27ae60" if sr >= 95 else "#f39c12" if sr >= 90 else "#e74c3c"
+                  for sr in ref_data["Success_Rate"]]
+        bars = ax2.barh(ref_data.index, ref_data["Success_Rate"], color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Success Rate (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3% Rule: Safety Check\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.axvline(x=95, color="green", linewidth=2, linestyle="--")
+        ax2.set_xlim(85, 100)
+
+        # Add value labels
+        for bar, val in zip(bars, ref_data["Success_Rate"]):
+            status = "✓" if val >= 95 else "⚠"
+            ax2.text(val + 0.3, bar.get_y() + bar.get_height()/2,
+                     f"{val:.1f}% {status}", va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    # Bottom Left: Comparison 3% vs 4% success rate
+    ax3 = axes[1, 0]
+    df_4pct = df[(df["WR"] == 4.0) & (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")]
+    df_4pct = df_4pct.set_index("Equity").reindex(INDEX_ORDER)
+
+    if not ref_data.empty:
+        x = np.arange(len(INDEX_ORDER))
+        width = 0.35
+
+        sr_3pct = [ref_data.loc[idx, "Success_Rate"] if idx in ref_data.index else 0
+                   for idx in INDEX_ORDER]
+        sr_4pct = [df_4pct.loc[idx, "Success_Rate"] if idx in df_4pct.index else 0
+                   for idx in INDEX_ORDER]
+
+        ax3.bar(x - width/2, sr_3pct, width, label="3% WR", color="#27ae60", alpha=0.85)
+        ax3.bar(x + width/2, sr_4pct, width, label="4% WR", color="#e74c3c", alpha=0.85)
+
+        ax3.set_xticks(x)
+        ax3.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+        ax3.set_xlabel("Equity Index", fontsize=12)
+        ax3.set_ylabel("Success Rate (%)", fontsize=12)
+        ax3.set_title("3% vs 4%: Safety Improvement\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax3.legend(fontsize=10)
+        ax3.set_ylim(60, 100)
+        ax3.grid(True, alpha=0.3, axis="y")
+
+        # Add improvement labels
+        for i, (s3, s4) in enumerate(zip(sr_3pct, sr_4pct)):
+            if s3 > 0 and s4 > 0:
+                ax3.text(i, max(s3, s4) + 1, f"+{s3-s4:.0f}%",
+                         ha="center", fontsize=9, color="green", fontweight="bold")
+
+    # Bottom Right: Summary
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    summary_text = "3% WITHDRAWAL RATE: SAFETY ANALYSIS\n"
+    summary_text += "=" * 45 + "\n\n"
+
+    if not ref_data.empty:
+        above_95 = (ref_data["Success_Rate"] >= 95).sum()
+        above_90 = (ref_data["Success_Rate"] >= 90).sum()
+        avg_rate = ref_data["Success_Rate"].mean()
+
+        summary_text += f"60/40 with Bund Results:\n"
+        summary_text += "-" * 45 + "\n"
+        summary_text += f"Indices with ≥95% success: {above_95}/{len(ref_data)}\n"
+        summary_text += f"Indices with ≥90% success: {above_90}/{len(ref_data)}\n"
+        summary_text += f"Average success rate:      {avg_rate:.1f}%\n\n"
+
+        summary_text += "Individual Results:\n"
+        for equity in INDEX_ORDER:
+            if equity in ref_data.index:
+                rate = ref_data.loc[equity, "Success_Rate"]
+                status = "✓ SAFE" if rate >= 95 else "⚠ MARGINAL" if rate >= 90 else "✗ RISKY"
+                summary_text += f"  {equity:15} {rate:5.1f}%  {status}\n"
+
+    summary_text += "\n" + "-" * 45 + "\n"
+    summary_text += "CONCLUSION:\n"
+    summary_text += "3% WR provides significantly higher safety\n"
+    summary_text += "margins for European investors compared to 4%."
+
+    ax4.text(0.1, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=11, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="lightgreen", alpha=0.3))
+
+    fig.suptitle("The 3% Rule: A Safer Approach for Europe",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "21_3pct_safety_analysis.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 21_3pct_safety_analysis.png")
+
+
+# =============================================================================
+# PLOT 22: 3% Allocation Sensitivity
+# =============================================================================
+
+def plot_22_3pct_allocation_sensitivity(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 22: How does success rate at 3% WR change with equity allocation?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 3% WR and Bund
+    subset = df[(df["WR"] == 3.0) & (df["Bond"] == "Bund")].copy()
+
+    if subset.empty:
+        logger.warning("No 3% WR Bund data available")
+        plt.close()
+        return
+
+    # Left: Line plot - Success rate vs Equity allocation
+    ax1 = axes[0]
+
+    for equity in INDEX_ORDER:
+        eq_data = subset[subset["Equity"] == equity].sort_values("Equity_Pct")
+        if not eq_data.empty:
+            ax1.plot(eq_data["Equity_Pct"], eq_data["Success_Rate"],
+                     marker="o", linewidth=2.5, markersize=8,
+                     color=EQUITY_COLORS.get(equity, "gray"),
+                     label=equity, alpha=0.9)
+
+    ax1.set_xlabel("Equity Allocation (%)", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("3% Rule: Sensitivity to Equity Allocation\n(with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(fontsize=10, loc="lower right")
+    ax1.set_xlim(55, 105)
+    ax1.set_ylim(88, 100)
+    ax1.axhline(y=95, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.text(57, 95.5, "95% target", fontsize=9, color="green")
+    ax1.grid(True, alpha=0.3)
+
+    # Right: Heatmap of success rates
+    ax2 = axes[1]
+    pivot = subset.pivot_table(
+        index="Equity", columns="Equity_Pct", values="Success_Rate"
+    )
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+
+    if not pivot.empty:
+        sns.heatmap(
+            pivot,
+            annot=True,
+            fmt=".1f",
+            cmap="RdYlGn",
+            center=95,
+            vmin=88,
+            vmax=100,
+            ax=ax2,
+            cbar_kws={"label": "Success Rate (%)"},
+            annot_kws={"size": 11, "weight": "bold"},
+            linewidths=2,
+            linecolor="white",
+        )
+        ax2.set_xlabel("Equity Allocation (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3% Rule: Success Rate Matrix\n(with Bund)",
+                      fontsize=13, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "22_3pct_allocation_sensitivity.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 22_3pct_allocation_sensitivity.png")
+
+
+# =============================================================================
+# PLOT 23: 3% Final Value Trade-off
+# =============================================================================
+
+def plot_23_3pct_final_value_tradeoff(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 23: What do you give up in final value with 3% vs 4%?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter data
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No 60/40 Bund data available")
+        plt.close()
+        return
+
+    # Left: Median Final Value 3% vs 4%
+    ax1 = axes[0]
+    data_3pct = subset[subset["WR"] == 3.0].set_index("Equity").reindex(INDEX_ORDER)
+    data_4pct = subset[subset["WR"] == 4.0].set_index("Equity").reindex(INDEX_ORDER)
+
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.35
+
+    med_3 = [data_3pct.loc[idx, "Median_Final"]/1_000_000 if idx in data_3pct.index else 0
+             for idx in INDEX_ORDER]
+    med_4 = [data_4pct.loc[idx, "Median_Final"]/1_000_000 if idx in data_4pct.index else 0
+             for idx in INDEX_ORDER]
+
+    ax1.bar(x - width/2, med_3, width, label="3% WR", color="#27ae60", alpha=0.85)
+    ax1.bar(x + width/2, med_4, width, label="4% WR", color="#e74c3c", alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Median Final Value (€ millions)", fontsize=12)
+    ax1.set_title("3% vs 4%: Median Final Portfolio Value\n(60/40 with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(fontsize=10)
+    ax1.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Extra wealth from lower withdrawal
+    ax2 = axes[1]
+    extra_wealth = [(m3 - m4) for m3, m4 in zip(med_3, med_4)]
+    colors = [EQUITY_COLORS.get(eq, "gray") for eq in INDEX_ORDER]
+
+    bars = ax2.barh(INDEX_ORDER, extra_wealth, color=colors, alpha=0.85)
+
+    ax2.set_xlabel("Extra Final Value with 3% vs 4% (€ millions)", fontsize=12)
+    ax2.set_ylabel("Equity Index", fontsize=12)
+    ax2.set_title("The Price of Safety: Extra Wealth at 3%\n(60/40 with Bund)",
+                  fontsize=13, fontweight="bold")
+
+    # Add value labels
+    for bar, val in zip(bars, extra_wealth):
+        ax2.text(val + 0.02, bar.get_y() + bar.get_height()/2,
+                 f"+€{val:.2f}M", va="center", fontsize=11, fontweight="bold")
+    ax2.grid(True, alpha=0.3, axis="x")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "23_3pct_final_value_tradeoff.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 23_3pct_final_value_tradeoff.png")
+
+
+# =============================================================================
+# PLOT 24: 3% Bond Impact
+# =============================================================================
+
+def plot_24_3pct_bond_impact(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 24: How do different bonds affect 3% success rate?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 3% WR and 60/40
+    subset = df[(df["WR"] == 3.0) & (df["Equity_Pct"] == 60)].copy()
+
+    if subset.empty:
+        logger.warning("No 3% WR 60/40 data available")
+        plt.close()
+        return
+
+    bond_types = subset["Bond"].unique()
+    bond_colors = {"Bund": "#3498db", "BTP": "#e74c3c", "Bund/BTP": "#9b59b6", "OAT": "#f39c12"}
+
+    # Left: Success Rate by Index and Bond Type
+    ax1 = axes[0]
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.2
+
+    for i, bond in enumerate(sorted(bond_types)):
+        bond_data = subset[subset["Bond"] == bond].set_index("Equity")
+        values = [bond_data.loc[idx, "Success_Rate"] if idx in bond_data.index else 0
+                  for idx in INDEX_ORDER]
+        offset = (i - len(bond_types)/2 + 0.5) * width
+        ax1.bar(x + offset, values, width, label=bond,
+                color=bond_colors.get(bond, "gray"), alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("3% Rule: Bond Type Impact\n(60/40 Allocation)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Bond Type", fontsize=10)
+    ax1.set_ylim(85, 100)
+    ax1.axhline(y=95, color="green", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Heatmap of success rates
+    ax2 = axes[1]
+    pivot = subset.pivot_table(index="Equity", columns="Bond", values="Success_Rate")
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+
+    if not pivot.empty:
+        sns.heatmap(
+            pivot, annot=True, fmt=".1f", cmap="RdYlGn", center=95,
+            vmin=88, vmax=100, ax=ax2, cbar_kws={"label": "Success Rate (%)"},
+            annot_kws={"size": 12, "weight": "bold"}, linewidths=2, linecolor="white",
+        )
+        ax2.set_xlabel("Bond Type", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3% Rule: Bond Impact Matrix\n(60/40 Allocation)",
+                      fontsize=13, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "24_3pct_bond_impact.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 24_3pct_bond_impact.png")
+
+
+# =============================================================================
+# PLOT 25: 3% Global vs European
+# =============================================================================
+
+def plot_25_3pct_global_vs_european(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 25: At 3%, is the Global vs European gap smaller?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 60/40 Bund
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No 60/40 Bund data available")
+        plt.close()
+        return
+
+    # Left: Gap comparison at different WRs
+    ax1 = axes[0]
+    gaps = []
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = subset[subset["WR"] == wr]
+        global_sr = wr_data[wr_data["Equity"].isin(GLOBAL_INDICES)]["Success_Rate"].mean()
+        european_sr = wr_data[wr_data["Equity"].isin(EUROPEAN_INDICES)]["Success_Rate"].mean()
+        gaps.append({"WR": f"{wr:g}%", "Gap": global_sr - european_sr if global_sr and european_sr else 0})
+
+    if gaps:
+        gap_df = pd.DataFrame(gaps)
+        colors = [WR_COLORS.get(float(g["WR"].replace("%", "")), "gray") for g in gaps]
+        bars = ax1.bar(gap_df["WR"], gap_df["Gap"], color=colors, alpha=0.85)
+
+        ax1.set_xlabel("Withdrawal Rate", fontsize=12)
+        ax1.set_ylabel("Global - European Gap (%)", fontsize=12)
+        ax1.set_title("Home Bias Cost at Different WRs\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+
+        for bar, val in zip(bars, gap_df["Gap"]):
+            ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.2,
+                     f"{val:.1f}%", ha="center", fontsize=12, fontweight="bold")
+        ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Success rates at 3%
+    ax2 = axes[1]
+    data_3pct = subset[subset["WR"] == 3.0].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not data_3pct.empty:
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_3pct.index]
+        bars = ax2.barh(data_3pct.index, data_3pct["Success_Rate"], color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Success Rate (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3% Rule: All Indices Performance\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.axvline(x=95, color="green", linewidth=2, linestyle="--")
+        ax2.set_xlim(88, 100)
+
+        # Add separator
+        ax2.axhline(y=1.5, color="black", linestyle="-", linewidth=2, alpha=0.5)
+        ax2.text(89, 2.7, "GLOBAL", fontsize=10, fontweight="bold", alpha=0.7)
+        ax2.text(89, 0.3, "EUROPEAN", fontsize=10, fontweight="bold", alpha=0.7)
+
+        for bar, val in zip(bars, data_3pct["Success_Rate"]):
+            ax2.text(val + 0.2, bar.get_y() + bar.get_height()/2,
+                     f"{val:.1f}%", va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "25_3pct_global_vs_european.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 25_3pct_global_vs_european.png")
+
+
+# =============================================================================
+# PLOT 26: 3% Risk Metrics
+# =============================================================================
+
+def plot_26_3pct_risk_metrics(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 26: Risk metrics at 3% - P5, Median, P95 final values.
+    """
+    fig, ax = plt.subplots(figsize=FIGSIZE_SQUARE)
+
+    # Filter to 3% WR, 60/40 Bund
+    mask = (df["WR"] == 3.0) & (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if subset.empty:
+        logger.warning("No 3% WR 60/40 Bund data available")
+        plt.close()
+        return
+
+    x = np.arange(len(subset))
+    width = 0.25
+
+    p5 = subset["P5_Final"] / 1_000_000
+    median = subset["Median_Final"] / 1_000_000
+    p95 = subset["P95_Final"] / 1_000_000
+
+    ax.bar(x - width, p5, width, label="P5 (Worst 5%)", color="#e74c3c", alpha=0.85)
+    ax.bar(x, median, width, label="Median", color="#f39c12", alpha=0.85)
+    ax.bar(x + width, p95, width, label="P95 (Best 5%)", color="#27ae60", alpha=0.85)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(subset.index, rotation=15, ha="right", fontsize=11)
+    ax.set_xlabel("Equity Index", fontsize=12)
+    ax.set_ylabel("Final Portfolio Value (€ millions)", fontsize=12)
+    ax.set_title("3% Rule: Range of Outcomes\n(60/40 with Bund)",
+                 fontsize=14, fontweight="bold")
+    ax.legend(fontsize=11)
+    ax.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5, linewidth=1.5)
+    ax.text(0.02, 1.1, "Initial €1M", fontsize=10, color="gray")
+    ax.grid(True, alpha=0.3, axis="y")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "26_3pct_risk_metrics.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 26_3pct_risk_metrics.png")
+
+
+# =============================================================================
+# PLOT 27: 3.5% Sweet Spot Analysis
+# =============================================================================
+
+def plot_27_35pct_sweet_spot(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 27: Is 3.5% the sweet spot for European investors?
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 60/40 Bund
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No 60/40 Bund data available")
+        plt.close()
+        return
+
+    # Top Left: Success rate comparison across WRs
+    ax1 = axes[0, 0]
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = subset[subset["WR"] == wr].set_index("Equity").reindex(INDEX_ORDER)
+        values = [wr_data.loc[idx, "Success_Rate"] if idx in wr_data.index else 0
+                  for idx in INDEX_ORDER]
+        x = np.arange(len(INDEX_ORDER))
+        width = 0.25
+        offset = (wr - 3.5) * width * 2
+        ax1.bar(x + offset, values, width, label=f"{wr:g}% WR",
+                color=WR_COLORS.get(wr, "gray"), alpha=0.85)
+
+    ax1.set_xticks(np.arange(len(INDEX_ORDER)))
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("Success Rate: 3% vs 3.5% vs 4%\n(60/40 with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(fontsize=10)
+    ax1.set_ylim(60, 100)
+    ax1.axhline(y=90, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: 3.5% specific - all indices
+    ax2 = axes[0, 1]
+    data_35 = subset[subset["WR"] == 3.5].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not data_35.empty:
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_35.index]
+        bars = ax2.barh(data_35.index, data_35["Success_Rate"], color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Success Rate (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3.5% Rule: Success Rate\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.axvline(x=90, color="orange", linewidth=2, linestyle="--")
+        ax2.axvline(x=85, color="red", linewidth=1.5, linestyle="--", alpha=0.5)
+        ax2.set_xlim(75, 100)
+
+        for bar, val in zip(bars, data_35["Success_Rate"]):
+            status = "✓" if val >= 90 else "⚠" if val >= 85 else "✗"
+            ax2.text(val + 0.3, bar.get_y() + bar.get_height()/2,
+                     f"{val:.1f}% {status}", va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    # Bottom Left: Trade-off - Success rate vs Final value
+    ax3 = axes[1, 0]
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = subset[subset["WR"] == wr]
+        ax3.scatter(wr_data["Success_Rate"], wr_data["Median_Final"]/1_000_000,
+                    c=WR_COLORS.get(wr, "gray"), s=150, alpha=0.75,
+                    label=f"{wr:g}% WR", edgecolors="white", linewidth=2)
+
+    ax3.set_xlabel("Success Rate (%)", fontsize=12)
+    ax3.set_ylabel("Median Final Value (€ millions)", fontsize=12)
+    ax3.set_title("Trade-off: Safety vs Wealth\n(60/40 with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax3.legend(fontsize=10)
+    ax3.axvline(x=90, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax3.grid(True, alpha=0.3)
+
+    # Bottom Right: Summary
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    summary_text = "3.5% WR: THE EUROPEAN SWEET SPOT?\n"
+    summary_text += "=" * 50 + "\n\n"
+
+    for wr in [3.0, 3.5, 4.0]:
+        wr_data = subset[subset["WR"] == wr]
+        avg_sr = wr_data["Success_Rate"].mean()
+        avg_med = wr_data["Median_Final"].mean() / 1_000_000
+        summary_text += f"{wr:g}% WR:\n"
+        summary_text += f"  Avg Success Rate:  {avg_sr:.1f}%\n"
+        summary_text += f"  Avg Median Value:  €{avg_med:.2f}M\n\n"
+
+    summary_text += "-" * 50 + "\n"
+    summary_text += "ANALYSIS:\n"
+    summary_text += "3.5% offers a middle ground:\n"
+    summary_text += "- Higher income than 3% (+17% more spending)\n"
+    summary_text += "- Better safety than 4% (lower failure risk)\n"
+    summary_text += "- May be optimal for European investors\n"
+    summary_text += "  seeking balance between income and safety"
+
+    ax4.text(0.05, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=11, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="lightyellow", alpha=0.5))
+
+    fig.suptitle("3.5% Withdrawal Rate: The European Sweet Spot?",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "27_35pct_sweet_spot.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 27_35pct_sweet_spot.png")
+
+
+# =============================================================================
+# PLOT 28: 3.5% Allocation Sensitivity
+# =============================================================================
+
+def plot_28_35pct_allocation_sensitivity(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 28: How does success rate at 3.5% WR change with equity allocation?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 3.5% WR and Bund
+    subset = df[(df["WR"] == 3.5) & (df["Bond"] == "Bund")].copy()
+
+    if subset.empty:
+        logger.warning("No 3.5% WR Bund data available")
+        plt.close()
+        return
+
+    # Left: Line plot
+    ax1 = axes[0]
+    for equity in INDEX_ORDER:
+        eq_data = subset[subset["Equity"] == equity].sort_values("Equity_Pct")
+        if not eq_data.empty:
+            ax1.plot(eq_data["Equity_Pct"], eq_data["Success_Rate"],
+                     marker="o", linewidth=2.5, markersize=8,
+                     color=EQUITY_COLORS.get(equity, "gray"),
+                     label=equity, alpha=0.9)
+
+    ax1.set_xlabel("Equity Allocation (%)", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("3.5% Rule: Sensitivity to Equity Allocation\n(with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(fontsize=10, loc="lower right")
+    ax1.set_xlim(55, 105)
+    ax1.set_ylim(75, 100)
+    ax1.axhline(y=90, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.axhline(y=85, color="red", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.text(57, 90.5, "90% target", fontsize=9, color="orange")
+    ax1.grid(True, alpha=0.3)
+
+    # Right: Heatmap
+    ax2 = axes[1]
+    pivot = subset.pivot_table(index="Equity", columns="Equity_Pct", values="Success_Rate")
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+
+    if not pivot.empty:
+        sns.heatmap(
+            pivot, annot=True, fmt=".1f", cmap="RdYlGn", center=87,
+            vmin=75, vmax=98, ax=ax2, cbar_kws={"label": "Success Rate (%)"},
+            annot_kws={"size": 11, "weight": "bold"}, linewidths=2, linecolor="white",
+        )
+        ax2.set_xlabel("Equity Allocation (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3.5% Rule: Success Rate Matrix\n(with Bund)",
+                      fontsize=13, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "28_35pct_allocation_sensitivity.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 28_35pct_allocation_sensitivity.png")
+
+
+# =============================================================================
+# PLOT 29: 3.5% Bond Impact
+# =============================================================================
+
+def plot_29_35pct_bond_impact(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 29: How do different bonds affect 3.5% success rate?
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 3.5% WR and 60/40
+    subset = df[(df["WR"] == 3.5) & (df["Equity_Pct"] == 60)].copy()
+
+    if subset.empty:
+        logger.warning("No 3.5% WR 60/40 data available")
+        plt.close()
+        return
+
+    bond_types = subset["Bond"].unique()
+    bond_colors = {"Bund": "#3498db", "BTP": "#e74c3c", "Bund/BTP": "#9b59b6", "OAT": "#f39c12"}
+
+    # Left: Bar chart
+    ax1 = axes[0]
+    x = np.arange(len(INDEX_ORDER))
+    width = 0.2
+
+    for i, bond in enumerate(sorted(bond_types)):
+        bond_data = subset[subset["Bond"] == bond].set_index("Equity")
+        values = [bond_data.loc[idx, "Success_Rate"] if idx in bond_data.index else 0
+                  for idx in INDEX_ORDER]
+        offset = (i - len(bond_types)/2 + 0.5) * width
+        ax1.bar(x + offset, values, width, label=bond,
+                color=bond_colors.get(bond, "gray"), alpha=0.85)
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(INDEX_ORDER, rotation=15, ha="right", fontsize=11)
+    ax1.set_xlabel("Equity Index", fontsize=12)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("3.5% Rule: Bond Type Impact\n(60/40 Allocation)",
+                  fontsize=13, fontweight="bold")
+    ax1.legend(title="Bond Type", fontsize=10)
+    ax1.set_ylim(75, 95)
+    ax1.axhline(y=90, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Heatmap
+    ax2 = axes[1]
+    pivot = subset.pivot_table(index="Equity", columns="Bond", values="Success_Rate")
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+
+    if not pivot.empty:
+        sns.heatmap(
+            pivot, annot=True, fmt=".1f", cmap="RdYlGn", center=87,
+            vmin=75, vmax=95, ax=ax2, cbar_kws={"label": "Success Rate (%)"},
+            annot_kws={"size": 12, "weight": "bold"}, linewidths=2, linecolor="white",
+        )
+        ax2.set_xlabel("Bond Type", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3.5% Rule: Bond Impact Matrix\n(60/40 Allocation)",
+                      fontsize=13, fontweight="bold")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "29_35pct_bond_impact.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 29_35pct_bond_impact.png")
+
+
+# =============================================================================
+# PLOT 30: 3.5% Global vs European
+# =============================================================================
+
+def plot_30_35pct_global_vs_european(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 30: Global vs European comparison at 3.5%.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=FIGSIZE_WIDE)
+
+    # Filter to 3.5% WR, 60/40 Bund
+    mask = (df["WR"] == 3.5) & (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No 3.5% WR 60/40 Bund data available")
+        plt.close()
+        return
+
+    subset["Category"] = subset["Equity"].apply(
+        lambda x: "Global" if x in GLOBAL_INDICES else "European"
+    )
+
+    # Left: Category comparison
+    ax1 = axes[0]
+    global_sr = subset[subset["Category"] == "Global"]["Success_Rate"].mean()
+    european_sr = subset[subset["Category"] == "European"]["Success_Rate"].mean()
+
+    categories = ["Global\n(World, ACWI)", "European\n(Europe, EMU)"]
+    means = [global_sr, european_sr]
+    colors = ["#27ae60", "#e74c3c"]
+
+    bars = ax1.bar(categories, means, color=colors, alpha=0.85, width=0.6)
+    ax1.set_ylabel("Success Rate (%)", fontsize=12)
+    ax1.set_title("3.5% Rule: Global vs European\n(60/40 with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax1.set_ylim(75, 95)
+    ax1.axhline(y=90, color="orange", linestyle="--", alpha=0.5, linewidth=1.5)
+
+    for bar, val in zip(bars, means):
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                 f"{val:.1f}%", ha="center", fontsize=14, fontweight="bold")
+
+    gap = global_sr - european_sr
+    ax1.annotate("", xy=(1, european_sr), xytext=(1, global_sr),
+                 arrowprops=dict(arrowstyle="<->", color="black", lw=2))
+    ax1.text(1.15, (global_sr + european_sr)/2, f"Gap:\n{gap:.1f}%",
+             fontsize=11, fontweight="bold", va="center")
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Right: Individual indices
+    ax2 = axes[1]
+    data_plot = subset.set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if not data_plot.empty:
+        colors = [EQUITY_COLORS.get(eq, "gray") for eq in data_plot.index]
+        bars = ax2.barh(data_plot.index, data_plot["Success_Rate"], color=colors, alpha=0.85)
+
+        ax2.set_xlabel("Success Rate (%)", fontsize=12)
+        ax2.set_ylabel("Equity Index", fontsize=12)
+        ax2.set_title("3.5% Rule: Individual Index Performance\n(60/40 with Bund)",
+                      fontsize=13, fontweight="bold")
+        ax2.axvline(x=90, color="orange", linewidth=2, linestyle="--")
+        ax2.set_xlim(75, 95)
+
+        ax2.axhline(y=1.5, color="black", linestyle="-", linewidth=2, alpha=0.5)
+        ax2.text(76, 2.7, "GLOBAL", fontsize=10, fontweight="bold", alpha=0.7)
+        ax2.text(76, 0.3, "EUROPEAN", fontsize=10, fontweight="bold", alpha=0.7)
+
+        for bar, val in zip(bars, data_plot["Success_Rate"]):
+            ax2.text(val + 0.3, bar.get_y() + bar.get_height()/2,
+                     f"{val:.1f}%", va="center", fontsize=11, fontweight="bold")
+        ax2.grid(True, alpha=0.3, axis="x")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "30_35pct_global_vs_european.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 30_35pct_global_vs_european.png")
+
+
+# =============================================================================
+# PLOT 31: 3.5% Risk Metrics
+# =============================================================================
+
+def plot_31_35pct_risk_metrics(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 31: Risk metrics at 3.5% - P5, Median, P95 final values.
+    """
+    fig, ax = plt.subplots(figsize=FIGSIZE_SQUARE)
+
+    # Filter to 3.5% WR, 60/40 Bund
+    mask = (df["WR"] == 3.5) & (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].set_index("Equity").reindex(INDEX_ORDER).dropna()
+
+    if subset.empty:
+        logger.warning("No 3.5% WR 60/40 Bund data available")
+        plt.close()
+        return
+
+    x = np.arange(len(subset))
+    width = 0.25
+
+    p5 = subset["P5_Final"] / 1_000_000
+    median = subset["Median_Final"] / 1_000_000
+    p95 = subset["P95_Final"] / 1_000_000
+
+    ax.bar(x - width, p5, width, label="P5 (Worst 5%)", color="#e74c3c", alpha=0.85)
+    ax.bar(x, median, width, label="Median", color="#f39c12", alpha=0.85)
+    ax.bar(x + width, p95, width, label="P95 (Best 5%)", color="#27ae60", alpha=0.85)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(subset.index, rotation=15, ha="right", fontsize=11)
+    ax.set_xlabel("Equity Index", fontsize=12)
+    ax.set_ylabel("Final Portfolio Value (€ millions)", fontsize=12)
+    ax.set_title("3.5% Rule: Range of Outcomes\n(60/40 with Bund)",
+                 fontsize=14, fontweight="bold")
+    ax.legend(fontsize=11)
+    ax.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5, linewidth=1.5)
+    ax.text(0.02, 1.1, "Initial €1M", fontsize=10, color="gray")
+    ax.grid(True, alpha=0.3, axis="y")
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "31_35pct_risk_metrics.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 31_35pct_risk_metrics.png")
+
+
+# =============================================================================
+# PLOT 32: WR Comparison Summary
+# =============================================================================
+
+def plot_32_wr_comparison_summary(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 32: Grand summary comparing all three withdrawal rates.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 60/40 Bund
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No 60/40 Bund data available")
+        plt.close()
+        return
+
+    # Top Left: Success Rate by WR
+    ax1 = axes[0, 0]
+    avg_sr = subset.groupby("WR")["Success_Rate"].mean()
+
+    bars = ax1.bar([f"{wr:g}%" for wr in avg_sr.index], avg_sr.values,
+                   color=[WR_COLORS.get(wr, "gray") for wr in avg_sr.index], alpha=0.85)
+    ax1.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax1.set_ylabel("Average Success Rate (%)", fontsize=12)
+    ax1.set_title("Average Success Rate by WR\n(60/40 with Bund, All Indices)",
+                  fontsize=13, fontweight="bold")
+    ax1.set_ylim(70, 100)
+
+    for bar, val in zip(bars, avg_sr.values):
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                 f"{val:.1f}%", ha="center", fontsize=14, fontweight="bold")
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: Median Final Value by WR
+    ax2 = axes[0, 1]
+    avg_med = subset.groupby("WR")["Median_Final"].mean() / 1_000_000
+
+    bars = ax2.bar([f"{wr:g}%" for wr in avg_med.index], avg_med.values,
+                   color=[WR_COLORS.get(wr, "gray") for wr in avg_med.index], alpha=0.85)
+    ax2.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax2.set_ylabel("Average Median Final Value (€ millions)", fontsize=12)
+    ax2.set_title("Average Median Final Value by WR\n(60/40 with Bund, All Indices)",
+                  fontsize=13, fontweight="bold")
+    ax2.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5)
+
+    for bar, val in zip(bars, avg_med.values):
+        ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.03,
+                 f"€{val:.2f}M", ha="center", fontsize=12, fontweight="bold")
+    ax2.grid(True, alpha=0.3, axis="y")
+
+    # Bottom Left: Scatter - Success vs Final Value
+    ax3 = axes[1, 0]
+    for wr in sorted(subset["WR"].unique()):
+        wr_data = subset[subset["WR"] == wr]
+        for equity in INDEX_ORDER:
+            eq_data = wr_data[wr_data["Equity"] == equity]
+            if not eq_data.empty:
+                ax3.scatter(
+                    eq_data["Success_Rate"],
+                    eq_data["Median_Final"] / 1_000_000,
+                    c=WR_COLORS.get(wr, "gray"),
+                    marker=EQUITY_MARKERS.get(equity, "o"),
+                    s=150, alpha=0.75, edgecolors="white", linewidth=1.5
+                )
+
+    # Custom legend
+    wr_handles = [Line2D([0], [0], marker="o", color="w", markerfacecolor=c,
+                         markersize=12, label=f"{wr:g}% WR")
+                  for wr, c in sorted(WR_COLORS.items())]
+    legend1 = ax3.legend(handles=wr_handles, loc="upper left", fontsize=10,
+                         title="Withdrawal Rate")
+    ax3.add_artist(legend1)
+
+    ax3.set_xlabel("Success Rate (%)", fontsize=12)
+    ax3.set_ylabel("Median Final Value (€ millions)", fontsize=12)
+    ax3.set_title("Trade-off: Success Rate vs Final Value\n(60/40 with Bund)",
+                  fontsize=13, fontweight="bold")
+    ax3.grid(True, alpha=0.3)
+
+    # Bottom Right: Summary table
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    summary_text = "WITHDRAWAL RATE COMPARISON SUMMARY\n"
+    summary_text += "(60/40 Portfolio with Bund)\n"
+    summary_text += "=" * 55 + "\n\n"
+
+    summary_text += f"{'WR':<8} {'Success':<12} {'Median Value':<15} {'Recommendation':<20}\n"
+    summary_text += "-" * 55 + "\n"
+
+    recommendations = {
+        3.0: "Very Safe - Conservative",
+        3.5: "Balanced - Sweet Spot?",
+        4.0: "Traditional - Higher Risk"
+    }
+
+    for wr in sorted(subset["WR"].unique()):
+        wr_data = subset[subset["WR"] == wr]
+        sr = wr_data["Success_Rate"].mean()
+        med = wr_data["Median_Final"].mean() / 1_000_000
+        rec = recommendations.get(wr, "")
+        summary_text += f"{wr:g}%{'':<5} {sr:>5.1f}%{'':<6} €{med:>5.2f}M{'':<7} {rec}\n"
+
+    summary_text += "-" * 55 + "\n\n"
+    summary_text += "KEY INSIGHTS:\n"
+    summary_text += "• 3% offers highest safety but lower spending\n"
+    summary_text += "• 3.5% provides good balance for Europe\n"
+    summary_text += "• 4% (US standard) is riskier in Europe\n\n"
+    summary_text += "RECOMMENDATION FOR EUROPEAN INVESTORS:\n"
+    summary_text += "Consider 3-3.5% WR for better safety margins\n"
+    summary_text += "vs the traditional US-based 4% rule."
+
+    ax4.text(0.05, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=11, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="lightcyan", alpha=0.5))
+
+    fig.suptitle("Withdrawal Rate Comparison: 3% vs 3.5% vs 4%",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "32_wr_comparison_summary.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 32_wr_comparison_summary.png")
+
+
+# =============================================================================
 # MAIN FUNCTION
 # =============================================================================
 
@@ -1839,6 +2812,22 @@ def main():
     plot_18_4pct_depletion_timeline(df, args.output_dir)
     plot_19_4pct_bond_impact(df, args.output_dir)
     plot_20_4pct_global_vs_european_gap(df, args.output_dir)
+
+    # 3% WR specific plots
+    plot_21_3pct_safety_analysis(df, args.output_dir)
+    plot_22_3pct_allocation_sensitivity(df, args.output_dir)
+    plot_23_3pct_final_value_tradeoff(df, args.output_dir)
+    plot_24_3pct_bond_impact(df, args.output_dir)
+    plot_25_3pct_global_vs_european(df, args.output_dir)
+    plot_26_3pct_risk_metrics(df, args.output_dir)
+
+    # 3.5% WR specific plots
+    plot_27_35pct_sweet_spot(df, args.output_dir)
+    plot_28_35pct_allocation_sensitivity(df, args.output_dir)
+    plot_29_35pct_bond_impact(df, args.output_dir)
+    plot_30_35pct_global_vs_european(df, args.output_dir)
+    plot_31_35pct_risk_metrics(df, args.output_dir)
+    plot_32_wr_comparison_summary(df, args.output_dir)
 
     logger.info("All plots generated successfully!")
     return 0
