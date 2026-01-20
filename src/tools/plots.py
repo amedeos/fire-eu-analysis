@@ -301,7 +301,7 @@ def plot_04_global_vs_european_comparison(df: pd.DataFrame, output_dir: Path) ->
     ax1.set_xticks(x)
     ax1.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
     ax1.set_ylim(50, 100)
-    ax1.legend(loc="lower left", fontsize=10, ncol=2)
+    ax1.legend(loc="upper right", fontsize=10, ncol=2)
     ax1.grid(True, alpha=0.3, axis="y")
 
     # Right plot: Gap analysis (Global avg - European avg)
@@ -333,7 +333,7 @@ def plot_04_global_vs_european_comparison(df: pd.DataFrame, output_dir: Path) ->
     ax2.set_xticks(x2)
     ax2.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
     ax2.set_ylim(50, 100)
-    ax2.legend(loc="lower left", fontsize=10)
+    ax2.legend(loc="upper right", fontsize=10)
     ax2.grid(True, alpha=0.3, axis="y")
 
     # Add gap annotations
