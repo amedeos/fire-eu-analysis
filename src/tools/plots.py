@@ -141,6 +141,68 @@ def plot_01_success_rate_summary_matrix(df: pd.DataFrame, output_dir: Path) -> N
 
 
 # =============================================================================
+# PLOT 01b: Summary Matrix - Bund+BTP Mix
+# =============================================================================
+
+def plot_01b_success_rate_summary_matrix_bundbtp(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 01b: Success Rate Summary Matrix (60/20/20 Bund+BTP portfolios).
+    Key decision matrix showing success rates for all indices × all WRs with mixed bonds.
+    """
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    # Filter to 60% equity with Bund+BTP allocation
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund+BTP")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No data for Summary Matrix Bund+BTP plot")
+        plt.close()
+        return
+
+    # Pivot to create summary table
+    pivot = subset.pivot_table(
+        index="Equity",
+        columns="WR",
+        values="Success_Rate",
+        aggfunc="mean"
+    )
+
+    # Order indices and columns
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+    pivot = pivot.reindex(columns=sorted(pivot.columns))
+
+    # Create heatmap
+    sns.heatmap(
+        pivot,
+        annot=True,
+        fmt=".1f",
+        cmap="RdYlGn",
+        center=80,
+        vmin=55,
+        vmax=100,
+        ax=ax,
+        cbar_kws={"label": "Success Rate (%)"},
+        annot_kws={"size": 16, "weight": "bold"},
+        linewidths=3,
+        linecolor="white",
+    )
+
+    ax.set_xlabel("Withdrawal Rate (%)", fontsize=14)
+    ax.set_ylabel("Equity Index", fontsize=14)
+    ax.set_title("Success Rate Summary: 60/20/20 Portfolios with Bund+BTP\n"
+                 "Key Decision Matrix for European Investors",
+                 fontsize=16, fontweight="bold")
+    ax.set_xticklabels([f"{float(x.get_text()):g}%" for x in ax.get_xticklabels()], fontsize=13)
+    ax.set_yticklabels(ax.get_yticklabels(), fontsize=13, rotation=0)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "01b_success_rate_summary_matrix_bundbtp.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 01b_success_rate_summary_matrix_bundbtp.png")
+
+
+# =============================================================================
 # PLOT 02: Success Rate vs Withdrawal Rate (All Indices)
 # =============================================================================
 
@@ -301,7 +363,7 @@ def plot_04_global_vs_european_comparison(df: pd.DataFrame, output_dir: Path) ->
     ax1.set_xticks(x)
     ax1.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
     ax1.set_ylim(50, 100)
-    ax1.legend(loc="lower left", fontsize=10, ncol=2)
+    ax1.legend(loc="upper right", fontsize=10, ncol=2)
     ax1.grid(True, alpha=0.3, axis="y")
 
     # Right plot: Gap analysis (Global avg - European avg)
@@ -333,7 +395,7 @@ def plot_04_global_vs_european_comparison(df: pd.DataFrame, output_dir: Path) ->
     ax2.set_xticks(x2)
     ax2.set_xticklabels([f"{wr:g}%" for wr in withdrawal_rates], fontsize=11)
     ax2.set_ylim(50, 100)
-    ax2.legend(loc="lower left", fontsize=10)
+    ax2.legend(loc="upper right", fontsize=10)
     ax2.grid(True, alpha=0.3, axis="y")
 
     # Add gap annotations
@@ -2745,6 +2807,133 @@ def plot_32_wr_comparison_summary(df: pd.DataFrame, output_dir: Path) -> None:
 
 
 # =============================================================================
+# PLOT 32b: WR Comparison Summary - Bund+BTP Mix
+# =============================================================================
+
+def plot_32b_wr_comparison_summary_bundbtp(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 32b: Grand summary comparing all three withdrawal rates with Bund+BTP mix.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(16, 14))
+
+    # Filter to 60% equity with Bund+BTP
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund+BTP")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No 60/20/20 Bund+BTP data available")
+        plt.close()
+        return
+
+    # Top Left: Success Rate by WR
+    ax1 = axes[0, 0]
+    avg_sr = subset.groupby("WR")["Success_Rate"].mean()
+
+    bars = ax1.bar([f"{wr:g}%" for wr in avg_sr.index], avg_sr.values,
+                   color=[WR_COLORS.get(wr, "gray") for wr in avg_sr.index], alpha=0.85)
+    ax1.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax1.set_ylabel("Average Success Rate (%)", fontsize=12)
+    ax1.set_title("Average Success Rate by WR\n(60/20/20 with Bund+BTP, All Indices)",
+                  fontsize=13, fontweight="bold")
+    ax1.set_ylim(70, 100)
+
+    for bar, val in zip(bars, avg_sr.values):
+        ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.5,
+                 f"{val:.1f}%", ha="center", fontsize=14, fontweight="bold")
+    ax1.grid(True, alpha=0.3, axis="y")
+
+    # Top Right: Median Final Value by WR
+    ax2 = axes[0, 1]
+    avg_med = subset.groupby("WR")["Median_Final"].mean() / 1_000_000
+
+    bars = ax2.bar([f"{wr:g}%" for wr in avg_med.index], avg_med.values,
+                   color=[WR_COLORS.get(wr, "gray") for wr in avg_med.index], alpha=0.85)
+    ax2.set_xlabel("Withdrawal Rate", fontsize=12)
+    ax2.set_ylabel("Average Median Final Value (€ millions)", fontsize=12)
+    ax2.set_title("Average Median Final Value by WR\n(60/20/20 with Bund+BTP, All Indices)",
+                  fontsize=13, fontweight="bold")
+    ax2.axhline(y=1.0, color="gray", linestyle=":", alpha=0.5)
+
+    for bar, val in zip(bars, avg_med.values):
+        ax2.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.03,
+                 f"€{val:.2f}M", ha="center", fontsize=12, fontweight="bold")
+    ax2.grid(True, alpha=0.3, axis="y")
+
+    # Bottom Left: Scatter - Success vs Final Value
+    ax3 = axes[1, 0]
+    for wr in sorted(subset["WR"].unique()):
+        wr_data = subset[subset["WR"] == wr]
+        for equity in INDEX_ORDER:
+            eq_data = wr_data[wr_data["Equity"] == equity]
+            if not eq_data.empty:
+                ax3.scatter(
+                    eq_data["Success_Rate"],
+                    eq_data["Median_Final"] / 1_000_000,
+                    c=WR_COLORS.get(wr, "gray"),
+                    marker=EQUITY_MARKERS.get(equity, "o"),
+                    s=150, alpha=0.75, edgecolors="white", linewidth=1.5
+                )
+
+    # Custom legend
+    wr_handles = [Line2D([0], [0], marker="o", color="w", markerfacecolor=c,
+                         markersize=12, label=f"{wr:g}% WR")
+                  for wr, c in sorted(WR_COLORS.items())]
+    legend1 = ax3.legend(handles=wr_handles, loc="upper left", fontsize=10,
+                         title="Withdrawal Rate")
+    ax3.add_artist(legend1)
+
+    ax3.set_xlabel("Success Rate (%)", fontsize=12)
+    ax3.set_ylabel("Median Final Value (€ millions)", fontsize=12)
+    ax3.set_title("Trade-off: Success Rate vs Final Value\n(60/20/20 with Bund+BTP)",
+                  fontsize=13, fontweight="bold")
+    ax3.grid(True, alpha=0.3)
+
+    # Bottom Right: Summary table
+    ax4 = axes[1, 1]
+    ax4.axis("off")
+
+    summary_text = "WITHDRAWAL RATE COMPARISON SUMMARY\n"
+    summary_text += "(60/20/20 Portfolio with Bund+BTP)\n"
+    summary_text += "=" * 55 + "\n\n"
+
+    summary_text += f"{'WR':<8} {'Success':<12} {'Median Value':<15} {'Recommendation':<20}\n"
+    summary_text += "-" * 55 + "\n"
+
+    recommendations = {
+        3.0: "Very Safe - Conservative",
+        3.5: "Balanced - Sweet Spot?",
+        4.0: "Traditional - Higher Risk"
+    }
+
+    for wr in sorted(subset["WR"].unique()):
+        wr_data = subset[subset["WR"] == wr]
+        sr = wr_data["Success_Rate"].mean()
+        med = wr_data["Median_Final"].mean() / 1_000_000
+        rec = recommendations.get(wr, "")
+        summary_text += f"{wr:g}%{'':<5} {sr:>5.1f}%{'':<6} €{med:>5.2f}M{'':<7} {rec}\n"
+
+    summary_text += "-" * 55 + "\n\n"
+    summary_text += "KEY INSIGHTS:\n"
+    summary_text += "• 3% offers highest safety but lower spending\n"
+    summary_text += "• 3.5% provides good balance for Europe\n"
+    summary_text += "• 4% (US standard) is riskier in Europe\n\n"
+    summary_text += "RECOMMENDATION FOR EUROPEAN INVESTORS:\n"
+    summary_text += "Consider 3-3.5% WR for better safety margins\n"
+    summary_text += "vs the traditional US-based 4% rule."
+
+    ax4.text(0.05, 0.95, summary_text, transform=ax4.transAxes,
+             fontsize=11, fontfamily="monospace", verticalalignment="top",
+             bbox=dict(boxstyle="round", facecolor="lightcyan", alpha=0.5))
+
+    fig.suptitle("Withdrawal Rate Comparison: 3% vs 3.5% vs 4% (Bund+BTP)",
+                 fontsize=16, fontweight="bold", y=0.98)
+    plt.tight_layout(rect=[0, 0, 1, 0.96])
+    plt.savefig(output_dir / "32b_wr_comparison_summary_bundbtp.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    logger.info("Generated: 32b_wr_comparison_summary_bundbtp.png")
+
+
+# =============================================================================
 # PLOT 33: Optimal Bond Strategy
 # =============================================================================
 
@@ -3127,6 +3316,7 @@ def main():
     logger.info(f"Generating plots in {args.output_dir}/")
 
     plot_01_success_rate_summary_matrix(df, args.output_dir)
+    plot_01b_success_rate_summary_matrix_bundbtp(df, args.output_dir)
     plot_02_success_rate_by_wr_all_indices(df, args.output_dir)
     plot_03_success_rate_by_allocation_grid(df, args.output_dir)
     plot_04_global_vs_european_comparison(df, args.output_dir)
@@ -3166,6 +3356,7 @@ def main():
     plot_30_35pct_global_vs_european(df, args.output_dir)
     plot_31_35pct_risk_metrics(df, args.output_dir)
     plot_32_wr_comparison_summary(df, args.output_dir)
+    plot_32b_wr_comparison_summary_bundbtp(df, args.output_dir)
 
     # Optimal bond strategy plots
     plot_33_optimal_bond_strategy(df, args.output_dir)
