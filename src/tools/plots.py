@@ -141,6 +141,68 @@ def plot_01_success_rate_summary_matrix(df: pd.DataFrame, output_dir: Path) -> N
 
 
 # =============================================================================
+# PLOT 01b: Summary Matrix - Bund+BTP Mix
+# =============================================================================
+
+def plot_01b_success_rate_summary_matrix_bundbtp(df: pd.DataFrame, output_dir: Path) -> None:
+    """
+    Plot 01b: Success Rate Summary Matrix (60/20/20 Bund+BTP portfolios).
+    Key decision matrix showing success rates for all indices × all WRs with mixed bonds.
+    """
+    fig, ax = plt.subplots(figsize=(10, 7))
+
+    # Filter to 60% equity with Bund+BTP allocation
+    mask = (df["Equity_Pct"] == 60) & (df["Bond"] == "Bund+BTP")
+    subset = df[mask].copy()
+
+    if subset.empty:
+        logger.warning("No data for Summary Matrix Bund+BTP plot")
+        plt.close()
+        return
+
+    # Pivot to create summary table
+    pivot = subset.pivot_table(
+        index="Equity",
+        columns="WR",
+        values="Success_Rate",
+        aggfunc="mean"
+    )
+
+    # Order indices and columns
+    pivot = pivot.reindex([i for i in INDEX_ORDER if i in pivot.index])
+    pivot = pivot.reindex(columns=sorted(pivot.columns))
+
+    # Create heatmap
+    sns.heatmap(
+        pivot,
+        annot=True,
+        fmt=".1f",
+        cmap="RdYlGn",
+        center=80,
+        vmin=55,
+        vmax=100,
+        ax=ax,
+        cbar_kws={"label": "Success Rate (%)"},
+        annot_kws={"size": 16, "weight": "bold"},
+        linewidths=3,
+        linecolor="white",
+    )
+
+    ax.set_xlabel("Withdrawal Rate (%)", fontsize=14)
+    ax.set_ylabel("Equity Index", fontsize=14)
+    ax.set_title("Success Rate Summary: 60/20/20 Portfolios with Bund+BTP\n"
+                 "Key Decision Matrix for European Investors",
+                 fontsize=16, fontweight="bold")
+    ax.set_xticklabels([f"{float(x.get_text()):g}%" for x in ax.get_xticklabels()], fontsize=13)
+    ax.set_yticklabels(ax.get_yticklabels(), fontsize=13, rotation=0)
+
+    plt.tight_layout()
+    plt.savefig(output_dir / "01b_success_rate_summary_matrix_bundbtp.png", dpi=150)
+    plt.close()
+    logger.info("Generated: 01b_success_rate_summary_matrix_bundbtp.png")
+
+
+# =============================================================================
 # PLOT 02: Success Rate vs Withdrawal Rate (All Indices)
 # =============================================================================
 
@@ -3127,6 +3189,7 @@ def main():
     logger.info(f"Generating plots in {args.output_dir}/")
 
     plot_01_success_rate_summary_matrix(df, args.output_dir)
+    plot_01b_success_rate_summary_matrix_bundbtp(df, args.output_dir)
     plot_02_success_rate_by_wr_all_indices(df, args.output_dir)
     plot_03_success_rate_by_allocation_grid(df, args.output_dir)
     plot_04_global_vs_european_comparison(df, args.output_dir)
